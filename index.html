@@ -8,667 +8,731 @@
     :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f8f9fa; }
     * { margin:0; padding:0; box-sizing:border-box; font-family: system-ui, sans-serif; }
     body { background: var(--bg); color: #333; line-height: 1.6; }
+    .nav-bar { display:flex; justify-content:space-between; align-items:center; gap:10px; padding: 14px 12px; background: var(--primary); color:#fff; position: sticky; top:0; z-index:1000; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+    .nav-btn { background: rgba(255,255,255,0.18); border:none; color:#fff; padding: 10px 14px; border-radius: 12px; cursor:pointer; font-weight: 800; }
+    .container { max-width: 650px; margin: 0 auto; padding: 14px; }
+    .screen { display:none; animation: fadeIn .25s ease; }
+    .screen.active { display:block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
 
-    .nav-bar {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 15px; background: var(--primary); color: white;
-      position: sticky; top:0; z-index:1000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2); gap: 10px;
-    }
-    .nav-btn {
-      background: rgba(255,255,255,0.2); border: none; color: white;
-      padding: 10px 15px; border-radius: 10px; cursor: pointer;
-      font-weight: bold; white-space: nowrap;
-    }
+    .btn-main { background: var(--primary); color: white; border:none; padding: 16px 14px; border-radius: 16px; font-size: 18px; font-weight: 900; cursor:pointer; width: 100%; margin-bottom: 12px; display:flex; align-items:center; justify-content:center; gap:10px; box-shadow: 0 4px 12px rgba(0,0,0,0.15); }
+    .btn-main:active { transform: scale(0.99); }
+    .search-box { width:100%; padding: 14px; border-radius: 14px; border: 2px solid #ddd; margin-bottom: 12px; font-size: 16px; background:#fff; }
+    .card { background: #fff; border: 1px solid #eee; border-radius: 14px; padding: 14px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+    .muted { color:#666; font-size: 14px; }
+    .section-head { background:#fff; border-radius: 16px; padding: 16px; margin-bottom: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
+    .section-head h1, .section-head h2 { margin:0; font-weight: 1000; }
 
-    .container { max-width: 600px; margin: 0 auto; padding: 15px; }
-    .screen { display: none; animation: fadeIn 0.3s; }
-    .screen.active { display: block; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .accordion { background:#fff; border-radius: 14px; margin-bottom: 10px; border:1px solid #eee; overflow:hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+    .acc-header { padding: 16px; font-weight: 950; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .acc-header span { opacity: 0.7; }
+    .acc-content { padding: 16px; display:none; background:#fcfcfc; border-top: 1px solid #eee; }
+    .acc-content.open { display:block; }
 
-    .btn-main {
-      background: var(--primary); color: white; border: none;
-      padding: 18px; border-radius: 15px; font-size: 18px; font-weight: bold;
-      cursor: pointer; width: 100%; margin-bottom: 12px;
-      display: flex; align-items: center; justify-content: center; gap: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
+    .quiz-option { background:#fff; border: 2px solid #ddd; border-radius: 14px; padding: 16px; font-size: 18px; margin-bottom: 10px; cursor:pointer; text-align:center; font-weight: 950; }
+    .correct { border-color:#27ae60; background:#d4edda; }
+    .wrong { border-color:#e74c3c; background:#f8d7da; }
 
-    .search-box {
-      width: 100%; padding: 15px; border-radius: 12px;
-      border: 2px solid #ddd; margin-bottom: 15px; font-size: 16px; outline: none;
-    }
-    .search-box:focus { border-color: var(--primary); }
-
-    .card{
-      background:#fff; border:1px solid #eee; padding:14px;
-      border-radius:12px; margin-bottom:10px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    }
-
-    .accordion {
-      background: white; border-radius: 12px; margin-bottom: 10px;
-      border: 1px solid #eee; overflow: hidden;
-    }
-    .acc-header {
-      padding: 18px; font-weight: bold; background: #fff; cursor: pointer;
-      display: flex; justify-content: space-between; align-items: center;
-      gap: 10px; user-select: none;
-    }
-    .acc-content { padding: 18px; display: none; background: #fdfdfd; border-top: 1px solid #eee; }
-    .acc-content.open { display: block; }
-    .acc-arrow { font-weight: 900; }
-
-    .item-card{
-      background:#fff; border:1px solid #eee;
-      padding:14px; border-radius:12px; margin-bottom:10px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    }
-    .item-head{
-      display:flex; justify-content: space-between; align-items: baseline;
-      gap: 10px; font-weight: 900;
-    }
-    .item-name{ direction:ltr; text-align:left; flex: 1; }
-    .item-desc{ margin-top: 6px; color:#444; }
-    .price-tag {
-      background: #eee; padding: 2px 8px; border-radius: 6px;
-      font-size: 13px; color: var(--primary); font-weight: bold; white-space: nowrap;
-      direction:ltr;
-    }
-
-    .quiz-option {
-      background: white; border: 2px solid #ddd; border-radius: 12px;
-      padding: 18px; font-size: 18px; margin-bottom: 10px;
-      cursor: pointer; text-align: center; font-weight: bold; user-select: none;
-    }
-    .correct { border-color: #27ae60; background: #d4edda; }
-    .wrong { border-color: #e74c3c; background: #f8d7da; }
-
-    .muted{ color:#6b7280; font-size: 13px; }
+    .pill { display:inline-block; padding: 4px 10px; border-radius: 999px; background:#eef2ff; color: var(--primary); font-weight: 900; font-size: 13px; }
+    .price-tag { display:inline-block; margin-inline-start: 8px; background:#eee; padding: 2px 8px; border-radius: 8px; font-size: 13px; color: var(--primary); font-weight: 1000; }
+    .item-title { font-weight: 1000; }
+    .item-desc { margin-top: 6px; color:#444; }
+    .item-row { padding: 10px 0; border-bottom: 1px dashed #e8e8e8; }
+    .item-row:last-child { border-bottom: none; }
   </style>
 </head>
 <body>
 
-<div class="nav-bar">
-  <button class="nav-btn" onclick="goBack()">🔙 חזור</button>
-  <span style="font-weight: 900;">THAI MASTER 2026</span>
-  <button class="nav-btn" onclick="goHome()">🏠 בית</button>
-</div>
-
-<div class="container">
-
-  <div id="mainMenu" class="screen active">
-    <div style="text-align: center; padding: 20px 0;">
-      <h1>🇹🇭 שלום ליאור</h1>
-      <p>המדריך המלא והמתוקן</p>
-    </div>
-
-    <input
-      type="text"
-      class="search-box"
-      id="mainSearch"
-      placeholder="🔍 חיפוש מהיר של מילה..."
-      oninput="searchWord(this.value)"
-      autocomplete="off"
-    />
-    <div id="searchResults" style="margin-bottom: 15px;"></div>
-
-    <button class="btn-main" onclick="loadLearnMenu()">📚 לימוד לפי נושאים</button>
-    <button class="btn-main" style="background:var(--accent); color:var(--primary);" onclick="startQuiz('all')">🎯 מבחן רנדומלי</button>
-    <button class="btn-main" style="background:#27ae60" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
-    <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
-    <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
+  <div class="nav-bar">
+    <button class="nav-btn" onclick="goBack()">🔙 חזור</button>
+    <div style="font-weight:1000; letter-spacing:0.5px;">THAI MASTER 2026</div>
+    <button class="nav-btn" onclick="showScreen('mainMenu')">🏠 בית</button>
   </div>
 
-  <!-- 7-ELEVEN -->
-  <div id="sevenMenu" class="screen">
-    <div style="text-align:center; margin-bottom:20px;">
-      <h2>🏪 המלצות סבן אילבן</h2>
-      <div class="muted">מוצרים באנגלית + הסבר בעברית</div>
-    </div>
+  <div class="container">
 
-    <div class="accordion">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        🍰 קינוחים ומתוקים <span class="acc-arrow">▼</span>
+    <!-- MAIN -->
+    <div id="mainMenu" class="screen active">
+      <div class="section-head" style="text-align:center;">
+        <h1>🇹🇭 שלום ליאור</h1>
+        <div class="muted">המדריך המלא והמתוקן</div>
       </div>
-      <div class="acc-content" id="711_sweets"></div>
+
+      <input type="text" class="search-box" id="mainSearch" placeholder="🔍 חיפוש מהיר של מילה..." oninput="searchWord(this.value)">
+      <div id="searchResults" style="margin-bottom: 14px;"></div>
+
+      <button class="btn-main" onclick="loadLearnMenu()">📚 לימוד לפי נושאים</button>
+      <button class="btn-main" style="background:var(--accent); color:var(--primary);" onclick="startQuiz()">🎯 מבחן רנדומלי</button>
+      <button class="btn-main" style="background:#27ae60" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
+      <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
+      <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
     </div>
 
-    <div class="accordion">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        💄 קוסמטיקה וטיפוח <span class="acc-arrow">▼</span>
+    <!-- 7-ELEVEN -->
+    <div id="sevenMenu" class="screen">
+      <div class="section-head" style="text-align:center;">
+        <h2>🏪 המדריך המושלם לסבן אילבן (7-Eleven) – המלצות ליאור</h2>
+        <div class="muted">קטגוריות בעברית | מוצרים באנגלית + הסבר בעברית</div>
       </div>
-      <div class="acc-content" id="711_beauty"></div>
-    </div>
 
-    <div class="accordion">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        🌶️ חטיפים ומאכלים חריפים <span class="acc-arrow">▼</span>
+      <div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">🍰 קינוחים ומתוקים <span>▼</span></div>
+        <div class="acc-content" id="711_sweets"></div>
       </div>
-      <div class="acc-content" id="711_spicy"></div>
-    </div>
 
-    <div class="accordion">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        🧀 מאכלים מגוונים <span class="acc-arrow">▼</span>
+      <div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">💄 קוסמטיקה וטיפוח <span>▼</span></div>
+        <div class="acc-content" id="711_beauty"></div>
       </div>
-      <div class="acc-content" id="711_meals"></div>
-    </div>
 
-    <div class="accordion">
-      <div class="acc-header" onclick="toggleAcc(this)">
-        🥤 משקאות מומלצים <span class="acc-arrow">▼</span>
+      <div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">🌶️ חטיפים ומאכלים חריפים <span>▼</span></div>
+        <div class="acc-content" id="711_spicy"></div>
       </div>
-      <div class="acc-content" id="711_drinks"></div>
+
+      <div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">🧀 מאכלים מגוונים <span>▼</span></div>
+        <div class="acc-content" id="711_meals"></div>
+      </div>
+
+      <div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">🥤 משקאות מומלצים <span>▼</span></div>
+        <div class="acc-content" id="711_drinks"></div>
+      </div>
     </div>
-  </div>
 
-  <!-- GUIDE MENU -->
-  <div id="guideMenu" class="screen">
-    <div class="btn-main" style="background:#3498db" onclick="openDest('phuket')">🏝️ פוקט (Phuket)</div>
-    <div class="btn-main" style="background:#1abc9c" onclick="openDest('krabi')">🛶 קראבי & קו לנטה (Krabi & Koh Lanta)</div>
-    <div class="btn-main" style="background:#9b59b6" onclick="openDest('samui')">🥥 קוסמוי (Koh Samui)</div>
-    <div class="btn-main" style="background:#34495e" onclick="openDest('bangkok')">🏙️ בנגקוק (Bangkok)</div>
-  </div>
-
-  <!-- DEST DETAIL -->
-  <div id="destDetail" class="screen">
-    <div style="background:white; padding:15px; border-radius:15px; margin-bottom:12px;">
-      <h1 id="destTitle"></h1>
-      <div id="destSubtitle" class="muted" style="margin-top:6px;"></div>
+    <!-- GUIDE MENU -->
+    <div id="guideMenu" class="screen">
+      <div class="section-head" style="text-align:center;">
+        <h2>📍 מדריך יעדים מפורט</h2>
+        <div class="muted">בחר יעד</div>
+      </div>
+      <div class="btn-main" style="background:#3498db" onclick="openDest('phuket')">🏝️ פוקט (Phuket)</div>
+      <div class="btn-main" style="background:#1abc9c" onclick="openDest('krabi')">🛶 קראבי (Krabi & Koh Lanta)</div>
+      <div class="btn-main" style="background:#9b59b6" onclick="openDest('samui')">🥥 קוסמוי (Koh Samui)</div>
+      <div class="btn-main" style="background:#34495e" onclick="openDest('bangkok')">🏙️ בנגקוק (Bangkok)</div>
     </div>
-    <div id="destSections"></div>
-  </div>
 
-  <!-- LEARN -->
-  <div id="learnMenu" class="screen">
-    <div id="categoryList"></div>
-  </div>
-
-  <!-- QUIZ -->
-  <div id="quizScreen" class="screen">
-    <div id="quizProgress" style="text-align:center; margin-bottom:15px; font-weight:bold;"></div>
-    <div style="background:white; padding:30px; border-radius:20px; text-align:center; margin-bottom:20px;">
-      <h1 id="qThai" style="color:var(--primary); font-size:48px;"></h1>
+    <!-- DEST DETAIL -->
+    <div id="destDetail" class="screen">
+      <div class="section-head">
+        <h1 id="destTitle"></h1>
+        <div id="destSubtitle" class="muted" style="margin-top:6px;"></div>
+      </div>
+      <div id="destSections"></div>
     </div>
-    <div id="quizOptions"></div>
-    <button id="nextQuizBtn" class="btn-main" style="display:none; background:#27ae60" onclick="nextQuestion()">המשך ⮕</button>
-  </div>
 
-  <!-- STATS -->
-  <div id="statsScreen" class="screen">
-    <div style="background:white; padding:30px; border-radius:15px; text-align:center;">
-      <p>שאלות שענית: <strong id="statTotal">0</strong></p>
-      <p>דיוק: <strong id="statPercent">0%</strong></p>
+    <!-- LEARN MENU -->
+    <div id="learnMenu" class="screen">
+      <div id="categoryList"></div>
     </div>
-    <button class="btn-main" style="margin-top:20px; background:#e74c3c" onclick="resetStats()">🗑️ איפוס נתונים</button>
-  </div>
 
-</div>
+    <!-- QUIZ -->
+    <div id="quizScreen" class="screen">
+      <div id="quizProgress" style="text-align:center; margin-bottom:12px; font-weight:1000;"></div>
+
+      <div class="card" style="text-align:center; padding: 22px;">
+        <div class="pill">בחר את התרגום הנכון</div>
+        <h1 id="qThai" style="color:var(--primary); font-size:40px; margin-top:12px;"></h1>
+        <div id="qHint" class="muted" style="margin-top:10px;"></div>
+      </div>
+
+      <div id="quizOptions"></div>
+      <button id="nextQuizBtn" class="btn-main" style="display:none; background:#27ae60" onclick="nextQuestion()">המשך ⮕</button>
+    </div>
+
+    <!-- STATS -->
+    <div id="statsScreen" class="screen">
+      <div class="section-head" style="text-align:center;">
+        <h2>📊 סטטיסטיקות</h2>
+        <div class="muted">נשמר אוטומטית</div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <p>שאלות שענית: <strong id="statTotal">0</strong></p>
+        <p>דיוק: <strong id="statPercent">0%</strong></p>
+      </div>
+      <!-- ללא חיפוס: הוסר כפתור איפוס -->
+    </div>
+
+  </div>
 
 <script>
-  /***********************
-   * VOCAB (כפי שנשלח – ללא שינויים)
-   ***********************/
-  const vocab = {
-    chat: { name: "שיחה, נימוסים וסלנג", icon: "💬", words: [
-      { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
-      { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
-      { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
-      { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
-      { thai: "Fan dee na", hebrew: "לילה טוב", pron: "פַאן דִי נָה" },
-      { thai: "Kho thot", hebrew: "סליחה / מצטער", pron: "קוֹ-תוֹט" },
-      { thai: "Yin dee", hebrew: "זה העונג שלי / בבקשה", pron: "יִין דִי" },
-      { thai: "Mai pen rai", hebrew: "לא נורא / אין בעיה", pron: "מַאי פֶּן רַאי" },
-      { thai: "Chok dee", hebrew: "בהצלחה!", pron: "צ'וֹק דִי" },
-      { thai: "Jing Ror?", hebrew: "באמת?", pron: "גִ'ינְג רוֹ?" },
-      { thai: "Cha?", hebrew: "נכון?", pron: "צַ'ה?" },
-      { thai: "Fang noi", hebrew: "תקשיב רגע", pron: "פָאנְג נוֹי" },
-      { thai: "Ok, khor khit doo gon", hebrew: "בסדר, אני אחשוב על זה", pron: "אוֹ-קֵי, כּוֹ קִית דוּ גוֹן" },
-      { thai: "Phut pasa angrit dai mai?", hebrew: "אתה מדבר אנגלית?", pron: "פּוּט פָּא-סָא אָנְג-גְרִיט דָאי מַאי?" },
-      { thai: "Khun ma jak muang Thai mai?", hebrew: "אתה מתאילנד?", pron: "קוּן מָא גָ'אק מוּאַנְג תָּאי מַאי?" },
-      { thai: "Khun tham-ngan a-rai?", hebrew: "במה אתה עובד?", pron: "קוּן תָּאם-נְגָאן אָ-רַאי?" },
-      { thai: "Phom tham-ngan HR", hebrew: "אני עובד ב-HR", pron: "פּוֹם תָּאם-נְגָאן אֵיְיץ'-אָר" },
-      { thai: "Khun suay maak", hebrew: "את יפה מאוד", pron: "קוּן סוּאַי מָאק" },
-      { thai: "Khun dee maak khrap", hebrew: "אתה אדם טוב מאוד", pron: "קוּן דִי מָאק קְרָאפּ" },
-      { thai: "Phom rian pasa Thai nit-noi", hebrew: "למדתי קצת תאית", pron: "פּוֹם רִיאַן פָּא-סָא תָּאי נִיט-נוֹי" },
-      { thai: "Pee-chai", hebrew: "אח שלי / חבר", pron: "פִּי-צ'אי" },
-      { thai: "Arun sook", hebrew: "בוקר טוב", pron: "אָרוּן סוּק" },
-      { thai: "Mai khao jai", hebrew: "אני לא מבין", pron: "מַאי קָאוֹ גָ'אי" },
-      { thai: "Khun ma jak arai?", hebrew: "מאיפה אתה?", pron: "קוּן מָא גָ'אק אָ-רַאי" },
-      { thai: "Yindee thi dai roo jak", hebrew: "שמח להכיר אותך", pron: "יִינְדִי תִּי דַאי רוּ גָ'אק" }
-    ]},
+/* =========================
+   DATA
+========================= */
 
-    food: { name: "אוכל והזמנות", icon: "🍜", words: [
-      { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
-      { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
-      { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
-      { thai: "Nam", hebrew: "עם מרק (רטוב)", pron: "נָאם" },
-      { thai: "Haeng", hebrew: "יבש (ללא מרק)", pron: "הֶנְג" },
-      { thai: "Look Chin", hebrew: "כדורי בשר (תוספת)", pron: "לוּק צִ'ין" },
-      { thai: "Tom Yam", hebrew: "מרק חריף", pron: "טוֹם יָאם" },
-      { thai: "Mai Sai...", hebrew: "בלי לשים...", pron: "מַאי סַאי..." },
-      { thai: "Phom Ao...", hebrew: "אני רוצה...", pron: "פּוֹם אָאוֹ..." },
-      { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" },
-      { thai: "A-roy maak mai khrap?", hebrew: "זה טעים מאוד, נכון?", pron: "אֲרוֹי מָאק מַאי קְרָאפּ?" },
-      { thai: "Sen-lek", hebrew: "אטריות אורז (בטוח)", pron: "סֶן-לֶק" },
-      { thai: "Ba-mee", hebrew: "אטריות חיטה (אסור!)", pron: "בָּה-מִי" },
-      { thai: "Mee thee sam-rap hok khon mai?", hebrew: "יש לכם מקום ל-6 אנשים?", pron: "מִי תִּי סַאם-רַאפּ הוֹק קוֹן מַאי?" },
-      { thai: "Nang thee-nee dai mai?", hebrew: "אפשר לשבת כאן?", pron: "נָאנְג תִּי-נִי דָאי מַאי?" },
-      { thai: "Mang sa wirat", hebrew: "צמחוני", pron: "מַנְגְסָה וִירַט" },
-      { thai: "Pat pet tua", hebrew: "אלרגיה לבוטנים", pron: "פַּט פֶּט טוּאַה" },
-      { thai: "Phom mangsa...", hebrew: "אני אלרגי ל...", pron: "פּוֹם מַנְגְסָה..." },
-      { thai: "Ron", hebrew: "מנה חמה", pron: "רוֹן" },
-      { thai: "Phom hiu", hebrew: "אני רעב", pron: "פּוֹם הִיוּ" }
-    ]},
-
-    drinks: { name: "שייקים ושתייה", icon: "🍹", words: [
-      { thai: "Taeng-mo Pun", hebrew: "שייק אבטיח", pron: "טֶנְג-מוֹ פַּאן" },
-      { thai: "Mamuang Pun", hebrew: "שייק מנגו", pron: "מָא-מוּאַנְג פַּאן" },
-      { thai: "Nam Som Pun", hebrew: "שייק תפוזים", pron: "נָאם סוֹם פַּאן" },
-      { thai: "Nam Kaeng", hebrew: "קרח", pron: "נָאם קֶנְג" },
-      { thai: "Nam Plao", hebrew: "מים מינרלים", pron: "נָאם פְּלָאוּ" },
-      { thai: "Cha Yen", hebrew: "תה תאילנדי קר", pron: "צָ'ה יֶן" },
-      { thai: "Oliang", hebrew: "קפה שחור קר", pron: "אוֹ-לִיאַנְג" },
-      { thai: "Nam Lam Yai", hebrew: "מי פרי הלונגן", pron: "נָאם לַאם יַאי" },
-      { thai: "Hio Nam", hebrew: "צמא", pron: "הִיוּ נָאם" },
-      { thai: "Nam-plao nueng khuat", hebrew: "בקבוק מים (אחד)", pron: "נָאם-פְּלָאוּ נִינְג כּוּאַט" },
-      { thai: "Gluay-Melon pan", hebrew: "שייק בננה מלון", pron: "קוּאַי-מֶלוֹן פַּן" },
-      { thai: "Sai nom", hebrew: "עם חלב", pron: "סַאי נוֹם" },
-      { thai: "Mai sai nom", hebrew: "בלי חלב", pron: "מָאי סַאי נוֹם" },
-      { thai: "Mai waan maak", hebrew: "לא מתוק מדי", pron: "מָאי וָאן מָאק" },
-      { thai: "Pen nam-som", hebrew: "על בסיס תפוזים", pron: "פֶּן נָאם-סוֹם" }
-    ]},
-
-    produce: { name: "פירות, ירקות וקינוחים", icon: "🍍", words: [
-      { thai: "Farang", hebrew: "גויאבה", pron: "פָא-רָאנְג" },
-      { thai: "Chompoo", hebrew: "תפוח מים", pron: "צוֹ'מְפּוּ" },
-      { thai: "Khao Niao Mamuang", hebrew: "מנגו סטיקי רייס", pron: "קָאוּ נִי-אוֹ מָא-מוּאַנְג" },
-      { thai: "Taeng-kwa", hebrew: "מלפפון", pron: "תֶּנְג-כּוּאַה" },
-      { thai: "Khao-pode", hebrew: "תירס", pron: "קָאוּ-פּוֹדֶה" },
-      { thai: "Hua-hom", hebrew: "בצל", pron: "הוּאַה-הוֹם" },
-      { thai: "Ma-khua-thet", hebrew: "עגבנייה", pron: "מָה-קוּאַה-תֵ'ת" },
-      { thai: "Sa-pa-rot", hebrew: "אננס", pron: "סַפּ-פַּה-רוֹט" },
-      { thai: "Ma-prao", hebrew: "קוקוס", pron: "מָה-פְּרָאוּ" },
-      { thai: "Phak-kaat", hebrew: "חסה", pron: "פָאק-קָאט" },
-      { thai: "Phrik", hebrew: "פלפל חריף", pron: "פְּרִיק" },
-      { thai: "Phak-bung", hebrew: "תרד תאילנדי", pron: "פָאק-בּוּנְג" },
-      { thai: "Ma-muang", hebrew: "מנגו", pron: "מָה-מוּאַנְג" },
-      { thai: "Gluay", hebrew: "בננה", pron: "קוּאַי" },
-      { thai: "Taeng-mo", hebrew: "אבטיח", pron: "תֶּנְג-מוֹ" },
-      { thai: "Som-o", hebrew: "פומלה", pron: "סוֹם-אוֹ" },
-      { thai: "Khao-pode sai noey", hebrew: "תירס עם חמאה", pron: "קָאוֹ-פּוֹט סַאי נוֹי" },
-      { thai: "Khao-pode ron", hebrew: "תירס חם", pron: "קָאוֹ-פּוֹט רוֹן" }
-    ]},
-
-    transport: { name: "תחבורה והתמצאות", icon: "🚕", words: [
-      { thai: "Trong pai", hebrew: "ישר", pron: "דְרוֹנְג פַּאי" },
-      { thai: "Yut thee-nee", hebrew: "עצור כאן", pron: "יוּט טִי נִי" },
-      { thai: "Liao kwa", hebrew: "פנה ימינה", pron: "לִי-אוֹ קְוָוא" },
-      { thai: "Liao sai", hebrew: "פנה שמאלה", pron: "לִי-אוֹ סַאי" },
-      { thai: "Eek gee na-thee?", hebrew: "כמה דקות עוד?", pron: "אִיק קִי נָא-תִי?" },
-      { thai: "Glai", hebrew: "רחוק", pron: "גְלַאי מתמשך" },
-      { thai: "Klai-klai", hebrew: "קרוב / ליד", pron: "קְלַאי-קְלַאי" },
-      { thai: "Rong-rem", hebrew: "מלון", pron: "רוֹנְג-רֶם" },
-      { thai: "Poet miter", hebrew: "תפעיל מונה", pron: "פֶּואֶט מִי-טֶר" },
-      { thai: "Jort thee-nee dai mai?", hebrew: "אפשר לחנות כאן?", pron: "ג'וֹרְט תִּי-נִי דָאי מַאי?" },
-      { thai: "Hok khon thao-rai?", hebrew: "כמה עולה ל-6 אנשים?", pron: "הוֹק קוֹן תַּאוֹ-רַאי?" },
-      { thai: "Tua hok bai thao-rai?", hebrew: "כמה עולים 6 כרטיסים?", pron: "תּוּאַה הוֹק בַּאי תַּאוֹ-רַאי?" },
-      { thai: "Sanam bin", hebrew: "שדה תעופה", pron: "סָנָאם בִּין" },
-      { thai: "Tao rai nathi?", hebrew: "כמה זמן?", pron: "תָאוֹ רַאי נָאתִי?" },
-      { thai: "Phom yak chuay ruea", hebrew: "אני רוצה להשכיר סירה", pron: "פּוֹם יַאק צוּאַי רוּעָה" },
-      { thai: "Nai", hebrew: "בתוך / בפנים", pron: "נַאי" }
-    ]},
-
-    shopping: { name: "קניות", icon: "🛍️", words: [
-      { thai: "Doo choey-choey", hebrew: "אני רק מסתכל (בלי לחץ)", pron: "דוּ צֶ'ה-אוֹי צֶ'ה-אוֹי" },
-      { thai: "Phaeng pai", hebrew: "יקר מדי!", pron: "פֶּנְג פָאי" },
-      { thai: "Lot dai mai?", hebrew: "אפשר הנחה?", pron: "לוֹט דָאי מַאי?" },
-      { thai: "Mee... mai?", hebrew: "יש לכם...?", pron: "מִי... מַאי?" },
-      { thai: "Tee-nee mee... khai mai?", hebrew: "אפשר למצוא/לקנות כאן...?", pron: "תִּי-נִי מִי... קָאי מַאי?" },
-      { thai: "Mai tong ngen-ton", hebrew: "לא צריך עודף (טיפ)", pron: "מָאי טוֹנְג נְגֶן-טוֹן" },
-      { thai: "Paek", hebrew: "חבילה / מארז", pron: "פֶּק" }
-    ]},
-
-    health: { name: "בריאות ועזרה ראשונה", icon: "🩺", words: [
-      { thai: "Ya-nuan", hebrew: "משחה לשרירים", pron: "יָא-נוּאַן" },
-      { thai: "Ya-mong", hebrew: "טייגר באם", pron: "יָא-מוֹנְג" },
-      { thai: "Wan-hang-na-ke", hebrew: "אלוורה", pron: "וָאן-הָא-נָא-קֶה" },
-      { thai: "Ya-tha-yung", hebrew: "עקיצות יתוש", pron: "יָא-תָא-יוּנְג" },
-      { thai: "Puat", hebrew: "כואב (פנימי)", pron: "פּוּאַט" },
-      { thai: "Bao-wan", hebrew: "סוכרת", pron: "בַּאוֹ-וָאן" },
-      { thai: "Thy-roid", hebrew: "בלוטת התריס", pron: "תָּאי-רוֹי" },
-      { thai: "Rong yamun", hebrew: "בית מרקחת", pron: "רוֹנְג יָמוּן" }
-    ]}
-  };
-
-  /***********************
-   * 7-ELEVEN (כמו שהיה בקוד שלך)
-   ***********************/
-  const sevenEleven = {
-    sweets: [
-      { name: "Coconut Lava Mochi (April’s Bakery)", desc: 'מוצ׳י רך עם מילוי קוקוס קרמי “לבה”. הלהיט של טיקטוק.', price: "39฿" },
-      { name: "Salted Egg Mochi", desc: "שילוב מושלם של מתוק ומלוח. ויראלי מאוד.", price: "35฿" },
-      { name: "Chocolate Mochi", desc: "מרקם פודינגי עשיר ורך. מומלץ לחובבי שוקולד.", price: "32฿" },
-      { name: "Pandan Custard Roll", desc: "רול ירוק מתוק, טעם תאילנדי קלאסי.", price: "28฿" },
-      { name: "Thai Milk & Melon Pudding", desc: "פודינג קרמי ומתוק בדיוק במידה.", price: "25฿" },
-      { name: "Coconut & Pandan Pudding", desc: "קינוח קוקוס מושלם ומרענן.", price: "29฿" },
-      { name: "Sago Thua Dam", desc: "קינוח מסורתי עם קוקוס ושעועית שחורה.", price: "27฿" },
-      { name: "Look Chit Coconut Jelly", desc: "ג׳לי בחלב מתוק למי שאוהב מרקם לעיס.", price: "30฿" },
-      { name: "Lod Chong", desc: 'ה“תולעים” הירוקות המפורסמות בג׳לי קוקוס מרענן.', price: "26฿" },
-      { name: "Sago with Corn (Coconut Milk)", desc: "קינוח קליל עם פניני סאגו ותירס מתוק.", price: "28฿" }
-    ],
-    beauty: [
-      { name: "Clear Nose BB Cream", desc: "BB קרם נגד אקנה, מעולה לעור רגיש.", price: "49฿" },
-      { name: "Garnier Vitamin C Serum", desc: "להבהרת כתמים, נספג במהירות.", price: "39฿" },
-      { name: "Sistar Watermelon Vitamin C Serum", desc: "סרום להבהרה מהירה ורעננות.", price: "39฿" },
-      { name: "Poreless 5X Mask", desc: "מסכה קוריאנית לצמצום נקבוביות ועור שמן.", price: "69฿" },
-      { name: "Nivea Oil Control Sunscreen", desc: "קליל ולא שומני, אידיאלי לחום התאילנדי.", price: "כ-50฿" },
-      { name: "Sree Chand Sun Lotion", desc: "קרם הגנה עם SPF גבוה, פופולרי מאוד ביוטיוב.", price: "כ-45฿" },
-      { name: "Nivea Luminous 630", desc: "קרם אנטי-אייג׳ינג מתקדם נגד כתמים.", price: "כ-60฿" },
-      { name: "Niacinamide + AHA Body Lotion", desc: "נגד אקנה בגוף וכהויות בעור.", price: "כ-50฿" },
-      { name: "Korean Face Masks", desc: "מארזים זולים להענקת לחות לפנים.", price: "25–35฿" },
-      { name: "Acne Spot Cream / Eye Gel", desc: "מוצרים ויראליים לטיפול ממוקד.", price: "30–50฿" }
-    ],
-    spicy: [
-      { name: "Lay’s Mieng Kam", desc: "טעם תבלין תאילנדי (מתוק-חריף).", price: "35฿" },
-      { name: "Bigga Corn Snack", desc: "חטיף פריך וחריף, קלאסיקה מקומית.", price: "25฿" },
-      { name: "FF Tomato Cracker", desc: "חריפות קלה, מתאים לטבעונים.", price: "28฿" },
-      { name: "Taokaenoi Fried Seaweed", desc: "הטעם המקורי, חטיף אהוב.", price: "29฿" },
-      { name: "Mama Green Curry Ramen", desc: "חריף וצמחוני.", price: "22฿" },
-      { name: "Samyang Carbonara (Ramen)", desc: "חריפות מעודנת וויראלית (ללא פירות ים).", price: "35฿" },
-      { name: "Bento Veggie (Spicy)", desc: "גרסה צמחונית וחריפה מאוד.", price: "26฿" },
-      { name: "Lay’s Sour Cream & Onion", desc: "עם טוויסט חריף קליל.", price: "32฿" },
-      { name: "Diamond Grains (Spicy)", desc: "חטיף אנרגיה עם חריפות קלה.", price: "25฿" },
-      { name: "Jay Vegetarian Spicy Ramen", desc: "זמין בעיקר בתקופות פסטיבלים.", price: "20฿" }
-    ],
-    meals: [
-      { name: "Cheese Toastie", desc: "המלך של הסבן אילבן. חובה לבקש שיחממו לכם!", price: "32–44฿" },
-      { name: "Spinach & Cheese Sandwich", desc: "אופציה צמחונית מעולה ועשירה.", price: "39–44฿" },
-      { name: "Coconut Sandwich", desc: "מתוק ומרענן.", price: "42฿" },
-      { name: "Onigiri (Corn/Vegetable)", desc: "חטיף אורז משביע ונוח.", price: "25฿" },
-      { name: "Vegetarian Basil Rice (Frozen)", desc: "ארוחה חמה ומהירה בחימום במקום.", price: "35฿" },
-      { name: "Banana Muffin", desc: "רך וטעים מאוד.", price: "28฿" },
-      { name: "Fresh Fruit Pack", desc: "מנגו או מנגוסטין חתוכים ומוכנים.", price: "40–60฿" },
-      { name: "Sticky Rice with Sweet Taro", desc: "קינוח משביע וטעים.", price: "30฿" },
-      { name: "Fried Tofu (Frozen)", desc: "מנה צמחונית ומהירה.", price: "25฿" },
-      { name: "Five-Spice Gluten Stew", desc: "מנה צמחונית עשירה בטעם.", price: "32฿" }
-    ],
-    drinks: [
-      { name: "Meiji Banana Milk", desc: "המשקה הכי מפורסם בטיקטוק. מתוק וקרמי.", price: "20฿" },
-      { name: "Dutch Mill Coffee Milk", desc: "מעורר ומתוק במידה הנכונה.", price: "18฿" },
-      { name: "Sunshine Daily Banana Drink", desc: "רענן וטבעי.", price: "15฿" },
-      { name: "Lactasoy Black Sesame Soy Milk", desc: "טעם אגוזי מיוחד.", price: "12฿" },
-      { name: "Binggrae Banana Milk", desc: "טעם בננה חזק וויראלי.", price: "16฿" },
-      { name: "Doi Kham Tomato Juice", desc: "מלוח וקליל, פתיחה בריאה לבוקר.", price: "18฿" },
-      { name: "Thai Milk Tea (Bottled)", desc: "תה חזק ומתוק, הטעם של תאילנד.", price: "22฿" },
-      { name: "Coconut Water", desc: "ללא תוספת סוכר, הכי מרענן שיש.", price: "20฿" },
-      { name: "All Café Iced Latte", desc: "קפה טרי מהדוכן בתוך הסניף.", price: "35฿" },
-      { name: "Vitamin C Jelly Drink", desc: "משקה מרענן עם מרקם ג׳לי כיפי.", price: "25฿" }
+const vocab = {
+  basics: {
+    name: "שיחה, נימוסים וסלנג",
+    icon: "💬",
+    words: [
+      { hebrew: "מה שלומך?", thai: "Sabai dee mai?", pron: "סַבַּאי דִי מַאי?" },
+      { hebrew: "אשכרה?! / רציני?!", thai: "Jing Di?!", pron: "גִ'ינְג דִי?!" },
+      { hebrew: "תירגע / קח באיזי", thai: "Jai Yen Yen", pron: "גַ'אי יֶן יֶן" },
+      { hebrew: "מה אתה עושה?", thai: "Tham Rai?", pron: "תַ'אם רַאי?" },
+      { hebrew: "לילה טוב", thai: "Fan dee na", pron: "פַאן דִי נָה" },
+      { hebrew: "סליחה / מצטער", thai: "Kho thot", pron: "קוֹ-תוֹט" },
+      { hebrew: "זה העונג שלי / בבקשה", thai: "Yin dee", pron: "יִין דִי" },
+      { hebrew: "לא נורא / אין בעיה", thai: "Mai pen rai", pron: "מַאי פֶּן רַאי" },
+      { hebrew: "בהצלחה!", thai: "Chok dee", pron: "צ'וֹק דִי" },
+      { hebrew: "באמת?", thai: "Jing Ror?", pron: "גִ'ינְג רוֹ?" },
+      { hebrew: "נכון?", thai: "Cha?", pron: "צַ'ה?" },
+      { hebrew: "תקשיב רגע", thai: "Fang noi", pron: "פָאנְג נוֹי" },
+      { hebrew: "בסדר, אני אחשוב על זה", thai: "Ok, khor khit doo gon", pron: "אוֹ-קֵי, כּוֹ קִית דוּ גוֹן" },
+      { hebrew: "אתה מדבר אנגלית?", thai: "Phut pasa angrit dai mai?", pron: "פּוּט פָּא-סָא אָנְג-גְרִיט דָאי מַאי?" },
+      { hebrew: "אתה מתאילנד?", thai: "Khun ma jak muang Thai mai?", pron: "קוּן מָא גָ'אק מוּאַנְג תָּאי מַאי?" },
+      { hebrew: "במה אתה עובד?", thai: "Khun tham-ngan a-rai?", pron: "קוּן תָּאם-נְגָאן אָ-רַאי?" },
+      { hebrew: "אני עובד ב-HR", thai: "Phom tham-ngan HR", pron: "פּוֹם תָּאם-נְגָאן אֵיְיץ'-אָר" },
+      { hebrew: "את יפה מאוד", thai: "Khun suay maak", pron: "קוּן סוּאַי מָאק" },
+      { hebrew: "אתה אדם טוב מאוד", thai: "Khun dee maak khrap", pron: "קוּן דִי מָאק קְרָאפּ" },
+      { hebrew: "למדתי קצת תאית", thai: "Phom rian pasa Thai nit-noi", pron: "פּוֹם רִיאַן פָּא-סָא תָּאי נִיט-נוֹי" },
+      { hebrew: "אח שלי / חבר", thai: "Pee-chai", pron: "פִּי-צ'אי" },
+      { hebrew: "בוקר טוב", thai: "Arun sook", pron: "אָרוּן סוּק" },
+      { hebrew: "אני לא מבין", thai: "Mai khao jai", pron: "מַאי קָאוֹ גָ'אי" },
+      { hebrew: "מאיפה אתה?", thai: "Khun ma jak arai?", pron: "קוּן מָא גָ'אק אָ-רַאי" },
+      { hebrew: "שמח להכיר אותך", thai: "Yindee thi dai roo jak", pron: "יִינְדִי תִּי דַאי רוּ גָ'אק" }
     ]
-  };
+  },
 
-  /***********************
-   * DESTINATIONS (כמו שהיה אצלך בקוד)
-   ***********************/
-  const destData = {
-    phuket: { name: "פוקט (Phuket)", subtitle: "", sections: [] },
-    krabi: { name: "קראבי & קו לנטה (Krabi & Koh Lanta)", subtitle: "", sections: [] },
-    samui: { name: "קוסמוי (Koh Samui)", subtitle: "", sections: [] },
-    bangkok: { name: "בנגקוק (Bangkok)", subtitle: "", sections: [] }
-  };
+  food: {
+    name: "אוכל והזמנות (נוסחת הנדל\"ס)",
+    icon: "🍜",
+    words: [
+      { hebrew: "אטריות אורז דקות", thai: "Sen Lek", pron: "סֶן לֶק" },
+      { hebrew: "אטריות אורז רחבות", thai: "Sen Yai", pron: "סֶן יַאי" },
+      { hebrew: "אטריות ביצים", thai: "Ba-Mee", pron: "בָּא-מִי" },
+      { hebrew: "עם מרק (רטוב)", thai: "Nam", pron: "נָאם" },
+      { hebrew: "יבש (ללא מרק)", thai: "Haeng", pron: "הֶנְג" },
+      { hebrew: "כדורי בשר (תוספת)", thai: "Look Chin", pron: "לוּק צִ'ין" },
+      { hebrew: "מרק חריף", thai: "Tom Yam", pron: "טוֹם יָאם" },
+      { hebrew: "בלי לשים...", thai: "Mai Sai...", pron: "מַאי סַאי..." },
+      { hebrew: "אני רוצה...", thai: "Phom Ao...", pron: "פּוֹם אָאוֹ..." },
+      { hebrew: "חשבון בבקשה", thai: "Check bin", pron: "צֶ'ק בִּין" },
+      { hebrew: "זה טעים מאוד, נכון?", thai: "A-roy maak mai khrap?", pron: "אֲרוֹי מָאק מַאי קְרָאפּ?" },
+      { hebrew: "אטריות אורז (בטוח)", thai: "Sen-lek", pron: "סֶן-לֶק" },
+      { hebrew: "אטריות חיטה (אסור!)", thai: "Ba-mee", pron: "בָּה-מִי" },
+      { hebrew: "יש לכם מקום ל-6 אנשים?", thai: "Mee thee sam-rap hok khon mai?", pron: "מִי תִּי סַאם-רַאפּ הוֹק קוֹן מַאי?" },
+      { hebrew: "אפשר לשבת כאן?", thai: "Nang thee-nee dai mai?", pron: "נָאנְג תִּי-נִי דָאי מַאי?" },
+      { hebrew: "צמחוני", thai: "Mang sa wirat", pron: "מַנְגְסָה וִירַט" },
+      { hebrew: "אלרגיה לבוטנים", thai: "Pat pet tua", pron: "פַּט פֶּט טוּאַה" },
+      { hebrew: "אני אלרגי ל...", thai: "Phom mangsa...", pron: "פּוֹם מַנְגָּסָה..." },
+      { hebrew: "מנה חמה", thai: "Ron", pron: "רוֹן" },
+      { hebrew: "אני רעב", thai: "Phom hiu", pron: "פּוֹם הִיוּ" }
+    ]
+  },
 
-  /***********************
-   * NAV / STATE
-   ***********************/
-  let stack = ['mainMenu'];
-  let stats = JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}');
+  drinks: {
+    name: "שייקים (Pun) ושתייה",
+    icon: "🍹",
+    words: [
+      { hebrew: "שייק אבטיח", thai: "Taeng-mo Pun", pron: "טֶנְג-מוֹ פַּאן" },
+      { hebrew: "שייק מנגו", thai: "Mamuang Pun", pron: "מָא-מוּאַנְג פַּאן" },
+      { hebrew: "שייק תפוזים", thai: "Nam Som Pun", pron: "נָאם סוֹם פַּאן" },
+      { hebrew: "קרח", thai: "Nam Kaeng", pron: "נָאם קֶנְג" },
+      { hebrew: "מים מינרלים", thai: "Nam Plao", pron: "נָאם פְּלָאוּ" },
+      { hebrew: "תה תאילנדי קר", thai: "Cha Yen", pron: "צָ'ה יֶן" },
+      { hebrew: "קפה שחור קר", thai: "Oliang", pron: "אוֹ-לִיאַנְג" },
+      { hebrew: "מי פרי הלונגן", thai: "Nam Lam Yai", pron: "נָאם לַאם יַאי" },
+      { hebrew: "צמא", thai: "Hio Nam", pron: "הִיוּ נָאם" },
+      { hebrew: "בקבוק מים (אחד)", thai: "Nam-plao nueng khuat", pron: "נָאם-פְּלָאוּ נִינְג כּוּאַט" },
+      { hebrew: "שייק בננה מלון", thai: "Gluay-Melon pan", pron: "קוּאַי-מֶלוֹן פַּן" },
+      { hebrew: "עם חלב", thai: "Sai nom", pron: "סַאי נוֹם" },
+      { hebrew: "בלי חלב", thai: "Mai sai nom", pron: "מָאי סַאי נוֹם" },
+      { hebrew: "לא מתוק מדי", thai: "Mai waan maak", pron: "מָאי וָאן מָאק" },
+      { hebrew: "על בסיס תפוזים", thai: "Pen nam-som", pron: "פֶּן נָאם-סוֹם" }
+    ]
+  },
 
-  // QUIZ STATE
-  let quizPool = [];
-  let quizIdx = 0;
-  let score = 0;
-  let quizLen = 20; // דרישה: 20 שאלות
+  fruits: {
+    name: "פירות, ירקות וקינוחים",
+    icon: "🍍",
+    words: [
+      { hebrew: "גויאבה", thai: "Farang", pron: "פָא-רָאנְג" },
+      { hebrew: "תפוח מים", thai: "Chompoo", pron: "צוֹ'מְפּוּ" },
+      { hebrew: "מנגו סטיקי רייס", thai: "Khao Niao Mamuang", pron: "קָאוּ נִי-אוֹ מָא-מוּאַנְג" },
+      { hebrew: "מלפפון", thai: "Taeng-kwa", pron: "תֶּנְג-כּוּאַה" },
+      { hebrew: "תירס", thai: "Khao-pode", pron: "קָאוּ-פּוֹדֶה" },
+      { hebrew: "בצל", thai: "Hua-hom", pron: "הוּאַה-הוֹם" },
+      { hebrew: "עגבנייה", thai: "Ma-khua-thet", pron: "מָה-קוּאַה-תֵ'ת" },
+      { hebrew: "אננס", thai: "Sa-pa-rot", pron: "סַפּ-פַּה-רוֹט" },
+      { hebrew: "קוקוס", thai: "Ma-prao", pron: "מָה-פְּרָאוּ" },
+      { hebrew: "חסה", thai: "Phak-kaat", pron: "פָאק-קָאט" },
+      { hebrew: "פלפל חריף", thai: "Phrik", pron: "פְּרִיק" },
+      { hebrew: "תרד תאילנדי", thai: "Phak-bung", pron: "פָאק-בּוּנְג" },
+      { hebrew: "מנגו", thai: "Ma-muang", pron: "מָה-מוּאַנְג" },
+      { hebrew: "בננה", thai: "Gluay", pron: "קוּאַי" },
+      { hebrew: "אבטיח", thai: "Taeng-mo", pron: "תֶּנְג-מוֹ" },
+      { hebrew: "פומלה", thai: "Som-o", pron: "סוֹם-אוֹ" },
+      { hebrew: "תירס עם חמאה", thai: "Khao-pode sai noey", pron: "קָאוֹ-פּוֹט סַאי נוֹי" },
+      { hebrew: "תירס חם", thai: "Khao-pode ron", pron: "קָאוֹ-פּוֹט רוֹן" }
+    ]
+  },
 
-  function showScreen(id, push=true) {
-    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.add('active');
+  transport: {
+    name: "תחבורה והתמצאות",
+    icon: "🚕",
+    words: [
+      { hebrew: "ישר", thai: "Trong pai", pron: "דְרוֹנְג פַּאי" },
+      { hebrew: "עצור כאן", thai: "Yut thee-nee", pron: "יוּט טִי נִי" },
+      { hebrew: "פנה ימינה", thai: "Liao kwa", pron: "לִי-אוֹ קְוָוא" },
+      { hebrew: "פנה שמאלה", thai: "Liao sai", pron: "לִי-אוֹ סַאי" },
+      { hebrew: "כמה דקות עוד?", thai: "Eek gee na-thee?", pron: "אִיק קִי נָא-תִי?" },
+      { hebrew: "רחוק", thai: "Glai", pron: "גְלַאי" },
+      { hebrew: "קרוב / ליד", thai: "Klai-klai", pron: "קְלַאי-קְלַאי" },
+      { hebrew: "מלון", thai: "Rong-rem", pron: "רוֹנְג-רֶם" },
+      { hebrew: "תפעיל מונה", thai: "Poet miter", pron: "פֶּואֶט מִי-טֶר" },
+      { hebrew: "אפשר לחנות כאן?", thai: "Jort thee-nee dai mai?", pron: "ג'וֹרְט תִּי-נִי דָאי מַאי?" },
+      { hebrew: "כמה עולה ל-6 אנשים?", thai: "Hok khon thao-rai?", pron: "הוֹק קוֹן תַּאוֹ-רַאי?" },
+      { hebrew: "כמה עולים 6 כרטיסים?", thai: "Tua hok bai thao-rai?", pron: "תּוּאַה הוֹק בַּאי תַּאוֹ-רַאי?" },
+      { hebrew: "שדה תעופה", thai: "Sanam bin", pron: "סָנָאם בִּין" },
+      { hebrew: "כמה זמן?", thai: "Tao rai nathi?", pron: "תָאוֹ רַאי נָאתִי?" },
+      { hebrew: "אני רוצה להשכיר סירה", thai: "Phom yak chuay ruea", pron: "פּוֹם יַאק צוּאַי רוּעָה" },
+      { hebrew: "בתוך / בפנים", thai: "Nai", pron: "נַאי" }
+    ]
+  },
 
-    if (push && stack[stack.length - 1] !== id) stack.push(id);
+  shopping: {
+    name: "קניות",
+    icon: "🛍️",
+    words: [
+      { hebrew: "אני רק מסתכל (בלי לחץ)", thai: "Doo choey-choey", pron: "דוּ צֶ'ה-אוֹי צֶ'ה-אוֹי" },
+      { hebrew: "יקר מדי!", thai: "Phaeng pai", pron: "פֶּנְג פָאי" },
+      { hebrew: "אפשר הנחה?", thai: "Lot dai mai?", pron: "לוֹט דָאי מַאי?" },
+      { hebrew: "יש לכם...?", thai: "Mee... mai?", pron: "מִי... מַאי?" },
+      { hebrew: "אפשר למצוא/לקנות כאן...?", thai: "Tee-nee mee... khai mai?", pron: "תִּי-נִי מִי... קָאי מַאי?" },
+      { hebrew: "לא צריך עודף (טיפ)", thai: "Mai tong ngen-ton", pron: "מָאי טוֹנְג נְגֶן-טוֹן" },
+      { hebrew: "חבילה / מארז", thai: "Paek", pron: "פֶּק" }
+    ]
+  },
 
-    if (id === 'statsScreen') renderStats();
+  health: {
+    name: "בריאות ועזרה ראשונה",
+    icon: "🩺",
+    words: [
+      { hebrew: "משחה לשרירים", thai: "Ya-nuan", pron: "יָא-נוּאַן" },
+      { hebrew: "טייגר באם", thai: "Ya-mong", pron: "יָא-מוֹנְג" },
+      { hebrew: "אלוורה", thai: "Wan-hang-na-ke", pron: "וָאן-הָא-נָא-קֶה" },
+      { hebrew: "עקיצות יתוש", thai: "Ya-tha-yung", pron: "יָא-תָא-יוּנְג" },
+      { hebrew: "כואב (פנימי)", thai: "Puat", pron: "פּוּאַט" },
+      { hebrew: "סוכרת", thai: "Bao-wan", pron: "בַּאוֹ-וָאן" },
+      { hebrew: "בלוטת התריס", thai: "Thy-roid", pron: "תָּאי-רוֹי" },
+      { hebrew: "בית מרקחת", thai: "Rong yamun", pron: "רוֹנְג יָמוּן" }
+    ]
+  }
+};
+
+const sevenEleven = {
+  sweets: [
+    { name: "April’s Bakery Coconut Lava Mochi", price: "39฿", desc: "מוצ'י רך עם מילוי קוקוס קרמי “לבה”. הלהיט של טיקטוק." },
+    { name: "Salted Egg Mochi", price: "35฿", desc: "שילוב מושלם של מתוק ומלוח. ויראלי מאוד." },
+    { name: "Chocolate Mochi", price: "32฿", desc: "מרקם פודינגי עשיר ורך. מומלץ לחובבי שוקולד." },
+    { name: "Pandan Custard Roll", price: "28฿", desc: "רול ירוק מתוק, טעם תאילנדי קלאסי." },
+    { name: "Thai Milk & Melon Pudding", price: "25฿", desc: "פודינג קרמי ומתוק בדיוק במידה." },
+    { name: "Coconut & Pandan Pudding", price: "29฿", desc: "קינוח קוקוס מושלם ומרענן." },
+    { name: "Sago Thua Dam", price: "27฿", desc: "קינוח מסורתי עם קוקוס ושעועית שחורה." },
+    { name: "Look Chit Coconut Jelly", price: "30฿", desc: "ג'לי בחלב מתוק למי שאוהב מרקם לעיס." },
+    { name: "Lod Chong", price: "26฿", desc: "ה“תולעים” הירוקות המפורסמות בג'לי קוקוס מרענן." },
+    { name: "Sago with Sweet Corn", price: "28฿", desc: "קינוח קליל עם פניני סאגו ותירס מתוק בחלב קוקוס." }
+  ],
+  beauty: [
+    { name: "Clear Nose BB Cream", price: "49฿", desc: "BB קרם נגד אקנה, מעולה לעור רגיש." },
+    { name: "Garnier Vitamin C Serum", price: "39฿", desc: "להבהרת כתמים, נספג במהירות." },
+    { name: "Sistar Watermelon Vitamin C Serum", price: "39฿", desc: "סרום להבהרה מהירה ורעננות." },
+    { name: "Poreless 5X Mask", price: "69฿", desc: "מסכה קוריאנית לצמצום נקבוביות ועור שמן." },
+    { name: "Nivea Oil Control Sunscreen", price: "~50฿", desc: "קליל ולא שומני, אידיאלי לחום התאילנדי." },
+    { name: "Sree Chand Sun Lotion", price: "~45฿", desc: "קרם הגנה עם SPF גבוה, פופולרי מאוד ביוטיוב." },
+    { name: "Nivea Luminous 630", price: "~60฿", desc: "קרם אנטי-אייג'ינג מתקדם נגד כתמים." },
+    { name: "Niacinamide + AHA Body Lotion", price: "~50฿", desc: "נגד אקנה בגוף וכהויות בעור." },
+    { name: "Korean Face Masks", price: "25–35฿", desc: "מארזים זולים להענקת לחות לפנים." },
+    { name: "Spot Acne Cream / Eye Gel", price: "30–50฿", desc: "מוצרים ויראליים לטיפול ממוקד." }
+  ],
+  spicy: [
+    { name: "Lay’s Mieng Kam", price: "35฿", desc: "טעם תאילנדי (מתוק-חריף). לרוב בלי הפתעות של פירות ים." },
+    { name: "Bigga Corn Snack", price: "25฿", desc: "חטיף פריך וחריף, קלאסיקה מקומית." },
+    { name: "FF Tomato Cracker", price: "28฿", desc: "חריפות קלה, מתאים לטבעונים." },
+    { name: "Taokaenoi Seaweed (Original)", price: "29฿", desc: "אצות מטוגנות – הטעם המקורי. חטיף אהוב." },
+    { name: "Mama Green Curry Ramen", price: "22฿", desc: "חריף וצמחוני." },
+    { name: "Samyang Carbonara", price: "35฿", desc: "חריפות מעודנת וויראלית (ללא פירות ים)." },
+    { name: "Bento Veggie (Spicy)", price: "26฿", desc: "גרסה צמחונית וחריפה מאוד." },
+    { name: "Lay’s Sour Cream & Onion", price: "32฿", desc: "עם טוויסט חריף קליל." },
+    { name: "Diamond Grains (Spicy-ish)", price: "25฿", desc: "חטיף אנרגיה עם חריפות קלה." },
+    { name: "Jay Spicy Noodles", price: "20฿", desc: "זמין בעיקר בתקופות פסטיבלים." }
+  ],
+  meals: [
+    { name: "Cheese Toastie", price: "32–44฿", desc: "המלך של הסבן אילבן. חובה לבקש שיחממו לכם!" },
+    { name: "Spinach Cheese Sandwich", price: "39–44฿", desc: "אופציה צמחונית מעולה ועשירה." },
+    { name: "Coconut Sandwich", price: "42฿", desc: "מתוק ומרענן." },
+    { name: "Onigiri (Corn / Veggie)", price: "25฿", desc: "חטיף אורז משביע ונוח." },
+    { name: "Vegetarian Basil Rice (Frozen)", price: "35฿", desc: "ארוחה חמה ומהירה בחימום במקום." },
+    { name: "Banana Muffin", price: "28฿", desc: "רך וטעים מאוד." },
+    { name: "Fresh Fruit Packs", price: "40–60฿", desc: "מנגו/מנגוסטין חתוכים ומוכנים." },
+    { name: "Sticky Rice with Sweet Taro", price: "30฿", desc: "קינוח משביע וטעים." },
+    { name: "Fried Tofu (Frozen)", price: "25฿", desc: "מנה צמחונית ומהירה." },
+    { name: "Five-Spice Gluten Stew (Vegetarian)", price: "32฿", desc: "מנה צמחונית עשירה בטעם." }
+  ],
+  drinks: [
+    { name: "Meiji Banana Milk", price: "20฿", desc: "המשקה הכי מפורסם בטיקטוק. מתוק וקרמי." },
+    { name: "Dutch Mill Coffee", price: "18฿", desc: "מעורר ומתוק במידה הנכונה." },
+    { name: "Sunshine Daily Banana Drink", price: "15฿", desc: "רענן וטבעי." },
+    { name: "Lactasoy Black Sesame Soy Milk", price: "12฿", desc: "טעם אגוזי מיוחד." },
+    { name: "Binggrae Banana Milk", price: "16฿", desc: "טעם בננה חזק וויראלי." },
+    { name: "Doi Kham Tomato Juice", price: "18฿", desc: "מלוח וקליל, פתיחה בריאה לבוקר." },
+    { name: "Thai Milk Tea (Bottled)", price: "22฿", desc: "תה חזק ומתוק — הטעם של תאילנד." },
+    { name: "Coconut Water", price: "20฿", desc: "ללא תוספת סוכר, הכי מרענן שיש." },
+    { name: "All Café Iced Latte", price: "35฿", desc: "קפה טרי מהדוכן בתוך הסניף." },
+    { name: "Vitamin C Jelly Drink", price: "25฿", desc: "משקה מרענן עם מרקם ג'לי כיפי." }
+  ]
+};
+
+const destData = {
+  phuket: {
+    name: "פוקט (Phuket)",
+    subtitle: "התמצאות, חופים, אוכל, אטרקציות ותצפיות",
+    sections: [
+      { h: "🗺️ התמצאות ואסטרטגיית לינה", c: "• מערב-מרכז (Patong, Karon, Kata): תיירותי, עמוס, חיי לילה, לוגיסטיקה קלה.<br>• צפון-מערב (Bang Tao, Surin, Kamala): יוקרתי, נקי, פתוח, אווירת ריזורטים איכותית.<br>• דרום (Rawai, Nai Harn, Yanui): טבעי, פחות מסחרי, וייב של מקומיים/אקספטים.<br>• Phuket Town: שווקים, אוכל מקומי, ארכיטקטורה סינית-פורטוגזית." },
+      { h: "🏖️ חופים (Must Visit)", c: "• Patong Beach: לא לרחצה חלומית. מרכז לוגיסטי, ספורט ימי, עמוס בתנועה.<br>• Bang Tao Beach: רצועה 6–7 ק\"מ. חול לבן, מים רגועים, פחות עמוס. מושלם להליכות וקיאקים.<br>• Surin Beach: השקיעה הכי טובה באי. מים צלולים, וייב איכותי.<br>• Freedom Beach: בסירה מפאטונג (~600฿) או הליכה קשה בג'ונגל. שקט מוחלט, מים שקופים.<br>• Nai Harn: בדרום. חוף טבעי ורחב, מים מצוינים לשחייה.<br>• Yanui Beach: קטן, פוטוגני, מעולה לשנורקלינג וקיאקים.<br>• Kata & Kata Noi: קאטה לספורט ימי/גלישה; קאטה נוי שקט ויוקרתי יותר.<br>• Kamala Beach: רגוע, משפחתי, מומלץ לשלב עם דרינק ב-Cafe Del Mar." },
+      { h: "🍜 אוכל ושווקים", c: "• Malin Plaza (פאטונג): שוק אוכל רחוב ופירות ים, פתוח עד חצות.<br>• Boat Avenue (באנג טאו): מתחם קניות ובילוי פתוח ואיכותי.<br>• Fun Friday Market: שישי בבאנג טאו – אוכל, מוזיקה חיה וקהל צעיר.<br>• Bang Tao Night Market: פעמיים-שלוש בשבוע – אוכל מקומי ודוכנים.<br>• Naka Weekend Market: שבת-ראשון – הכי גדול לקניות ואוכל.<br>• שוק הדגים ב-Rawai: בוחרים דגים ומבקשים מהמסעדות ממול לבשל (חוויה חזקה)." },
+      { h: "🎢 אטרקציות ואקשן", c: "• Andamanda Water Park: 5–6 שעות. מבוגר ~1,500฿.<br>• Hanuman World: אומגות (2–4 שעות). 1,000–3,500฿.<br>• Three Monkeys: מסעדה מעוצבת בתוך הג'ונגל במתחם הנומן וורלד.<br>• Similan Islands: “המלדיבס” של תאילנד. עונתי (נסגר באמצע מאי). יום ארוך.<br>• James Bond Island: שיט בפאנג נגה + Koh Panyee. סיור יום: 50–60$.<br>• Phuket Elephant Sanctuary: לבחור אתיים בלבד. ~85$.<br>• ספורט ימי: קיאקים ~100฿/שעה, סאפ ~300฿/שעה, שנורקלינג ~100฿ לציוד." },
+      { h: "🌇 תצפיות", c: "• Promthep Cape: תצפית השקיעה הכי חזקה בדרום.<br>• Windmill Viewpoint: סמוך לפרומתפ, פחות עמוס.<br>• Karon Viewpoint: “שלושת החופים”.<br>• Phang Nga Skywalk (Samet Nangshe): גשר זכוכית למפרץ פאנג נגה (כשעה וחצי נסיעה)." },
+      { h: "💡 טיפים לוגיסטיים", c: "• חובה להשתמש ב-InDrive או Bolt. מוניות ברחוב יקרות בערך פי 2.<br>• Jungceylon בפאטונג: קוסמטיקה/שיניים ברמה גבוהה במחירים טובים.<br>• אחרי ים: חפשו “Aloe Massage” למניעת כוויות אחרי ימים ארוכים." }
+    ]
+  },
+
+  krabi: {
+    name: "קראבי (Krabi) & קו לנטה",
+    subtitle: "חופים ואיים, טבע, שווקים וטיפים למשפחה",
+    sections: [
+      { h: "🗺️ אסטרטגיית לינה (Ao Nang)", c: "• Beach Road: הלב הפועם, הכל נגיש ברגל.<br>• Noppharat Thara: צפונית למרכז, שקט יותר, קרוב לשוק הלילה לנדמרק." },
+      { h: "🏖️ חופים ואיים", c: "• Phra Nang Cave Beach: להגיע לפני 10:00. מסאז’ חוף 300–400฿.<br>• Railay West: אווירת אי ללא כבישים. שקיעה חזקה + Walking Street.<br>• Tonsai Beach: וייב מטיילים וטיפוס צוקים.<br>• Hong Island: לגונה פוטוגנית + תצפית 360° (~400 מדרגות).<br>• טיפ: לצאת מ-Tubkaek/Klong Muang לקיצור זמן ההפלגה.<br>• 4 Islands: טיול איים קלאסי (Koh Poda, Chicken Island ועוד).<br>• קו לנטה: Relax Beach (שקט), Klong Khong (טיקי ועצי דקל)." },
+      { h: "🌿 טבע ואטרקציות", c: "• Emerald Pool: כניסה 400฿. להגיע ב-08:00 + דוחה יתושים.<br>• Hot Springs: כניסה 200฿. מומלץ לשלב עם Emerald Pool.<br>• Ao Thalane (קיאקים): חצי יום ~1,000฿.<br>• Tiger Cave Temple: 1,260 מדרגות לתצפית — לוותר אם לא מחפשים מאמץ." },
+      { h: "🍜 אוכל ושווקים", c: "• Ao Nang Landmark Night Market: כל יום 17:00–22:00. ~100฿ למנה.<br>• Krabi Town Walking Street: שישי–ראשון בלבד.<br>• מנות חובה: סאטה, פירות ים בגריל, רוטי בננה." },
+      { h: "💡 טיפים לוגיסטיים", c: "• הגעה לריילי: לונגטייל 80–100฿ לאדם. משפחה 6 — עדיף סירה פרטית 600–800฿.<br>• מהשדה לאאו נאנג: מונית ~600฿ או שאטל 150฿ לאדם.<br>• נהג בקו לנטה: נהג בשם Ahmed לסיורים פרטיים." }
+    ]
+  },
+
+  samui: {
+    name: "קוסמוי (Koh Samui)",
+    subtitle: "חופים, תצפיות, בילויים, אוכל וטיפים להתניידות",
+    sections: [
+      { h: "🗺️ בחירת בסיס לינה", c: "• Chaweng: הכי “חי”, הכל ברגל (קניון, ברים, חוף).<br>• Bophut / Fisherman’s Village: סטייל, טיילת איכותית, מסעדות על המים.<br>• Lamai: רגוע יותר מצ'אוונג, מחירים נוחים יותר." },
+      { h: "🏖️ חופים (Must Visit)", c: "• Chaweng Beach: חול לבן, מים נוחים. מסיבות חוף (Ark Bar).<br>• Silver Beach: “סיישל הקטן”. להגיע לפני 09:00.<br>• Coral Cove: שנורקלינג שקט בלי המונים.<br>• Choeng Mon: רגוע ונעים.<br>• Taling Ngam: שקיעות מטורפות בצד המערבי." },
+      { h: "🌇 תצפיות ונקודות עניין", c: "• Overlap Rock 1+2: ~200฿ (כולל שאטל 4x4 ושתייה).<br>• The Cocoon: 09:00–23:00. להגיע שעה לפני שקיעה ולהזמין שולחן.<br>• Big Buddha: עצירה קצרה 20–40 דק' לתמונה ונוף." },
+      { h: "🎢 אטרקציות ובילויים", c: "• Pig Island (Koh Madsum): ~1,500฿ (כולל ארוחה) + 50฿ כניסה.<br>• מפלי Na Muang (1 ו-2): נאמואנג 2 יפה יותר. ~50฿ (09:00–18:00). להביא נעליים נוחות.<br>• Magic Garden: גן פסלים מוצל בג'ונגל.<br>• Ark Bar: מופעי אש ב-20:00 וב-22:00.<br>• SEEN Beach Club: Pool Party בשבת. מינימום 3,000–5,000฿ למיטה.<br>• Coco Tam’s: פופים על החול מול השקיעה." },
+      { h: "🍜 שווקים ואוכל", c: "• Fisherman’s Village: שוק לילה (שישי היום החזק).<br>• Lamai Night Market: אוכל רחוב זול ואותנטי.<br>• Tiki Box: בורגרים מעולים (Buffalo & Blue Cheese).<br>• El Gaucho: סטייקאוס איכותי בצ'אוונג." },
+      { h: "💡 טיפים לוגיסטיים", c: "• Songthaew: לסגור מחיר לפני העלייה (50–100฿).<br>• Circle Island Tour: נהג פרטי ל-5 שעות ~2,500–3,000฿." }
+    ]
+  },
+
+  bangkok: {
+    name: "בנגקוק (Bangkok)",
+    subtitle: "תחבורה חכמה, קניות, שווקים, רופטופים וטבע",
+    sections: [
+      { h: "🚇 תחבורה (עקיפת פקקים)", c: "• BTS: 17–45฿. מומלץ Rabbit Card נטען.<br>• שיט בנהר (Chao Phraya): Express Boat (כתום) 16฿ 06:00–19:00 | Tourist Boat (כחול) 45฿ / 150฿ יומי.<br>• Motorbike Taxi: 20–60฿ בתוך סמטאות (Soi).<br>• Grab/InDrive: עדיף לנסיעות ארוכות בשעות שאין פקקים." },
+      { h: "🛍️ קניונים וקניות", c: "• MBK: זיופים/גאדג'טים. קומות 4–5. 10:00–22:00.<br>• Platinum: אופנה, מחירים טובים בקנייה 3+ פריטים. 09:00–20:00.<br>• Icon Siam: SookSiam בקומה 1 (שוק צף מקורה) + מרפסת תצפית בקומה 7 (חינם).<br>• Siam Paragon: יוקרה + אוכל + Sea Life (~1,500฿).<br>• Chatuchak: שוק סופ\"ש ענק. BTS Mo Chit.<br>• Pratunam: שוק בגדים זול (גם בלילה)." },
+      { h: "🍜 אוכל ושווקי לילה", c: "• Chinatown (Yaowarat): 18:00–חצות. אוכל רחוב מפורסם.<br>• Jodd Fairs: 17:00–00:00. פוטוגני ואווירה צעירה.<br>• Asiatique Riverfront: שוק על הנהר + גלגל ענק.<br>• Train Night Market Srinakarin: חמישי–ראשון. וינטג' ומוזיקה חיה." },
+      { h: "🌃 חיי לילה ורופטופים", c: "• Khao San Road: תרמילאים, ברים ומוזיקה.<br>• Sukhumvit (Nana/Asok/Thonglor): האזור הכי חי.<br>• Octave (קומה 45): בירה ~250฿, קוקטייל ~390฿.<br>• Above Eleven: 280–450฿.<br>• Tichuca: “העץ המואר”.<br>• Brewski: בר בירה בגובה." },
+      { h: "🌿 טבע ובתי קפה", c: "• Lumpini Park: לטאות כוח ושיט פדלים.<br>• Bang Krachao (Green Lung): אופניים ~100฿.<br>• בתי קפה: % Arabica (Icon Siam), Factory Coffee, After You." }
+    ]
+  }
+};
+
+/* =========================
+   STATE
+========================= */
+let stack = ['mainMenu'];
+let quizPool = [];
+let quizIdx = 0;
+let score = 0;
+
+let stats = JSON.parse(localStorage.getItem('lior_stats') || '{"total":0,"correct":0}');
+
+/* =========================
+   NAV
+========================= */
+function showScreen(id, push=true) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.add('active');
+  if (push && stack[stack.length-1] !== id) stack.push(id);
+  if (id === 'statsScreen') renderStats();
+}
+
+function goBack() {
+  if (stack.length > 1) {
+    stack.pop();
+    showScreen(stack[stack.length-1], false);
+  }
+}
+
+function toggleAcc(el) {
+  const content = el.nextElementSibling;
+  if (content) content.classList.toggle('open');
+}
+
+/* =========================
+   LEARN
+========================= */
+function loadLearnMenu() {
+  let html = `<div class="section-head"><h2>📚 לימוד לפי נושאים</h2><div class="muted">בחר קטגוריה</div></div>`;
+  for (const key in vocab) {
+    html += `<div class="btn-main" onclick="showWords('${key}')"><span>${vocab[key].icon}</span>${vocab[key].name}</div>`;
+  }
+  document.getElementById('categoryList').innerHTML = html;
+  showScreen('learnMenu');
+}
+
+function showWords(cat) {
+  const c = vocab[cat];
+  if (!c) return;
+
+  let html = `<div class="section-head"><h2>${c.icon} ${c.name}</h2><div class="muted">עברית • לטינית • הגייה</div></div>`;
+  c.words.forEach(w => {
+    html += `
+      <div class="card">
+        <div class="item-title">${escapeHtml(w.hebrew)} – ${escapeHtml(w.thai)}</div>
+        <div class="item-desc muted">(${escapeHtml(w.pron)})</div>
+      </div>`;
+  });
+
+  document.getElementById('categoryList').innerHTML = html;
+  showScreen('learnMenu');
+}
+
+/* =========================
+   SEARCH
+========================= */
+function searchWord(val) {
+  const res = document.getElementById('searchResults');
+  if (!res) return;
+
+  const q = (val || "").trim();
+  if (!q) { res.innerHTML = ""; return; }
+
+  const all = getAllWords();
+  const qLower = q.toLowerCase();
+
+  const found = all.filter(w =>
+    (w.hebrew && w.hebrew.includes(q)) ||
+    (w.thai && w.thai.toLowerCase().includes(qLower)) ||
+    (w.pron && w.pron.includes(q))
+  ).slice(0, 8);
+
+  if (found.length === 0) {
+    res.innerHTML = `<div class="card muted">לא נמצאו תוצאות.</div>`;
+    return;
   }
 
-  function goBack() {
-    if (stack.length > 1) {
-      stack.pop();
-      showScreen(stack[stack.length - 1], false);
-    }
-  }
+  res.innerHTML = found.map(w =>
+    `<div class="card" style="margin-bottom:8px;">
+      <div class="item-title">${escapeHtml(w.hebrew)} – ${escapeHtml(w.thai)}</div>
+      <div class="muted">(${escapeHtml(w.pron)})</div>
+    </div>`
+  ).join('');
+}
 
-  function goHome() {
-    stack = ['mainMenu'];
-    showScreen('mainMenu', false);
-  }
+/* =========================
+   QUIZ (20 questions, no duplicates)
+========================= */
+function startQuiz() {
+  const all = getAllWords();
 
-  function toggleAcc(headerEl) {
-    const content = headerEl.nextElementSibling;
-    if (!content) return;
-    content.classList.toggle('open');
+  // ייחוד לפי thai (לטינית) כדי למנוע כפילות
+  const uniqueMap = new Map();
+  all.forEach(w => {
+    const key = (w.thai || "").trim().toLowerCase();
+    if (key && !uniqueMap.has(key)) uniqueMap.set(key, w);
+  });
 
-    const arrow = headerEl.querySelector('.acc-arrow');
-    if (arrow) arrow.textContent = content.classList.contains('open') ? '▲' : '▼';
-  }
+  const unique = Array.from(uniqueMap.values());
+  shuffleInPlace(unique);
 
-  /***********************
-   * LEARN
-   ***********************/
-  function loadLearnMenu() {
-    let html = "<h2 style='margin-bottom:12px;'>בחר קטגוריה:</h2>";
-    for (let key in vocab) {
-      html += `<div class="btn-main" onclick="showWords('${key}')"><span>${vocab[key].icon}</span> ${vocab[key].name}</div>`;
-    }
-    document.getElementById('categoryList').innerHTML = html;
-    showScreen('learnMenu');
-  }
+  const count = Math.min(20, unique.length);
+  quizPool = unique.slice(0, count);
+  quizIdx = 0;
+  score = 0;
 
-  function showWords(cat) {
-    const c = vocab[cat];
-    if (!c) return;
+  renderQ();
+  showScreen('quizScreen');
+}
 
-    let html = `<h2 style="margin-bottom:12px;">${c.name}</h2>`;
-    c.words.forEach(w => {
-      html += `<div class="card"><strong>${w.thai}</strong><br>${w.hebrew} <small>(${w.pron})</small></div>`;
-    });
+function renderQ() {
+  const q = quizPool[quizIdx];
+  if (!q) { showScreen('mainMenu'); return; }
 
-    document.getElementById('categoryList').innerHTML = html;
-    showScreen('learnMenu');
-  }
+  document.getElementById('quizProgress').innerText = `שאלה ${quizIdx + 1} / ${quizPool.length}`;
+  document.getElementById('qThai').innerText = q.thai || "";
+  document.getElementById('qHint').innerText = q.pron ? `הגייה: (${q.pron})` : "";
 
-  /***********************
-   * SEARCH (VOCAB)
-   ***********************/
-  function searchWord(val) {
-    const res = document.getElementById('searchResults');
-    val = (val || "").trim();
-    if (!val) { res.innerHTML = ""; return; }
+  const optsDiv = document.getElementById('quizOptions');
+  optsDiv.innerHTML = '';
 
-    let all = [];
-    Object.values(vocab).forEach(c => all.push(...c.words));
+  const all = getAllWords();
 
-    const valLower = val.toLowerCase();
-    const found = all
-      .filter(w =>
-        (w.hebrew || "").includes(val) ||
-        (w.thai || "").toLowerCase().includes(valLower) ||
-        (w.pron || "").includes(val)
-      )
-      .slice(0, 5);
+  // אופציות תשובה = עברית
+  const poolHeb = Array.from(new Set(all.map(w => w.hebrew).filter(Boolean)));
+  const wrongs = poolHeb.filter(h => h !== q.hebrew);
+  shuffleInPlace(wrongs);
 
-    res.innerHTML = found
-      .map(w => `<div class="card" style="margin-bottom:6px;"><b>${w.thai}</b> = ${w.hebrew} <span class="muted">(${w.pron})</span></div>`)
-      .join('');
-  }
+  const choices = [q.hebrew, ...wrongs.slice(0, 3)];
+  shuffleInPlace(choices);
 
-  /***********************
-   * QUIZ (20 שאלות, ללא כפילויות, בלי חזרה על אותה מילה באותו מבחן)
-   ***********************/
-  function getAllWordsUniqueByThai(scope = 'all') {
-    let all = [];
-    if (scope && scope !== 'all' && vocab[scope]) all = [...vocab[scope].words];
-    else Object.values(vocab).forEach(c => all.push(...c.words));
+  choices.forEach(opt => {
+    const d = document.createElement('div');
+    d.className = 'quiz-option';
+    d.innerText = opt;
 
-    // דה-דופליקציה לפי "thai" (כדי לא לחזור על אותה מילה פעמיים במבחן גם אם יש לה שתי שורות)
-    const seen = new Set();
-    const unique = [];
-    for (const w of all) {
-      const key = (w.thai || "").trim().toLowerCase();
-      if (!key) continue;
-      if (seen.has(key)) continue;
-      seen.add(key);
-      unique.push(w);
-    }
-    return unique;
-  }
+    d.onclick = () => {
+      const isCorrect = (opt === q.hebrew);
 
-  function startQuiz(scope = 'all') {
-    const uniqueWords = getAllWordsUniqueByThai(scope);
-    const available = uniqueWords.length;
+      if (isCorrect) {
+        d.classList.add('correct');
+        score++;
+        stats.correct++;
+      } else {
+        d.classList.add('wrong');
+        Array.from(optsDiv.children).forEach(b => {
+          if (b.innerText === q.hebrew) b.classList.add('correct');
+        });
+      }
 
-    if (available < 2) { alert("אין מספיק מילים למבחן."); return; }
+      stats.total++;
+      localStorage.setItem('lior_stats', JSON.stringify(stats));
 
-    quizLen = Math.min(20, available); // דרישה: 20, ואם אין מספיק — מקסימום אפשרי בלי כפילויות
-    quizPool = uniqueWords.sort(() => 0.5 - Math.random()).slice(0, quizLen);
+      Array.from(optsDiv.children).forEach(b => b.onclick = null);
+      document.getElementById('nextQuizBtn').style.display = 'block';
+    };
 
-    quizIdx = 0;
-    score = 0;
+    optsDiv.appendChild(d);
+  });
 
+  document.getElementById('nextQuizBtn').style.display = 'none';
+}
+
+function nextQuestion() {
+  quizIdx++;
+  if (quizIdx < quizPool.length) {
     renderQ();
-    showScreen('quizScreen');
+  } else {
+    alert(`ציון: ${score}/${quizPool.length}`);
+    showScreen('mainMenu');
   }
+}
 
-  function renderQ() {
-    const q = quizPool[quizIdx];
-    if (!q) { goHome(); return; }
+/* =========================
+   DESTINATIONS
+========================= */
+function openDest(id) {
+  const d = destData[id] || { name: "בקרוב", subtitle: "", sections: [] };
 
-    document.getElementById('quizProgress').innerText = `שאלה ${quizIdx + 1} / ${quizLen}`;
-    document.getElementById('qThai').innerText = q.thai;
+  document.getElementById('destTitle').innerText = d.name || "";
+  document.getElementById('destSubtitle').innerText = d.subtitle || "";
 
-    const optsDiv = document.getElementById('quizOptions');
-    optsDiv.innerHTML = '';
-
-    // בניית מאגר תשובות (hebrew) מתוך כל המילים הייחודיות (כדי לצמצם הטיות/שכפולים)
-    const poolAll = getAllWordsUniqueByThai('all');
-    const allHeb = poolAll.map(w => w.hebrew).filter(Boolean);
-
-    // 1 נכונה + עד 3 מסיחים ייחודיים
-    const correct = q.hebrew;
-    const distractors = Array.from(new Set(allHeb.filter(h => h !== correct)))
-      .sort(() => 0.5 - Math.random())
-      .slice(0, 3);
-
-    let choices = [correct, ...distractors].sort(() => 0.5 - Math.random());
-
-    // אם מסיבה כלשהי אין מספיק מסיחים, עדיין המבחן יעבוד (פשוט פחות אפשרויות)
-    choices.forEach(opt => {
-      const d = document.createElement('div');
-      d.className = 'quiz-option';
-      d.innerText = opt;
-
-      d.onclick = () => {
-        const isCorrect = (opt === correct);
-
-        if (isCorrect) {
-          d.classList.add('correct');
-          score++;
-          stats.correct++;
-        } else {
-          d.classList.add('wrong');
-          Array.from(optsDiv.children).forEach(b => {
-            if (b.innerText === correct) b.classList.add('correct');
-          });
-        }
-
-        stats.total++;
-        localStorage.setItem('lior_stats', JSON.stringify(stats));
-
-        Array.from(optsDiv.children).forEach(b => b.onclick = null);
-        document.getElementById('nextQuizBtn').style.display = 'block';
-      };
-
-      optsDiv.appendChild(d);
-    });
-
-    document.getElementById('nextQuizBtn').style.display = 'none';
-  }
-
-  function nextQuestion() {
-    quizIdx++;
-    if (quizIdx < quizLen) renderQ();
-    else { alert(`ציון: ${score}/${quizLen}`); goHome(); }
-  }
-
-  /***********************
-   * DESTINATIONS
-   ***********************/
-  function openDest(id) {
-    const d = destData[id] || { name: "בקרוב", subtitle: "", sections: [] };
-
-    document.getElementById('destTitle').innerText = d.name;
-    document.getElementById('destSubtitle').innerText = d.subtitle || "";
-
-    document.getElementById('destSections').innerHTML = (d.sections || []).map(s =>
-      `<div class="accordion">
-        <div class="acc-header" onclick="toggleAcc(this)">${s.h} <span class="acc-arrow">▼</span></div>
+  const sectionsEl = document.getElementById('destSections');
+  if (!d.sections || d.sections.length === 0) {
+    sectionsEl.innerHTML = `<div class="card muted">אין עדיין תוכן ליעד הזה.</div>`;
+  } else {
+    sectionsEl.innerHTML = d.sections.map(s => `
+      <div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">${s.h} <span>▼</span></div>
         <div class="acc-content">${s.c}</div>
-      </div>`
-    ).join('') || `<div class="card"><b>אין עדיין תוכן ליעד הזה.</b></div>`;
-
-    showScreen('destDetail');
-  }
-
-  /***********************
-   * STATS
-   ***********************/
-  function renderStats() {
-    document.getElementById('statTotal').innerText = stats.total;
-    document.getElementById('statPercent').innerText =
-      (stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0) + "%";
-  }
-
-  function resetStats() {
-    localStorage.removeItem('lior_stats');
-    stats = { total: 0, correct: 0 };
-    renderStats();
-    alert("הסטטיסטיקות אופסו.");
-    goHome();
-  }
-
-  /***********************
-   * 7-ELEVEN RENDER
-   ***********************/
-  function renderSevenList(items) {
-    return items.map(it => `
-      <div class="item-card">
-        <div class="item-head">
-          <div class="item-name">${it.name}</div>
-          <div class="price-tag">${it.price}</div>
-        </div>
-        <div class="item-desc">${it.desc}</div>
       </div>
     `).join('');
   }
 
-  function init() {
-    document.getElementById('711_sweets').innerHTML = renderSevenList(sevenEleven.sweets);
-    document.getElementById('711_beauty').innerHTML = renderSevenList(sevenEleven.beauty);
-    document.getElementById('711_spicy').innerHTML = renderSevenList(sevenEleven.spicy);
-    document.getElementById('711_meals').innerHTML = renderSevenList(sevenEleven.meals);
-    document.getElementById('711_drinks').innerHTML = renderSevenList(sevenEleven.drinks);
+  showScreen('destDetail');
+}
+
+/* =========================
+   STATS
+========================= */
+function renderStats() {
+  document.getElementById('statTotal').innerText = stats.total;
+  document.getElementById('statPercent').innerText =
+    (stats.total > 0 ? Math.round(stats.correct / stats.total * 100) : 0) + "%";
+}
+
+/* =========================
+   7-ELEVEN RENDER
+========================= */
+function renderSevenElevenList(containerId, items) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+
+  if (!items || items.length === 0) {
+    el.innerHTML = `<div class="muted">אין נתונים.</div>`;
+    return;
   }
-  init();
+
+  // בנייה בטוחה (בלי “טקסט עם HTML” מתוך הדאטה)
+  const frag = document.createDocumentFragment();
+
+  items.forEach((it) => {
+    const row = document.createElement('div');
+    row.className = 'item-row';
+
+    const title = document.createElement('div');
+    title.className = 'item-title';
+    title.textContent = it.name;
+
+    const price = document.createElement('span');
+    price.className = 'price-tag';
+    price.textContent = it.price || "";
+
+    title.appendChild(price);
+
+    const desc = document.createElement('div');
+    desc.className = 'item-desc';
+    desc.textContent = it.desc || "";
+
+    row.appendChild(title);
+    row.appendChild(desc);
+
+    frag.appendChild(row);
+  });
+
+  el.innerHTML = "";
+  el.appendChild(frag);
+}
+
+/* =========================
+   HELPERS
+========================= */
+function getAllWords() {
+  const all = [];
+  Object.values(vocab).forEach(cat => {
+    if (cat && Array.isArray(cat.words)) all.push(...cat.words);
+  });
+  return all;
+}
+
+function shuffleInPlace(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function escapeHtml(str) {
+  return String(str ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+/* =========================
+   INIT
+========================= */
+function init() {
+  renderSevenElevenList('711_sweets', sevenEleven.sweets);
+  renderSevenElevenList('711_beauty', sevenEleven.beauty);
+  renderSevenElevenList('711_spicy', sevenEleven.spicy);
+  renderSevenElevenList('711_meals', sevenEleven.meals);
+  renderSevenElevenList('711_drinks', sevenEleven.drinks);
+}
+init();
 </script>
 
 </body>
