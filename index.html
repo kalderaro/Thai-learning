@@ -1,150 +1,541 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thai Master - Lior's Ultimate Guide</title>
-    <style>
-        :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f8f9fa; }
-        * { margin:0; padding:0; box-sizing:border-box; font-family: system-ui, -apple-system, sans-serif; }
-        body { background: var(--bg); color: #333; }
-        .nav-bar { display: flex; justify-content: space-between; padding: 15px; background: var(--primary); color: white; position: sticky; top:0; z-index:100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
-        .nav-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
-        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
-        .screen { display: none; animation: fadeIn 0.3s; }
-        .screen.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
-        .btn-main { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 10px; }
-        .btn-accent { background: var(--accent); color: var(--primary); }
-        .btn-green { background: #27ae60; }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thai Master - Lior 2026</title>
+  <style>
+    :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f8f9fa; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family: system-ui, sans-serif; }
+    body { background: var(--bg); color: #333; line-height: 1.6; }
 
-        .card { background: white; border-radius: 15px; padding: 15px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
-        .accordion { background: white; border-radius: 12px; margin-bottom: 8px; border: 1px solid #eee; overflow: hidden; }
-        .acc-header { padding: 15px; font-weight: bold; background: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .acc-content { padding: 15px; display: none; border-top: 1px solid #eee; background: #fdfdfd; line-height: 1.6; }
-        .acc-content.open { display: block; }
-        
-        .dest-link { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500'); background-size: cover; height: 100px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold; margin-bottom: 12px; cursor: pointer; }
-        .price-tag { background: #eee; padding: 2px 6px; border-radius: 5px; font-size: 12px; margin-right: 5px; color: var(--primary); font-weight: bold; }
-        
-        h3 { margin-bottom: 10px; color: var(--primary); border-bottom: 2px solid var(--accent); display: inline-block; }
-    </style>
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: var(--primary);
+      color: white;
+      position: sticky;
+      top:0;
+      z-index:1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      gap: 10px;
+    }
+    .nav-btn {
+      background: rgba(255,255,255,0.2);
+      border: none;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      white-space: nowrap;
+    }
+
+    .container { max-width: 600px; margin: 0 auto; padding: 15px; }
+    .screen { display: none; animation: fadeIn 0.3s; }
+    .screen.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+    .btn-main {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 18px;
+      border-radius: 15px;
+      font-size: 18px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: 2px solid #ddd;
+      margin-bottom: 15px;
+      font-size: 16px;
+      outline: none;
+    }
+    .search-box:focus { border-color: var(--primary); }
+
+    /* ✅ חסר בקוד המקורי: card */
+    .card{
+      background:#fff;
+      border:1px solid #eee;
+      padding:14px;
+      border-radius:12px;
+      margin-bottom:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    }
+
+    .accordion {
+      background: white;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      border: 1px solid #eee;
+      overflow: hidden;
+    }
+    .acc-header {
+      padding: 18px;
+      font-weight: bold;
+      background: #fff;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      user-select: none;
+    }
+    .acc-content {
+      padding: 18px;
+      display: none;
+      background: #fdfdfd;
+      border-top: 1px solid #eee;
+    }
+    .acc-content.open { display: block; }
+    .acc-arrow { font-weight: 900; }
+
+    .quiz-option {
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 12px;
+      padding: 18px;
+      font-size: 18px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      user-select: none;
+    }
+    .correct { border-color: #27ae60; background: #d4edda; }
+    .wrong { border-color: #e74c3c; background: #f8d7da; }
+
+    .price-tag {
+      background: #eee;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--primary);
+      font-weight: bold;
+      white-space: nowrap;
+    }
+  </style>
 </head>
 <body>
 
 <div class="nav-bar">
-    <button class="nav-btn" onclick="goBack()">🔙 חזור</button>
-    <span style="font-weight: 900;">THAI MASTER</span>
-    <button class="nav-btn" onclick="showScreen('mainMenu')">🏠 בית</button>
+  <button class="nav-btn" onclick="goBack()">🔙 חזור</button>
+  <span style="font-weight: 900;">THAI MASTER 2026</span>
+  <!-- ✅ בית מאפס ניווט (לא דוחף ל-stack) -->
+  <button class="nav-btn" onclick="goHome()">🏠 בית</button>
 </div>
 
 <div class="container">
-    <div id="mainMenu" class="screen active">
-        <div style="text-align: center; padding: 20px;"><h1>🇹🇭 שלום ליאור</h1><p>כל הידע לטיול במקום אחד</p></div>
-        <button class="btn-main" onclick="showScreen('learnMenu')">📚 לימוד מילים ומשפטים</button>
-        <button class="btn-main btn-accent" onclick="startQuiz('all')">🎯 מבחן רנדומלי</button>
-        <button class="btn-main btn-green" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
-        <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
+
+  <div id="mainMenu" class="screen active">
+    <div style="text-align: center; padding: 20px 0;">
+      <h1>🇹🇭 שלום ליאור</h1>
+      <p>המדריך המלא והמתוקן</p>
     </div>
 
-    <div id="sevenMenu" class="screen">
-        <div style="text-align:center; margin-bottom:20px;"><h2>🏪 המלצות סבן אילבן</h2></div>
-        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🍰 קינוחים ומתוקים <span>▼</span></div><div class="acc-content" id="711_sweets"></div></div>
-        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">💄 קוסמטיקה וטיפוח <span>▼</span></div><div class="acc-content" id="711_beauty"></div></div>
-        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🌶️ חטיפים ומאכלים חריפים <span>▼</span></div><div class="acc-content" id="711_spicy"></div></div>
-        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🥤 משקאות ומגוון <span>▼</span></div><div class="acc-content" id="711_drinks"></div></div>
+    <input
+      type="text"
+      class="search-box"
+      id="mainSearch"
+      placeholder="🔍 חיפוש מהיר של מילה..."
+      oninput="searchWord(this.value)"
+      autocomplete="off"
+    />
+    <div id="searchResults" style="margin-bottom: 15px;"></div>
+
+    <button class="btn-main" onclick="loadLearnMenu()">📚 לימוד לפי נושאים</button>
+
+    <!-- ✅ תואם לפונקציה (תומך גם פילטר עתידי) -->
+    <button class="btn-main" style="background:var(--accent); color:var(--primary);" onclick="startQuiz('all')">
+      🎯 מבחן רנדומלי
+    </button>
+
+    <button class="btn-main" style="background:#27ae60" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
+    <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
+    <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
+  </div>
+
+  <div id="sevenMenu" class="screen">
+    <div style="text-align:center; margin-bottom:20px;"><h2>🏪 המלצות סבן אילבן</h2></div>
+
+    <div class="accordion">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        🍰 10 קינוחים ומתוקים <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-content" id="711_sweets"></div>
     </div>
 
-    <div id="guideMenu" class="screen">
-        <div class="dest-link" onclick="openDest('phuket')">פוקט (Phuket)</div>
-        <div class="dest-link" onclick="openDest('krabi')">קראבי (Krabi)</div>
-        <div class="dest-link" onclick="openDest('samui')">קוסמוי (Koh Samui)</div>
-        <div class="dest-link" onclick="openDest('bangkok')">בנגקוק (Bangkok)</div>
+    <div class="accordion">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        💄 10 מוצרי קוסמטיקה <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-content" id="711_beauty"></div>
     </div>
 
-    <div id="destDetail" class="screen">
-        <div class="card"><h1 id="destTitle"></h1></div>
-        <div id="destSections"></div>
+    <div class="accordion">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        🌶️ 10 חטיפים ומאכלים חריפים <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-content" id="711_spicy"></div>
     </div>
 
-    <div id="learnMenu" class="screen"><div id="categoryList"></div></div>
+    <div class="accordion">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        🥤 10 משקאות ומגוון <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-content" id="711_drinks"></div>
+    </div>
+  </div>
+
+  <div id="guideMenu" class="screen">
+    <div class="btn-main" style="background:#3498db" onclick="openDest('phuket')">🏝️ פוקט (Phuket)</div>
+    <div class="btn-main" style="background:#1abc9c" onclick="openDest('krabi')">🛶 קראבי (Krabi)</div>
+    <div class="btn-main" style="background:#9b59b6" onclick="openDest('samui')">🥥 קוסמוי (Samui)</div>
+    <div class="btn-main" style="background:#34495e" onclick="openDest('bangkok')">🏙️ בנגקוק (Bangkok)</div>
+  </div>
+
+  <div id="destDetail" class="screen">
+    <div style="background:white; padding:15px; border-radius:15px; margin-bottom:15px;">
+      <h1 id="destTitle"></h1>
+    </div>
+    <div id="destSections"></div>
+  </div>
+
+  <div id="learnMenu" class="screen">
+    <div id="categoryList"></div>
+  </div>
+
+  <div id="quizScreen" class="screen">
+    <div id="quizProgress" style="text-align:center; margin-bottom:15px; font-weight:bold;"></div>
+    <div style="background:white; padding:30px; border-radius:20px; text-align:center; margin-bottom:20px;">
+      <h1 id="qThai" style="color:var(--primary); font-size:48px;"></h1>
+    </div>
+    <div id="quizOptions"></div>
+    <button id="nextQuizBtn" class="btn-main" style="display:none; background:#27ae60" onclick="nextQuestion()">המשך ⮕</button>
+  </div>
+
+  <div id="statsScreen" class="screen">
+    <div style="background:white; padding:30px; border-radius:15px; text-align:center;">
+      <p>שאלות שענית: <strong id="statTotal">0</strong></p>
+      <p>דיוק: <strong id="statPercent">0%</strong></p>
+    </div>
+    <button class="btn-main" style="margin-top:20px; background:#e74c3c" onclick="resetStats()">🗑️ איפוס נתונים</button>
+  </div>
+
 </div>
 
 <script>
-const destData = {
-    phuket: {
-        name: "פוקט (Phuket)",
-        sections: [
-            { h: "🗺️ התמצאות ולינה", c: "• <b>מערב-מרכז:</b> Patong, Karon, Kata (תיירותי, חיי לילה).<br>• <b>צפון-מערב:</b> Bang Tao, Surin, Kamala (יוקרתי, נקי).<br>• <b>דרום:</b> Rawai, Nai Harn (טבעי, וייב מקומי)." },
-            { h: "🏖️ חופים (Must Visit)", c: "• <b>Bang Tao:</b> חול לבן, רגוע, מושלם לקיאקים.<br>• <b>Freedom Beach:</b> מים שקופים, הגעה בסירה מפאטונג (~600฿).<br>• <b>Surin:</b> השקיעה הכי טובה באי.<br>• <b>Nai Harn:</b> חוף טבעי מעולה לשחייה." },
-            { h: "🍜 אוכל ושווקים", c: "• <b>Malin Plaza:</b> אוכל רחוב זול בפאטונג.<br>• <b>שוק הדגים ב-Rawai:</b> קונים טרי ומבשלים במסעדה ממול.<br>• <b>Naka Market:</b> שוק סופ\"ש ענק (קניות וזיופים)." },
-            { h: "🎢 אטרקציות ואקשן", c: "• <b>Andamanda:</b> פארק מים חדיש (~1500฿).<br>• <b>James Bond Island:</b> שיט במפרץ פאנג נגה.<br>• <b>Hanuman World:</b> אומגות בג'ונגל ומסעדת Three Monkeys." }
-        ]
+  const vocab = {
+    "basics": {
+      name: "שיחה וסלנג",
+      icon: "💬",
+      words: [
+        { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
+        { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
+        { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
+        { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
+        { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" }
+      ]
     },
-    krabi: {
-        name: "קראבי (Krabi)",
-        sections: [
-            { h: "🏖️ חופים ואיים", c: "• <b>Phra Nang Cave:</b> מערת הנסיכה, להגיע לפני 10:00.<br>• <b>Railay West:</b> אווירת אי ללא כבישים, שקיעה מטורפת.<br>• <b>4 Islands:</b> טיול איים קלאסי (Poda, Chicken).<br>• <b>Hong Island:</b> לגונה ותצפית 360 מעלות." },
-            { h: "🌿 טבע ואטרקציות", c: "• <b>Emerald Pool:</b> בריכת טורקיז טבעית (400฿).<br>• <b>Hot Springs:</b> מעיינות חמים (200฿).<br>• <b>Ao Thalane:</b> קיאקים בין מנגרובים." }
-        ]
-    },
-    samui: {
-        name: "קוסמוי (Koh Samui)",
-        sections: [
-            { h: "🏖️ חופים", c: "• <b>Chaweng:</b> המרכז, חול לבן, מסיבות (Ark Bar).<br>• <b>Silver Beach:</b> מפרץ קטן ושקוף, להגיע מוקדם.<br>• <b>Fisherman’s Village:</b> טיילת ומסעדות על המים." },
-            { h: "🌇 תצפיות", c: "• <b>Overlap Rock:</b> סלעי ענק על הצוק (~200฿).<br>• <b>The Cocoon:</b> מסעדה עם תצפית מעל השדה." }
-        ]
-    },
-    bangkok: {
-        name: "בנגקוק (Bangkok)",
-        sections: [
-            { h: "🚇 תחבורה", c: "• <b>BTS/MRT:</b> עוקף פקקים, חובה Rabbit Card.<br>• <b>Chao Phraya Boat:</b> קו כתום (16฿) או כחול תיירותי (45฿).<br>• <b>Grab:</b> רק בשעות ללא פקקים." },
-            { h: "🛍️ קניות", c: "• <b>MBK:</b> זיופים וגאדג'טים.<br>• <b>Icon Siam:</b> הקניון המפואר, שוק צף מקורה בקומה 1.<br>• <b>Chatuchak:</b> שוק סופ\"ש הגדול בעולם." }
-        ]
+    "food": {
+      name: "אוכל ומסעדות",
+      icon: "🍜",
+      words: [
+        { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
+        { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
+        { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
+        { thai: "Nam", hebrew: "עם מרק (רטוב)", pron: "נָאם" },
+        { thai: "Haeng", hebrew: "יבש (ללא מרק)", pron: "הֶנְג" }
+      ]
     }
-};
+  };
 
-const sevenEleven = {
-    sweets: ["April’s Bakery Coconut Lava Mochi <span class='price-tag'>39฿</span>", "Salted Egg Mochi <span class='price-tag'>35฿</span>", "Chocolate Mochi <span class='price-tag'>32฿</span>", "Pandan Custard Roll <span class='price-tag'>28฿</span>", "Lod Chong Coconut Milk <span class='price-tag'>26฿</span>"],
-    beauty: ["Clear Nose BB Cream <span class='price-tag'>49฿</span>", "Garnier Vitamin C Serum <span class='price-tag'>39฿</span>", "Sistar Watermelon Serum <span class='price-tag'>39฿</span>", "Nivea Sun Oil Control <span class='price-tag'>50฿</span>", "Soffell Mosquito Spray (וורוד)"],
-    spicy: ["Lay’s Mieng Kam Chips <span class='price-tag'>35฿</span>", "Mama Green Curry Noodles <span class='price-tag'>22฿</span>", "Samyang Carbonara <span class='price-tag'>35฿</span>", "Bento Spicy Snack <span class='price-tag'>26฿</span>"],
-    drinks: ["Cheese Toastie (חימום במקום) <span class='price-tag'>32฿</span>", "Meiji Banana Milk <span class='price-tag'>20฿</span>", "All Café Iced Latte <span class='price-tag'>35฿</span>", "Nam Plao (מים מינרליים)"]
-};
+  const sevenEleven = {
+    sweets: [
+      "Coconut Lava Mochi <span class='price-tag'>39฿</span>",
+      "Salted Egg Mochi <span class='price-tag'>35฿</span>",
+      "Chocolate Mochi <span class='price-tag'>32฿</span>",
+      "Pandan Custard Roll <span class='price-tag'>28฿</span>",
+      "Thai Milk Pudding <span class='price-tag'>25฿</span>",
+      "Coconut Sweet Pudding <span class='price-tag'>29฿</span>",
+      "Sago Thua Dam <span class='price-tag'>27฿</span>",
+      "Look Chit Woon <span class='price-tag'>30฿</span>",
+      "Lod Chong <span class='price-tag'>26฿</span>",
+      "Sago with Corn <span class='price-tag'>28฿</span>"
+    ],
+    beauty: [
+      "Clear Nose BB Cream <span class='price-tag'>49฿</span>",
+      "Garnier Vitamin C <span class='price-tag'>39฿</span>",
+      "Sistar Watermelon Serum <span class='price-tag'>39฿</span>",
+      "Poreless 5X Mask <span class='price-tag'>69฿</span>",
+      "Nivea Oil Control <span class='price-tag'>50฿</span>",
+      "Stre Chan Sun Lotion <span class='price-tag'>45฿</span>",
+      "Nivea Anti-Aging <span class='price-tag'>60฿</span>",
+      "Niacinamide Body Lotion <span class='price-tag'>50฿</span>",
+      "Korean Face Masks <span class='price-tag'>25฿</span>",
+      "Acne Creams <span class='price-tag'>30฿</span>"
+    ],
+    spicy: [
+      "Lay’s Mieng Kam <span class='price-tag'>35฿</span>",
+      "Bigga Corn Snack <span class='price-tag'>25฿</span>",
+      "FF Tomato Cracker <span class='price-tag'>28฿</span>",
+      "Fried Seaweed <span class='price-tag'>29฿</span>",
+      "Mama Green Curry <span class='price-tag'>22฿</span>",
+      "Samyang Carbonara <span class='price-tag'>35฿</span>",
+      "Bento Spicy <span class='price-tag'>26฿</span>",
+      "Lay’s Sour Cream <span class='price-tag'>32฿</span>",
+      "Diamond Grains <span class='price-tag'>25฿</span>",
+      "Vegan Spicy Noodles <span class='price-tag'>20฿</span>"
+    ],
+    drinks: [
+      "Cheese Toastie <span class='price-tag'>32฿</span>",
+      "Spinach Cheese Sandwich <span class='price-tag'>39฿</span>",
+      "Coconut Sandwich <span class='price-tag'>42฿</span>",
+      "Onigiri Tuna <span class='price-tag'>25฿</span>",
+      "Meiji Banana Milk <span class='price-tag'>20฿</span>",
+      "Dutch Mill Coffee <span class='price-tag'>18฿</span>",
+      "Thai Milk Tea Bottled <span class='price-tag'>22฿</span>",
+      "Coconut Water <span class='price-tag'>20฿</span>",
+      "All Café Iced Latte <span class='price-tag'>35฿</span>",
+      "Vitamin C Jelly <span class='price-tag'>25฿</span>"
+    ]
+  };
 
-let screenStack = ['mainMenu'];
+  const destData = {
+    phuket: {
+      name: "פוקט (Phuket)",
+      sections: [
+        { h: "🗺️ התמצאות ולינה", c: "• <b>מערב-מרכז:</b> Patong, Karon, Kata.<br>• <b>צפון-מערב:</b> Bang Tao, Surin, Kamala.<br>• <b>דרום:</b> Rawai, Nai Harn." },
+        { h: "🏖️ חופים מומלצים", c: "• <b>Freedom Beach:</b> מים שקופים, הגעה בסירה.<br>• <b>Bang Tao:</b> חול לבן, מושלם לקיאקים.<br>• <b>Surin:</b> השקיעה הכי טובה באי." }
+      ]
+    }
+  };
 
-function showScreen(id, push = true) {
+  // ניווט
+  let stack = ['mainMenu'];
+
+  // סטטיסטיקות
+  let stats = JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}');
+
+  // מבחן
+  let quizPool = [];
+  let quizIdx = 0;
+  let score = 0;
+  let quizLen = 10;
+
+  function showScreen(id, push=true) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-    document.getElementById(id).classList.add('active');
-    if(push && screenStack[screenStack.length-1] !== id) screenStack.push(id);
-}
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.classList.add('active');
 
-function goBack() {
-    if(screenStack.length > 1) { screenStack.pop(); showScreen(screenStack[screenStack.length-1], false); }
-}
+    if (push && stack[stack.length - 1] !== id) stack.push(id);
 
-function toggleAcc(el) { el.nextElementSibling.classList.toggle('open'); }
+    if (id === 'statsScreen') renderStats();
+  }
 
-function openDest(id) {
-    const data = destData[id];
-    document.getElementById('destTitle').innerText = data.name;
-    let html = "";
-    data.sections.forEach(s => {
-        html += `<div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">${s.h} <span>▼</span></div><div class="acc-content">${s.c}</div></div>`;
+  function goBack() {
+    if (stack.length > 1) {
+      stack.pop();
+      showScreen(stack[stack.length - 1], false);
+    }
+  }
+
+  function goHome() {
+    stack = ['mainMenu'];
+    showScreen('mainMenu', false);
+  }
+
+  function toggleAcc(headerEl) {
+    const content = headerEl.nextElementSibling;
+    if (!content) return;
+    content.classList.toggle('open');
+
+    // ✅ להפוך חץ ▼ / ▲
+    const arrow = headerEl.querySelector('.acc-arrow');
+    if (arrow) arrow.textContent = content.classList.contains('open') ? '▲' : '▼';
+  }
+
+  // לימוד
+  function loadLearnMenu() {
+    let html = "<h2 style='margin-bottom:12px;'>בחר קטגוריה:</h2>";
+    for (let key in vocab) {
+      html += `<div class="btn-main" onclick="showWords('${key}')"><span>${vocab[key].icon}</span> ${vocab[key].name}</div>`;
+    }
+    document.getElementById('categoryList').innerHTML = html;
+    showScreen('learnMenu');
+  }
+
+  function showWords(cat) {
+    const c = vocab[cat];
+    if (!c) return;
+
+    let html = `<h2 style="margin-bottom:12px;">${c.name}</h2>`;
+    c.words.forEach(w => {
+      html += `<div class="card"><strong>${w.thai}</strong><br>${w.hebrew} <small>(${w.pron})</small></div>`;
     });
-    document.getElementById('destSections').innerHTML = html;
-    showScreen('destDetail');
-}
+    document.getElementById('categoryList').innerHTML = html;
+    showScreen('learnMenu');
+  }
 
-function init711() {
+  // חיפוש
+  function searchWord(val) {
+    const res = document.getElementById('searchResults');
+    val = (val || "").trim();
+    if (!val) { res.innerHTML = ""; return; }
+
+    let all = [];
+    Object.values(vocab).forEach(c => all.push(...c.words));
+
+    const valLower = val.toLowerCase();
+    const found = all
+      .filter(w =>
+        (w.hebrew || "").includes(val) ||
+        (w.thai || "").toLowerCase().includes(valLower)
+      )
+      .slice(0, 5);
+
+    res.innerHTML = found
+      .map(w => `<div class="card" style="margin-bottom:6px;"><b>${w.thai}</b> = ${w.hebrew}</div>`)
+      .join('');
+  }
+
+  // מבחן (תומך גם פילטר קטגוריה לעתיד)
+  function startQuiz(scope = 'all') {
+    let all = [];
+
+    if (scope && scope !== 'all' && vocab[scope]) {
+      all = [...vocab[scope].words];
+    } else {
+      Object.values(vocab).forEach(c => all.push(...c.words));
+    }
+
+    quizLen = Math.min(10, all.length);
+    if (quizLen === 0) { alert("אין עדיין מילים למבחן."); return; }
+
+    quizPool = all.sort(() => 0.5 - Math.random()).slice(0, quizLen);
+    quizIdx = 0;
+    score = 0;
+
+    renderQ();
+    showScreen('quizScreen');
+  }
+
+  function renderQ() {
+    const q = quizPool[quizIdx];
+    if (!q) { goHome(); return; }
+
+    document.getElementById('quizProgress').innerText = `שאלה ${quizIdx + 1} / ${quizLen}`;
+    document.getElementById('qThai').innerText = q.thai;
+
+    const optsDiv = document.getElementById('quizOptions');
+    optsDiv.innerHTML = '';
+
+    // מאגר תשובות
+    let allH = [];
+    Object.values(vocab).forEach(c => c.words.forEach(w => allH.push(w.hebrew)));
+
+    // 1 נכונה + 3 מסיחים
+    let distractors = allH.filter(h => h !== q.hebrew).sort(() => 0.5 - Math.random()).slice(0, 3);
+    let choices = [q.hebrew, ...distractors].sort(() => 0.5 - Math.random());
+
+    choices.forEach(opt => {
+      const d = document.createElement('div');
+      d.className = 'quiz-option';
+      d.innerText = opt;
+
+      d.onclick = () => {
+        const isCorrect = (opt === q.hebrew);
+
+        if (isCorrect) {
+          d.classList.add('correct');
+          score++;
+          stats.correct++;
+        } else {
+          d.classList.add('wrong');
+          // לסמן את הנכונה
+          Array.from(optsDiv.children).forEach(b => {
+            if (b.innerText === q.hebrew) b.classList.add('correct');
+          });
+        }
+
+        stats.total++;
+        localStorage.setItem('lior_stats', JSON.stringify(stats));
+
+        // לנעול בחירה נוספת
+        Array.from(optsDiv.children).forEach(b => b.onclick = null);
+
+        document.getElementById('nextQuizBtn').style.display = 'block';
+      };
+
+      optsDiv.appendChild(d);
+    });
+
+    document.getElementById('nextQuizBtn').style.display = 'none';
+  }
+
+  function nextQuestion() {
+    quizIdx++;
+    if (quizIdx < quizLen) renderQ();
+    else {
+      alert(`ציון: ${score}/${quizLen}`);
+      goHome();
+    }
+  }
+
+  // יעדים
+  function openDest(id) {
+    const d = destData[id] || { name: "בקרוב", sections: [] };
+
+    document.getElementById('destTitle').innerText = d.name;
+    document.getElementById('destSections').innerHTML = d.sections.map(s =>
+      `<div class="accordion">
+        <div class="acc-header" onclick="toggleAcc(this)">${s.h} <span class="acc-arrow">▼</span></div>
+        <div class="acc-content">${s.c}</div>
+      </div>`
+    ).join('');
+
+    showScreen('destDetail');
+  }
+
+  // סטטיסטיקות
+  function renderStats() {
+    document.getElementById('statTotal').innerText = stats.total;
+    document.getElementById('statPercent').innerText =
+      (stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0) + "%";
+  }
+
+  function resetStats() {
+    localStorage.removeItem('lior_stats');
+    stats = { total: 0, correct: 0 };
+    renderStats();
+    alert("הסטטיסטיקות אופסו.");
+    goHome();
+  }
+
+  // init
+  function init() {
     document.getElementById('711_sweets').innerHTML = sevenEleven.sweets.map(i => `• ${i}`).join('<br>');
     document.getElementById('711_beauty').innerHTML = sevenEleven.beauty.map(i => `• ${i}`).join('<br>');
     document.getElementById('711_spicy').innerHTML = sevenEleven.spicy.map(i => `• ${i}`).join('<br>');
     document.getElementById('711_drinks').innerHTML = sevenEleven.drinks.map(i => `• ${i}`).join('<br>');
-}
-
-init711();
+  }
+  init();
 </script>
+
 </body>
 </html>
