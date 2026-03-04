@@ -10,27 +10,15 @@
     body { background: var(--bg); color: #333; line-height: 1.6; }
 
     .nav-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      background: var(--primary);
-      color: white;
-      position: sticky;
-      top:0;
-      z-index:1000;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      gap: 10px;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 15px; background: var(--primary); color: white;
+      position: sticky; top:0; z-index:1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2); gap: 10px;
     }
     .nav-btn {
-      background: rgba(255,255,255,0.2);
-      border: none;
-      color: white;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      white-space: nowrap;
+      background: rgba(255,255,255,0.2); border: none; color: white;
+      padding: 10px 15px; border-radius: 10px; cursor: pointer;
+      font-weight: bold; white-space: nowrap;
     }
 
     .container { max-width: 600px; margin: 0 auto; padding: 15px; }
@@ -39,94 +27,69 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     .btn-main {
-      background: var(--primary);
-      color: white;
-      border: none;
-      padding: 18px;
-      border-radius: 15px;
-      font-size: 18px;
-      font-weight: bold;
-      cursor: pointer;
-      width: 100%;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
+      background: var(--primary); color: white; border: none;
+      padding: 18px; border-radius: 15px; font-size: 18px; font-weight: bold;
+      cursor: pointer; width: 100%; margin-bottom: 12px;
+      display: flex; align-items: center; justify-content: center; gap: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
     .search-box {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      border: 2px solid #ddd;
-      margin-bottom: 15px;
-      font-size: 16px;
-      outline: none;
+      width: 100%; padding: 15px; border-radius: 12px;
+      border: 2px solid #ddd; margin-bottom: 15px; font-size: 16px; outline: none;
     }
     .search-box:focus { border-color: var(--primary); }
 
-    /* ✅ חסר בקוד המקורי: card */
     .card{
-      background:#fff;
-      border:1px solid #eee;
-      padding:14px;
-      border-radius:12px;
-      margin-bottom:10px;
+      background:#fff; border:1px solid #eee; padding:14px;
+      border-radius:12px; margin-bottom:10px;
       box-shadow:0 2px 8px rgba(0,0,0,0.06);
     }
 
     .accordion {
-      background: white;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      border: 1px solid #eee;
-      overflow: hidden;
+      background: white; border-radius: 12px; margin-bottom: 10px;
+      border: 1px solid #eee; overflow: hidden;
     }
     .acc-header {
-      padding: 18px;
-      font-weight: bold;
-      background: #fff;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      user-select: none;
+      padding: 18px; font-weight: bold; background: #fff; cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      gap: 10px; user-select: none;
     }
-    .acc-content {
-      padding: 18px;
-      display: none;
-      background: #fdfdfd;
-      border-top: 1px solid #eee;
-    }
+    .acc-content { padding: 18px; display: none; background: #fdfdfd; border-top: 1px solid #eee; }
     .acc-content.open { display: block; }
     .acc-arrow { font-weight: 900; }
 
+    .item-card{
+      background:#fff; border:1px solid #eee;
+      padding:14px; border-radius:12px; margin-bottom:10px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.06);
+    }
+    .item-head{
+      display:flex; justify-content: space-between; align-items: baseline;
+      gap: 10px; font-weight: 900;
+    }
+    .item-name{ direction:ltr; text-align:left; flex: 1; }
+    .item-desc{ margin-top: 6px; color:#444; }
+    .price-tag {
+      background: #eee; padding: 2px 8px; border-radius: 6px;
+      font-size: 13px; color: var(--primary); font-weight: bold; white-space: nowrap;
+      direction:ltr;
+    }
+
     .quiz-option {
-      background: white;
-      border: 2px solid #ddd;
-      border-radius: 12px;
-      padding: 18px;
-      font-size: 18px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      text-align: center;
-      font-weight: bold;
-      user-select: none;
+      background: white; border: 2px solid #ddd; border-radius: 12px;
+      padding: 18px; font-size: 18px; margin-bottom: 10px;
+      cursor: pointer; text-align: center; font-weight: bold; user-select: none;
     }
     .correct { border-color: #27ae60; background: #d4edda; }
     .wrong { border-color: #e74c3c; background: #f8d7da; }
 
-    .price-tag {
-      background: #eee;
-      padding: 2px 8px;
-      border-radius: 6px;
-      font-size: 13px;
-      color: var(--primary);
-      font-weight: bold;
-      white-space: nowrap;
+    .muted{ color:#6b7280; font-size: 13px; }
+
+    .section-note{
+      background:#fff; border:1px solid #eee; padding:12px 14px;
+      border-radius:12px; margin-bottom:12px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.06);
     }
   </style>
 </head>
@@ -135,12 +98,12 @@
 <div class="nav-bar">
   <button class="nav-btn" onclick="goBack()">🔙 חזור</button>
   <span style="font-weight: 900;">THAI MASTER 2026</span>
-  <!-- ✅ בית מאפס ניווט (לא דוחף ל-stack) -->
   <button class="nav-btn" onclick="goHome()">🏠 בית</button>
 </div>
 
 <div class="container">
 
+  <!-- MAIN -->
   <div id="mainMenu" class="screen active">
     <div style="text-align: center; padding: 20px 0;">
       <h1>🇹🇭 שלום ליאור</h1>
@@ -158,67 +121,78 @@
     <div id="searchResults" style="margin-bottom: 15px;"></div>
 
     <button class="btn-main" onclick="loadLearnMenu()">📚 לימוד לפי נושאים</button>
-
-    <!-- ✅ תואם לפונקציה (תומך גם פילטר עתידי) -->
-    <button class="btn-main" style="background:var(--accent); color:var(--primary);" onclick="startQuiz('all')">
-      🎯 מבחן רנדומלי
-    </button>
-
+    <button class="btn-main" style="background:var(--accent); color:var(--primary);" onclick="startQuiz('all')">🎯 מבחן רנדומלי</button>
     <button class="btn-main" style="background:#27ae60" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
     <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
     <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
   </div>
 
+  <!-- 7-ELEVEN -->
   <div id="sevenMenu" class="screen">
-    <div style="text-align:center; margin-bottom:20px;"><h2>🏪 המלצות סבן אילבן</h2></div>
+    <div style="text-align:center; margin-bottom:20px;">
+      <h2>🏪 המלצות סבן אילבן</h2>
+      <div class="muted">מוצרים באנגלית + הסבר בעברית</div>
+    </div>
 
     <div class="accordion">
       <div class="acc-header" onclick="toggleAcc(this)">
-        🍰 10 קינוחים ומתוקים <span class="acc-arrow">▼</span>
+        🍰 קינוחים ומתוקים <span class="acc-arrow">▼</span>
       </div>
       <div class="acc-content" id="711_sweets"></div>
     </div>
 
     <div class="accordion">
       <div class="acc-header" onclick="toggleAcc(this)">
-        💄 10 מוצרי קוסמטיקה <span class="acc-arrow">▼</span>
+        💄 קוסמטיקה וטיפוח <span class="acc-arrow">▼</span>
       </div>
       <div class="acc-content" id="711_beauty"></div>
     </div>
 
     <div class="accordion">
       <div class="acc-header" onclick="toggleAcc(this)">
-        🌶️ 10 חטיפים ומאכלים חריפים <span class="acc-arrow">▼</span>
+        🌶️ חטיפים ומאכלים חריפים <span class="acc-arrow">▼</span>
       </div>
       <div class="acc-content" id="711_spicy"></div>
     </div>
 
     <div class="accordion">
       <div class="acc-header" onclick="toggleAcc(this)">
-        🥤 10 משקאות ומגוון <span class="acc-arrow">▼</span>
+        🧀 מאכלים מגוונים <span class="acc-arrow">▼</span>
+      </div>
+      <div class="acc-content" id="711_meals"></div>
+    </div>
+
+    <div class="accordion">
+      <div class="acc-header" onclick="toggleAcc(this)">
+        🥤 משקאות מומלצים <span class="acc-arrow">▼</span>
       </div>
       <div class="acc-content" id="711_drinks"></div>
     </div>
   </div>
 
+  <!-- GUIDE MENU -->
   <div id="guideMenu" class="screen">
     <div class="btn-main" style="background:#3498db" onclick="openDest('phuket')">🏝️ פוקט (Phuket)</div>
-    <div class="btn-main" style="background:#1abc9c" onclick="openDest('krabi')">🛶 קראבי (Krabi)</div>
-    <div class="btn-main" style="background:#9b59b6" onclick="openDest('samui')">🥥 קוסמוי (Samui)</div>
+    <div class="btn-main" style="background:#1abc9c" onclick="openDest('krabi')">🛶 קראבי & קו לנטה (Krabi & Koh Lanta)</div>
+    <div class="btn-main" style="background:#9b59b6" onclick="openDest('samui')">🥥 קוסמוי (Koh Samui)</div>
     <div class="btn-main" style="background:#34495e" onclick="openDest('bangkok')">🏙️ בנגקוק (Bangkok)</div>
   </div>
 
+  <!-- DEST DETAIL -->
   <div id="destDetail" class="screen">
-    <div style="background:white; padding:15px; border-radius:15px; margin-bottom:15px;">
+    <div style="background:white; padding:15px; border-radius:15px; margin-bottom:12px;">
       <h1 id="destTitle"></h1>
+      <div id="destSubtitle" class="muted" style="margin-top:6px;"></div>
     </div>
     <div id="destSections"></div>
   </div>
 
+  <!-- LEARN -->
   <div id="learnMenu" class="screen">
     <div id="categoryList"></div>
   </div>
 
+  <!-- QUIZ -->
   <div id="quizScreen" class="screen">
     <div id="quizProgress" style="text-align:center; margin-bottom:15px; font-weight:bold;"></div>
     <div style="background:white; padding:30px; border-radius:20px; text-align:center; margin-bottom:20px;">
@@ -228,6 +202,7 @@
     <button id="nextQuizBtn" class="btn-main" style="display:none; background:#27ae60" onclick="nextQuestion()">המשך ⮕</button>
   </div>
 
+  <!-- STATS -->
   <div id="statsScreen" class="screen">
     <div style="background:white; padding:30px; border-radius:15px; text-align:center;">
       <p>שאלות שענית: <strong id="statTotal">0</strong></p>
@@ -239,99 +214,274 @@
 </div>
 
 <script>
+  /***********************
+   * VOCAB (דוגמה קיימת)
+   ***********************/
   const vocab = {
-    "basics": {
-      name: "שיחה וסלנג",
-      icon: "💬",
-      words: [
-        { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
-        { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
-        { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
-        { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
-        { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" }
-      ]
-    },
-    "food": {
-      name: "אוכל ומסעדות",
-      icon: "🍜",
-      words: [
-        { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
-        { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
-        { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
-        { thai: "Nam", hebrew: "עם מרק (רטוב)", pron: "נָאם" },
-        { thai: "Haeng", hebrew: "יבש (ללא מרק)", pron: "הֶנְג" }
-      ]
-    }
+    "basics": { name: "שיחה וסלנג", icon: "💬", words: [
+      { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
+      { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
+      { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
+      { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
+      { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" }
+    ]},
+    "food": { name: "אוכל ומסעדות", icon: "🍜", words: [
+      { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
+      { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
+      { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
+      { thai: "Nam", hebrew: "עם מרק (רטוב)", pron: "נָאם" },
+      { thai: "Haeng", hebrew: "יבש (ללא מרק)", pron: "הֶנְג" }
+    ]}
   };
 
+  /***********************
+   * 7-ELEVEN (מפורט)
+   ***********************/
   const sevenEleven = {
     sweets: [
-      "Coconut Lava Mochi <span class='price-tag'>39฿</span>",
-      "Salted Egg Mochi <span class='price-tag'>35฿</span>",
-      "Chocolate Mochi <span class='price-tag'>32฿</span>",
-      "Pandan Custard Roll <span class='price-tag'>28฿</span>",
-      "Thai Milk Pudding <span class='price-tag'>25฿</span>",
-      "Coconut Sweet Pudding <span class='price-tag'>29฿</span>",
-      "Sago Thua Dam <span class='price-tag'>27฿</span>",
-      "Look Chit Woon <span class='price-tag'>30฿</span>",
-      "Lod Chong <span class='price-tag'>26฿</span>",
-      "Sago with Corn <span class='price-tag'>28฿</span>"
+      { name: "Coconut Lava Mochi (April’s Bakery)", desc: 'מוצ׳י רך עם מילוי קוקוס קרמי “לבה”. הלהיט של טיקטוק.', price: "39฿" },
+      { name: "Salted Egg Mochi", desc: "שילוב מושלם של מתוק ומלוח. ויראלי מאוד.", price: "35฿" },
+      { name: "Chocolate Mochi", desc: "מרקם פודינגי עשיר ורך. מומלץ לחובבי שוקולד.", price: "32฿" },
+      { name: "Pandan Custard Roll", desc: "רול ירוק מתוק, טעם תאילנדי קלאסי.", price: "28฿" },
+      { name: "Thai Milk & Melon Pudding", desc: "פודינג קרמי ומתוק בדיוק במידה.", price: "25฿" },
+      { name: "Coconut & Pandan Pudding", desc: "קינוח קוקוס מושלם ומרענן.", price: "29฿" },
+      { name: "Sago Thua Dam", desc: "קינוח מסורתי עם קוקוס ושעועית שחורה.", price: "27฿" },
+      { name: "Look Chit Coconut Jelly", desc: "ג׳לי בחלב מתוק למי שאוהב מרקם לעיס.", price: "30฿" },
+      { name: "Lod Chong", desc: 'ה“תולעים” הירוקות המפורסמות בג׳לי קוקוס מרענן.', price: "26฿" },
+      { name: "Sago with Corn (Coconut Milk)", desc: "קינוח קליל עם פניני סאגו ותירס מתוק.", price: "28฿" }
     ],
     beauty: [
-      "Clear Nose BB Cream <span class='price-tag'>49฿</span>",
-      "Garnier Vitamin C <span class='price-tag'>39฿</span>",
-      "Sistar Watermelon Serum <span class='price-tag'>39฿</span>",
-      "Poreless 5X Mask <span class='price-tag'>69฿</span>",
-      "Nivea Oil Control <span class='price-tag'>50฿</span>",
-      "Stre Chan Sun Lotion <span class='price-tag'>45฿</span>",
-      "Nivea Anti-Aging <span class='price-tag'>60฿</span>",
-      "Niacinamide Body Lotion <span class='price-tag'>50฿</span>",
-      "Korean Face Masks <span class='price-tag'>25฿</span>",
-      "Acne Creams <span class='price-tag'>30฿</span>"
+      { name: "Clear Nose BB Cream", desc: "BB קרם נגד אקנה, מעולה לעור רגיש.", price: "49฿" },
+      { name: "Garnier Vitamin C Serum", desc: "להבהרת כתמים, נספג במהירות.", price: "39฿" },
+      { name: "Sistar Watermelon Vitamin C Serum", desc: "סרום להבהרה מהירה ורעננות.", price: "39฿" },
+      { name: "Poreless 5X Mask", desc: "מסכה קוריאנית לצמצום נקבוביות ועור שמן.", price: "69฿" },
+      { name: "Nivea Oil Control Sunscreen", desc: "קליל ולא שומני, אידיאלי לחום התאילנדי.", price: "כ-50฿" },
+      { name: "Sree Chand Sun Lotion", desc: "קרם הגנה עם SPF גבוה, פופולרי מאוד ביוטיוב.", price: "כ-45฿" },
+      { name: "Nivea Luminous 630", desc: "קרם אנטי-אייג׳ינג מתקדם נגד כתמים.", price: "כ-60฿" },
+      { name: "Niacinamide + AHA Body Lotion", desc: "נגד אקנה בגוף וכהויות בעור.", price: "כ-50฿" },
+      { name: "Korean Face Masks", desc: "מארזים זולים להענקת לחות לפנים.", price: "25–35฿" },
+      { name: "Acne Spot Cream / Eye Gel", desc: "מוצרים ויראליים לטיפול ממוקד.", price: "30–50฿" }
     ],
     spicy: [
-      "Lay’s Mieng Kam <span class='price-tag'>35฿</span>",
-      "Bigga Corn Snack <span class='price-tag'>25฿</span>",
-      "FF Tomato Cracker <span class='price-tag'>28฿</span>",
-      "Fried Seaweed <span class='price-tag'>29฿</span>",
-      "Mama Green Curry <span class='price-tag'>22฿</span>",
-      "Samyang Carbonara <span class='price-tag'>35฿</span>",
-      "Bento Spicy <span class='price-tag'>26฿</span>",
-      "Lay’s Sour Cream <span class='price-tag'>32฿</span>",
-      "Diamond Grains <span class='price-tag'>25฿</span>",
-      "Vegan Spicy Noodles <span class='price-tag'>20฿</span>"
+      { name: "Lay’s Mieng Kam", desc: "טעם תבלין תאילנדי (מתוק-חריף).", price: "35฿" },
+      { name: "Bigga Corn Snack", desc: "חטיף פריך וחריף, קלאסיקה מקומית.", price: "25฿" },
+      { name: "FF Tomato Cracker", desc: "חריפות קלה, מתאים לטבעונים.", price: "28฿" },
+      { name: "Taokaenoi Fried Seaweed", desc: "הטעם המקורי, חטיף אהוב.", price: "29฿" },
+      { name: "Mama Green Curry Ramen", desc: "חריף וצמחוני.", price: "22฿" },
+      { name: "Samyang Carbonara (Ramen)", desc: "חריפות מעודנת וויראלית (ללא פירות ים).", price: "35฿" },
+      { name: "Bento Veggie (Spicy)", desc: "גרסה צמחונית וחריפה מאוד.", price: "26฿" },
+      { name: "Lay’s Sour Cream & Onion", desc: "עם טוויסט חריף קליל.", price: "32฿" },
+      { name: "Diamond Grains (Spicy)", desc: "חטיף אנרגיה עם חריפות קלה.", price: "25฿" },
+      { name: "Jay Vegetarian Spicy Ramen", desc: "זמין בעיקר בתקופות פסטיבלים.", price: "20฿" }
+    ],
+    meals: [
+      { name: "Cheese Toastie", desc: "המלך של הסבן אילבן. חובה לבקש שיחממו לכם!", price: "32–44฿" },
+      { name: "Spinach & Cheese Sandwich", desc: "אופציה צמחונית מעולה ועשירה.", price: "39–44฿" },
+      { name: "Coconut Sandwich", desc: "מתוק ומרענן.", price: "42฿" },
+      { name: "Onigiri (Corn/Vegetable)", desc: "חטיף אורז משביע ונוח.", price: "25฿" },
+      { name: "Vegetarian Basil Rice (Frozen)", desc: "ארוחה חמה ומהירה בחימום במקום.", price: "35฿" },
+      { name: "Banana Muffin", desc: "רך וטעים מאוד.", price: "28฿" },
+      { name: "Fresh Fruit Pack", desc: "מנגו או מנגוסטין חתוכים ומוכנים.", price: "40–60฿" },
+      { name: "Sticky Rice with Sweet Taro", desc: "קינוח משביע וטעים.", price: "30฿" },
+      { name: "Fried Tofu (Frozen)", desc: "מנה צמחונית ומהירה.", price: "25฿" },
+      { name: "Five-Spice Gluten Stew", desc: "מנה צמחונית עשירה בטעם.", price: "32฿" }
     ],
     drinks: [
-      "Cheese Toastie <span class='price-tag'>32฿</span>",
-      "Spinach Cheese Sandwich <span class='price-tag'>39฿</span>",
-      "Coconut Sandwich <span class='price-tag'>42฿</span>",
-      "Onigiri Tuna <span class='price-tag'>25฿</span>",
-      "Meiji Banana Milk <span class='price-tag'>20฿</span>",
-      "Dutch Mill Coffee <span class='price-tag'>18฿</span>",
-      "Thai Milk Tea Bottled <span class='price-tag'>22฿</span>",
-      "Coconut Water <span class='price-tag'>20฿</span>",
-      "All Café Iced Latte <span class='price-tag'>35฿</span>",
-      "Vitamin C Jelly <span class='price-tag'>25฿</span>"
+      { name: "Meiji Banana Milk", desc: "המשקה הכי מפורסם בטיקטוק. מתוק וקרמי.", price: "20฿" },
+      { name: "Dutch Mill Coffee Milk", desc: "מעורר ומתוק במידה הנכונה.", price: "18฿" },
+      { name: "Sunshine Daily Banana Drink", desc: "רענן וטבעי.", price: "15฿" },
+      { name: "Lactasoy Black Sesame Soy Milk", desc: "טעם אגוזי מיוחד.", price: "12฿" },
+      { name: "Binggrae Banana Milk", desc: "טעם בננה חזק וויראלי.", price: "16฿" },
+      { name: "Doi Kham Tomato Juice", desc: "מלוח וקליל, פתיחה בריאה לבוקר.", price: "18฿" },
+      { name: "Thai Milk Tea (Bottled)", desc: "תה חזק ומתוק, הטעם של תאילנד.", price: "22฿" },
+      { name: "Coconut Water", desc: "ללא תוספת סוכר, הכי מרענן שיש.", price: "20฿" },
+      { name: "All Café Iced Latte", desc: "קפה טרי מהדוכן בתוך הסניף.", price: "35฿" },
+      { name: "Vitamin C Jelly Drink", desc: "משקה מרענן עם מרקם ג׳לי כיפי.", price: "25฿" }
     ]
   };
 
+  /***********************
+   * DESTINATIONS (מפורט ומסודר)
+   ***********************/
   const destData = {
     phuket: {
       name: "פוקט (Phuket)",
+      subtitle: "איים, חופים, שווקים, אקשן ותצפיות — מסודר לתכנון מהיר",
       sections: [
-        { h: "🗺️ התמצאות ולינה", c: "• <b>מערב-מרכז:</b> Patong, Karon, Kata.<br>• <b>צפון-מערב:</b> Bang Tao, Surin, Kamala.<br>• <b>דרום:</b> Rawai, Nai Harn." },
-        { h: "🏖️ חופים מומלצים", c: "• <b>Freedom Beach:</b> מים שקופים, הגעה בסירה.<br>• <b>Bang Tao:</b> חול לבן, מושלם לקיאקים.<br>• <b>Surin:</b> השקיעה הכי טובה באי." }
+        { h: "🗺️ התמצאות ואסטרטגיית לינה", c: `
+          • <b>מערב-מרכז (Patong, Karon, Kata):</b> תיירותי, עמוס, חיי לילה, לוגיסטיקה קלה.<br>
+          • <b>צפון-מערב (Bang Tao, Surin, Kamala):</b> יוקרתי, נקי, פתוח, אווירת ריזורטים איכותית.<br>
+          • <b>דרום (Rawai, Nai Harn, Yanui):</b> טבעי, פחות מסחרי, וייב של מקומיים/אקספטים.<br>
+          • <b>Phuket Town:</b> שווקים, אוכל מקומי, ארכיטקטורה סינית-פורטוגזית.
+        `},
+        { h: "🏖️ חופים (Must Visit)", c: `
+          • <b>Patong Beach:</b> לא לרחצה חלומית. מרכז לוגיסטי, ספורט ימי (מצנחים/אופנועי ים), עמוס בתנועה.<br>
+          • <b>Bang Tao Beach:</b> רצועה של 6–7 ק״מ. חול לבן רך, מים רגועים, הרבה פחות עמוס. מושלם להליכות ארוכות וקיאקים.<br>
+          • <b>Surin Beach:</b> השקיעה הכי טובה באי. מים צלולים, פחות מסחרי, וייב איכותי.<br>
+          • <b>Freedom Beach:</b> הגעה בסירה מפאטונג (~600 באט) או הליכה קשה בג׳ונגל. שקט מוחלט, מים שקופים.<br>
+          • <b>Nai Harn:</b> בדרום. חוף טבעי, רחב, מים מצוינים לשחייה, אווירה אותנטית.<br>
+          • <b>Yanui Beach:</b> קטן, פוטוגני, מעולה לשנורקלינג וקיאקים.<br>
+          • <b>Kata & Kata Noi:</b> קאטה – מרכז לספורט ימי ולמידה לגלישה; קאטה נוי – שקט ויוקרתי יותר.<br>
+          • <b>Kamala Beach:</b> רגוע, משפחתי, מומלץ לשלב עם דרינק ב-<span style="direction:ltr;display:inline-block;">Cafe Del Mar</span>.
+        `},
+        { h: "🍜 אוכל ושווקים", c: `
+          • <b>Malin Plaza (Patong):</b> שוק אוכל רחוב ופירות ים, פתוח עד חצות. זול יחסית ונוח.<br>
+          • <b>Boat Avenue (Bang Tao):</b> מתחם קניות ובילוי פתוח ואיכותי.<br>
+          • <b>Fun Friday Market:</b> שוק לילה בימי שישי בבאנג טאו – אוכל רחוב, מוזיקה חיה וקהל צעיר.<br>
+          • <b>Bang Tao Night Market:</b> פעמיים–שלוש בשבוע. אוכל רחוב מקומי, פירות ודוכנים.<br>
+          • <b>Naka Weekend Market:</b> שוק סופ״ש (שבת–ראשון). הכי גדול לקניות, זיופים ואוכל רחוב.<br>
+          • <b>Rawai Fish Market:</b> בדרום. בוחרים דגים טריים מהדוכנים ומבקשים מהמסעדות ממול לבשל (חוויה קולינרית חזקה).
+        `},
+        { h: "🎢 אטרקציות ואקשן", c: `
+          • <b>Andamanda Water Park:</b> פארק מים ענק וחדיש (5–6 שעות). כרטיס מבוגר ~1,500 באט.<br>
+          • <b>Hanuman World:</b> אומגות (Zipline) בג׳ונגל + גשרים תלויים (2–4 שעות). מחירים 1,000–3,500 באט.<br>
+          • <b>Three Monkeys:</b> מסעדה מעוצבת בתוך הג׳ונגל (במתחם Hanuman World).<br>
+          • <b>Similan Islands:</b> “המלדיבס של תאילנד”. עונתי (נסגר באמצע מאי). יום ארוך (כ-3 שעות הפלגה בספיד-בוט).<br>
+          • <b>James Bond Island:</b> שיט במפרץ פאנג נגה + כפר צף Koh Panyee. סיור יום: 50–60 דולר.<br>
+          • <b>Phuket Elephant Sanctuary:</b> לבחור מקומות אתיים בלבד. האכלה/רחצה: ~85 דולר.<br>
+          • <b>צלילה וספורט ימי:</b> קיאקים (100 באט/שעה), סאפ (300 באט/שעה), שנורקלינג (100 באט לציוד).
+        `},
+        { h: "🌇 תצפיות", c: `
+          • <b>Promthep Cape:</b> הנקודה הדרומית ביותר. תצפית חזקה לשקיעה.<br>
+          • <b>Windmill Viewpoint:</b> סמוך לפרומתפ, נוף פתוח יותר ופחות עמוס.<br>
+          • <b>Karon Viewpoint:</b> תצפית “שלושת החופים”.<br>
+          • <b>Phang Nga Skywalk (Samet Nangshe):</b> גשר זכוכית המשקיף על מפרץ פאנג נגה. ~שעה וחצי נסיעה מפוקט.
+        `},
+        { h: "💡 טיפים לוגיסטיים", c: `
+          • <b>אפליקציות:</b> חובה <span style="direction:ltr;display:inline-block;">InDrive</span> או <span style="direction:ltr;display:inline-block;">Bolt</span>. מוניות ברחוב יקרות פי 2.<br>
+          • <b>קוסמטיקה/שיניים:</b> קניון <span style="direction:ltr;display:inline-block;">Jungceylon</span> בפאטונג – רמה גבוהה ומחירים זולים.<br>
+          • <b>מסאז’ שמש:</b> חפשו <span style="direction:ltr;display:inline-block;">Aloe Massage</span> אחרי ימי ים ארוכים.
+        `}
+      ]
+    },
+
+    krabi: {
+      name: "קראבי & קו לנטה (Krabi & Koh Lanta)",
+      subtitle: "נופים של צוקי גיר, איים, קיאקים במנגרובים וריילי בלי כבישים",
+      sections: [
+        { h: "🗺️ אסטרטגיית לינה (Ao Nang)", c: `
+          • <b>Beach Road:</b> הלב הפועם, הכל נגיש ברגל.<br>
+          • <b>Noppharat Thara:</b> צפונית למרכז, שקט יותר, קרוב לשוק הלילה לנדמרק.
+        `},
+        { h: "🏖️ חופים ואיים", c: `
+          • <b>Phra Nang Cave Beach:</b> מערת הנסיכה, צוקים ענקיים. להגיע לפני 10:00 (לפני עומס סירות). מסאז’ חוף 300–400 באט.<br>
+          • <b>Railay West:</b> אווירת אי ללא כבישים. שקיעה חזקה + מסעדות/ברים ב-<span style="direction:ltr;display:inline-block;">Walking Street</span>.<br>
+          • <b>Tonsai Beach:</b> וייב מטיילים וטיפוס צוקים, אותנטי ורגוע.<br>
+          • <b>Hong Island:</b> לגונה פוטוגנית + תצפית 360° (~400 מדרגות).<br>
+          • <b>טיפ זמן:</b> לצאת מחוף <span style="direction:ltr;display:inline-block;">Tubkaek</span>/<span style="direction:ltr;display:inline-block;">Klong Muang</span> לקיצור זמן הפלגה.<br>
+          • <b>4 Islands:</b> טיול איים קלאסי (Koh Poda, Chicken Island ועוד).<br>
+          • <b>קו לנטה (חופים):</b> <span style="direction:ltr;display:inline-block;">Relax Beach</span> (שקט), <span style="direction:ltr;display:inline-block;">Klong Khong</span> (בקתות טיקי ועצי דקל).
+        `},
+        { h: "🌿 טבע ואטרקציות", c: `
+          • <b>Emerald Pool:</b> בריכת טורקיז טבעית ביער. כניסה 400 באט. להגיע ב-08:00 + להביא דוחה יתושים.<br>
+          • <b>Hot Springs:</b> מעיינות חמים (35–42°). כניסה 200 באט. מומלץ לשלב עם Emerald Pool.<br>
+          • <b>Ao Thalane (Kayak):</b> חתירה בין מנגרובים וקניוני גיר. חצי יום ~1,000 באט.<br>
+          • <b>Tiger Cave Temple:</b> אתגר פיזי (1,260 מדרגות) לתצפית גבוהה (לוותר אם לא מחפשים מאמץ).
+        `},
+        { h: "🍜 אוכל ושווקים", c: `
+          • <b>Ao Nang Landmark Night Market:</b> פתוח כל יום 17:00–22:00. אוכל רחוב נוח וזול (~100 באט למנה).<br>
+          • <b>Krabi Town Walking Street:</b> שוק לילה גדול (שישי–ראשון בלבד).<br>
+          • <b>מנות חובה:</b> סאטה, פירות ים בגריל, רוטי בננה.
+        `},
+        { h: "💡 טיפים לוגיסטיים", c: `
+          • <b>הגעה לריילי:</b> רק בסירות לונגטייל (80–100 באט לאדם). משפחה של 6 – עדיף סירה פרטית (600–800 באט) לחיסכון בזמן.<br>
+          • <b>מהשדה לאאו נאנג:</b> מונית 600 באט (45 דק’) או שאטל 150 באט לאדם.<br>
+          • <b>קו לנטה:</b> נהג בשם <span style="direction:ltr;display:inline-block;">Ahmed</span> לסיורים פרטיים.
+        `}
+      ]
+    },
+
+    samui: {
+      name: "קוסמוי (Koh Samui)",
+      subtitle: "חופים לבנים, תצפיות שקיעה, מועדוני חוף ושוק דייגים חזק",
+      sections: [
+        { h: "🗺️ בחירת בסיס לינה", c: `
+          • <b>Chaweng:</b> הכל נגיש ברגל (קניון, ברים, חוף מצוין). הכי “חי”.<br>
+          • <b>Bophut / Fisherman’s Village:</b> סטייל, טיילת איכותית, מסעדות על המים.<br>
+          • <b>Lamai:</b> רגוע יותר מצ’אוונג, מחירים נוחים יותר.
+        `},
+        { h: "🏖️ חופים (Must Visit)", c: `
+          • <b>Chaweng Beach:</b> חול לבן ורך, מים נוחים לשחייה. מסיבות חוף (<span style="direction:ltr;display:inline-block;">Ark Bar</span>).<br>
+          • <b>Silver Beach:</b> “סיישל הקטן” — מפרץ קטן, סלעי גרניט, מים שקופים. להגיע לפני 09:00.<br>
+          • <b>Coral Cove Beach:</b> שנורקלינג שקט בלי המונים.<br>
+          • <b>Choeng Mon Beach:</b> חוף רגוע ונעים, בריחה טובה מצ’אוונג.<br>
+          • <b>Taling Ngam:</b> שקיעות מטורפות בצד המערבי.
+        `},
+        { h: "🌇 תצפיות ונקודות עניין", c: `
+          • <b>Overlap Rock 1+2:</b> סלעי ענק על קצה הצוק. כניסה ~200 באט (כולל שאטל 4x4 + שתייה).<br>
+          • <b>The Cocoon:</b> מסעדת תצפית מעל שדה התעופה. 09:00–23:00. להגיע שעה לפני השקיעה ולהזמין שולחן.<br>
+          • <b>Big Buddha:</b> עצירה מהירה (20–40 דק’) לתמונה ונוף.
+        `},
+        { h: "🎢 אטרקציות ובילויים", c: `
+          • <b>Pig Island (Koh Madsum):</b> אי החזירים + שנורקלינג בקו טאן. ~1,500 באט (כולל ארוחה) + 50 באט כניסה לאי.<br>
+          • <b>Na Muang Waterfalls (1+2):</b> טבילה בבריכות טבעיות. נאמואנג 2 יפה יותר (כניסה ~50 באט, 09:00–18:00). חובה נעליים נוחות.<br>
+          • <b>Magic Garden:</b> גן פסלים מוצל בג’ונגל — מפלט מהחום.<br>
+          • <b>Ark Bar:</b> מופעי אש ב-20:00 וב-22:00 (וייב צעיר).<br>
+          • <b>SEEN Beach Club:</b> מסיבות בריכה (Pool Party בשבת). מינימום הזמנה 3,000–5,000 באט למיטה.<br>
+          • <b>Coco Tam’s (Bophut):</b> ישיבה על פופים על החול מול השקיעה.
+        `},
+        { h: "🍜 שווקים ואוכל", c: `
+          • <b>Fisherman’s Village:</b> שוק הלילה המרכזי (שישי הוא היום החזק).<br>
+          • <b>Lamai Night Market:</b> אוכל רחוב זול ואותנטי.<br>
+          • <b>Tiki Box:</b> בורגרים מעולים (Buffalo & Blue Cheese).<br>
+          • <b>El Gaucho:</b> סטייקאוס איכותי בצ’אוונג.
+        `},
+        { h: "💡 טיפים לוגיסטיים", c: `
+          • <b>Songthaew (טנדר אדום):</b> לסגור מחיר לפני העלייה (50–100 באט לנסיעה קצרה).<br>
+          • <b>Circle Island Tour:</b> נהג פרטי ל-5 שעות (~2,500–3,000 באט) לסגירת מפלים ותצפיות.
+        `}
+      ]
+    },
+
+    bangkok: {
+      name: "בנגקוק (Bangkok)",
+      subtitle: "תחבורה חכמה, קניונים, שווקי לילה ורופטופים במחיר סביר",
+      sections: [
+        { h: "🚇 תחבורה (עקיפת פקקים)", c: `
+          • <b>BTS (רכבת עילית):</b> ממוזג ועוקף פקקים. 17–45 באט. חובה <span style="direction:ltr;display:inline-block;">Rabbit Card</span> נטען.<br>
+          • <b>שיט בנהר (Chao Phraya):</b><br>
+          &nbsp;&nbsp;– <b>Express Boat (קו כתום):</b> 16 באט. 06:00–19:00.<br>
+          &nbsp;&nbsp;– <b>Tourist Boat (קו כחול):</b> 45 באט לנסיעה / 150 באט יומי (Hop-on Hop-off).<br>
+          • <b>Motorbike Taxi:</b> לנסיעות קצרות בתוך ה-<span style="direction:ltr;display:inline-block;">Soi</span> (20–60 באט).<br>
+          • <b>Grab / InDrive:</b> עדיף לנסיעות ארוכות בשעות שאין פקקים.
+        `},
+        { h: "🛍️ קניונים וקניות", c: `
+          • <b>MBK Center:</b> זיופים, נעליים, גאדג’טים. קומות 4–5 הן המרכז. 10:00–22:00.<br>
+          • <b>Platinum Fashion Mall:</b> אופנה בסגנון סיטונאי. משתלם בקנייה של 3+ פריטים. 09:00–20:00.<br>
+          • <b>Icon Siam:</b> קניון מפואר. <span style="direction:ltr;display:inline-block;">SookSiam</span> (שוק צף מקורה) בקומה 1 + מרפסת תצפית בקומה 7 (חינם).<br>
+          • <b>Siam Paragon:</b> יוקרה + מתחם אוכל ענק + אקווריום <span style="direction:ltr;display:inline-block;">Sea Life</span> (~1,500 באט).<br>
+          • <b>Chatuchak Weekend Market:</b> “השוק הגדול בעולם” (סופ״ש). תחנה: <span style="direction:ltr;display:inline-block;">BTS Mo Chit</span>.<br>
+          • <b>Pratunam Market:</b> שוק בגדים זול (פעיל גם בלילה).
+        `},
+        { h: "🍜 אוכל ושווקי לילה", c: `
+          • <b>Chinatown (Yaowarat):</b> רחוב האוכל המפורסם בלילה (18:00–חצות).<br>
+          • <b>Jodd Fairs:</b> השוק הכי פופולרי היום (17:00–00:00). פוטוגני + צעיר.<br>
+          • <b>Asiatique Riverfront:</b> שוק לילה על הנהר + גלגל ענק + מסעדות.<br>
+          • <b>Train Night Market Srinakarin:</b> וייב מקומי, וינטג’, מוזיקה חיה (חמישי–ראשון).
+        `},
+        { h: "🌃 חיי לילה ורופטופים (במחיר סביר)", c: `
+          • <b>Khao San Road:</b> רחוב התרמילאים — ברים, מוזיקה ואלכוהול “בדליים”.<br>
+          • <b>Sukhumvit (Nana/Asok/Thonglor):</b> האזור הכי חי. ברים ומועדונים.<br>
+          • <b>Octave (קומה 45):</b> נוף 360°. בירה ~250 באט, קוקטייל ~390 באט.<br>
+          • <b>Above Eleven:</b> עיצוב מיוחד, קוקטיילים 280–450 באט.<br>
+          • <b>Tichuca:</b> בר “העץ המואר” (אינסטגרמי מאוד).<br>
+          • <b>Brewski:</b> בר בירה בגובה (מחירים נוחים).
+        `},
+        { h: "🌿 טבע ובתי קפה", c: `
+          • <b>Lumpini Park:</b> לטאות כוח ענקיות + שיט בסירות פדלים.<br>
+          • <b>The Green Lung (Bang Krachao):</b> השכרת אופניים ~100 באט לרכיבה בטבע בלב הנהר.<br>
+          • <b>בתי קפה מומלצים:</b> <span style="direction:ltr;display:inline-block;">% Arabica</span> (Icon Siam), <span style="direction:ltr;display:inline-block;">Factory Coffee</span>, <span style="direction:ltr;display:inline-block;">After You</span> (קינוחים).
+        `}
       ]
     }
   };
 
-  // ניווט
+  /***********************
+   * NAV / STATE
+   ***********************/
   let stack = ['mainMenu'];
-
-  // סטטיסטיקות
   let stats = JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}');
 
-  // מבחן
   let quizPool = [];
   let quizIdx = 0;
   let score = 0;
@@ -365,12 +515,13 @@
     if (!content) return;
     content.classList.toggle('open');
 
-    // ✅ להפוך חץ ▼ / ▲
     const arrow = headerEl.querySelector('.acc-arrow');
     if (arrow) arrow.textContent = content.classList.contains('open') ? '▲' : '▼';
   }
 
-  // לימוד
+  /***********************
+   * LEARN
+   ***********************/
   function loadLearnMenu() {
     let html = "<h2 style='margin-bottom:12px;'>בחר קטגוריה:</h2>";
     for (let key in vocab) {
@@ -392,7 +543,9 @@
     showScreen('learnMenu');
   }
 
-  // חיפוש
+  /***********************
+   * SEARCH (VOCAB)
+   ***********************/
   function searchWord(val) {
     const res = document.getElementById('searchResults');
     val = (val || "").trim();
@@ -414,15 +567,13 @@
       .join('');
   }
 
-  // מבחן (תומך גם פילטר קטגוריה לעתיד)
+  /***********************
+   * QUIZ
+   ***********************/
   function startQuiz(scope = 'all') {
     let all = [];
-
-    if (scope && scope !== 'all' && vocab[scope]) {
-      all = [...vocab[scope].words];
-    } else {
-      Object.values(vocab).forEach(c => all.push(...c.words));
-    }
+    if (scope && scope !== 'all' && vocab[scope]) all = [...vocab[scope].words];
+    else Object.values(vocab).forEach(c => all.push(...c.words));
 
     quizLen = Math.min(10, all.length);
     if (quizLen === 0) { alert("אין עדיין מילים למבחן."); return; }
@@ -445,11 +596,9 @@
     const optsDiv = document.getElementById('quizOptions');
     optsDiv.innerHTML = '';
 
-    // מאגר תשובות
     let allH = [];
     Object.values(vocab).forEach(c => c.words.forEach(w => allH.push(w.hebrew)));
 
-    // 1 נכונה + 3 מסיחים
     let distractors = allH.filter(h => h !== q.hebrew).sort(() => 0.5 - Math.random()).slice(0, 3);
     let choices = [q.hebrew, ...distractors].sort(() => 0.5 - Math.random());
 
@@ -467,7 +616,6 @@
           stats.correct++;
         } else {
           d.classList.add('wrong');
-          // לסמן את הנכונה
           Array.from(optsDiv.children).forEach(b => {
             if (b.innerText === q.hebrew) b.classList.add('correct');
           });
@@ -476,9 +624,7 @@
         stats.total++;
         localStorage.setItem('lior_stats', JSON.stringify(stats));
 
-        // לנעול בחירה נוספת
         Array.from(optsDiv.children).forEach(b => b.onclick = null);
-
         document.getElementById('nextQuizBtn').style.display = 'block';
       };
 
@@ -491,28 +637,31 @@
   function nextQuestion() {
     quizIdx++;
     if (quizIdx < quizLen) renderQ();
-    else {
-      alert(`ציון: ${score}/${quizLen}`);
-      goHome();
-    }
+    else { alert(`ציון: ${score}/${quizLen}`); goHome(); }
   }
 
-  // יעדים
+  /***********************
+   * DESTINATIONS
+   ***********************/
   function openDest(id) {
-    const d = destData[id] || { name: "בקרוב", sections: [] };
+    const d = destData[id] || { name: "בקרוב", subtitle: "", sections: [] };
 
     document.getElementById('destTitle').innerText = d.name;
-    document.getElementById('destSections').innerHTML = d.sections.map(s =>
+    document.getElementById('destSubtitle').innerText = d.subtitle || "";
+
+    document.getElementById('destSections').innerHTML = (d.sections || []).map(s =>
       `<div class="accordion">
         <div class="acc-header" onclick="toggleAcc(this)">${s.h} <span class="acc-arrow">▼</span></div>
         <div class="acc-content">${s.c}</div>
       </div>`
-    ).join('');
+    ).join('') || `<div class="card"><b>אין עדיין תוכן ליעד הזה.</b></div>`;
 
     showScreen('destDetail');
   }
 
-  // סטטיסטיקות
+  /***********************
+   * STATS
+   ***********************/
   function renderStats() {
     document.getElementById('statTotal').innerText = stats.total;
     document.getElementById('statPercent').innerText =
@@ -527,12 +676,28 @@
     goHome();
   }
 
-  // init
+  /***********************
+   * 7-ELEVEN RENDER
+   ***********************/
+  function renderSevenList(items) {
+    return items.map(it => `
+      <div class="item-card">
+        <div class="item-head">
+          <div class="item-name">${it.name}</div>
+          <div class="price-tag">${it.price}</div>
+        </div>
+        <div class="item-desc">${it.desc}</div>
+      </div>
+    `).join('');
+  }
+
   function init() {
-    document.getElementById('711_sweets').innerHTML = sevenEleven.sweets.map(i => `• ${i}`).join('<br>');
-    document.getElementById('711_beauty').innerHTML = sevenEleven.beauty.map(i => `• ${i}`).join('<br>');
-    document.getElementById('711_spicy').innerHTML = sevenEleven.spicy.map(i => `• ${i}`).join('<br>');
-    document.getElementById('711_drinks').innerHTML = sevenEleven.drinks.map(i => `• ${i}`).join('<br>');
+    // 7-Eleven
+    document.getElementById('711_sweets').innerHTML = renderSevenList(sevenEleven.sweets);
+    document.getElementById('711_beauty').innerHTML = renderSevenList(sevenEleven.beauty);
+    document.getElementById('711_spicy').innerHTML = renderSevenList(sevenEleven.spicy);
+    document.getElementById('711_meals').innerHTML = renderSevenList(sevenEleven.meals);
+    document.getElementById('711_drinks').innerHTML = renderSevenList(sevenEleven.drinks);
   }
   init();
 </script>
