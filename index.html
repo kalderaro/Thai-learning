@@ -3,349 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לימוד תאילנדית - ליאור</title>
+    <title>Thai Master - Lior's Executive Guide</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, sans-serif; background: linear-gradient(135deg,#667eea,#764ba2); min-height: 100vh; padding: 20px; color: #333; }
-        .container { max-width: 500px; margin: 0 auto; }
-        .header { background: white; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.2); margin-bottom: 20px; }
-        .screen { display: none; animation: fadeIn 0.3s; }
+        :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f4f7f6; --text: #2c3e50; }
+        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
+        
+        /* Navigation & UI */
+        .nav-bar { display: flex; justify-content: space-between; padding: 15px; background: var(--primary); color: white; position: sticky; top:0; z-index:100; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
+        .nav-btn { background: rgba(255,255,255,0.15); border: none; color: white; padding: 10px 18px; border-radius: 12px; font-weight: 700; cursor: pointer; }
+        .container { max-width: 500px; margin: 0 auto; min-height: 100vh; padding: 15px; }
+        .header { background: white; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; border-bottom: 6px solid var(--accent); }
+        
+        /* Screens */
+        .screen { display: none; animation: slideIn 0.3s ease-out; }
         .screen.active { display: block; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-        .card { background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; cursor: pointer; display: flex; align-items: center; gap: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
-        .btn { background: white; color: #667eea; border: none; padding: 18px; border-radius: 12px; font-size: 20px; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); transition: 0.2s; }
-        .btn:active { transform: scale(0.98); }
-        .btn-home { background: #34495e; color: white; }
-        .quiz-option { background: #f8f9fa; border: 3px solid transparent; border-radius: 12px; padding: 18px; font-size: 18px; font-weight: 600; cursor: pointer; text-align: center; margin-bottom: 10px; }
-        .correct { border-color: #28a745; background: #d4edda; }
-        .wrong { border-color: #dc3545; background: #f8d7da; }
-        .flashcard { background: white; border-radius: 20px; padding: 60px 20px; min-height: 300px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; box-shadow: 0 10px 30px rgba(0,0,0,0.15); margin-bottom: 20px; }
-        .word-thai { font-size: 32px; color: #667eea; font-weight: bold; margin-bottom: 10px; }
-        .word-hebrew { font-size: 28px; margin-top: 15px; }
-        .word-pron { font-size: 20px; color: #888; margin-top: 10px; font-style: italic; }
-        .stats-box { background: white; border-radius: 15px; padding: 20px; margin-bottom: 15px; }
-        .stat-line { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #eee; }
-        .badge { background: #e74c3c; color: white; padding: 2px 8px; border-radius: 10px; font-size: 14px; margin-right: 5px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Buttons & Menu */
+        .btn-main { background: var(--primary); color: white; border: none; padding: 20px; border-radius: 18px; font-size: 18px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 15px; box-shadow: 0 6px 15px rgba(26,42,108,0.25); display: flex; align-items: center; justify-content: center; gap: 15px; }
+        .btn-accent { background: var(--accent); color: var(--primary); }
+        .btn-danger { background: var(--secondary); color: white; }
+        
+        .card-item { background: white; border-radius: 15px; padding: 20px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: 0.2s; border: 1px solid #eee; }
+        .card-item:active { transform: scale(0.97); }
+
+        /* Study & Quiz */
+        .flashcard { background: white; border-radius: 30px; padding: 60px 20px; min-height: 380px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 25px; border: 2px solid #f0f0f0; }
+        .word-thai { font-size: 52px; color: var(--primary); font-weight: 900; margin-bottom: 10px; }
+        .word-hebrew { font-size: 38px; color: var(--secondary); font-weight: 700; }
+        .word-pron { font-size: 24px; color: #7f8c8d; margin-top: 20px; background: #f8f9fa; padding: 10px 25px; border-radius: 15px; font-style: italic; }
+        
+        .quiz-option { background: white; border: 2.5px solid #edf2f7; border-radius: 15px; padding: 20px; font-size: 19px; font-weight: 700; cursor: pointer; text-align: center; margin-bottom: 12px; }
+        .correct { background: #c6f6d5; border-color: #38a169; color: #22543d; }
+        .wrong { background: #fed7d7; border-color: #e53e3e; color: #742a2a; }
+
+        /* Guide & Destination */
+        .dest-card { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1528181304800-2f5408bb1267?auto=format&fit=crop&w=500&q=80'); background-size: cover; height: 120px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; font-weight: 900; margin-bottom: 15px; cursor: pointer; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
+        .accordion { background: white; border-radius: 15px; margin-bottom: 10px; overflow: hidden; border: 1px solid #eee; }
+        .accordion-header { padding: 18px; font-weight: 800; display: flex; justify-content: space-between; cursor: pointer; background: #fafafa; }
+        .accordion-content { padding: 18px; display: none; border-top: 1px solid #eee; font-size: 16px; line-height: 1.8; }
+        .accordion-content.open { display: block; }
+        
+        .price-tag { background: #e2e8f0; padding: 2px 8px; border-radius: 6px; font-size: 13px; font-weight: bold; color: var(--primary); }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="header">
-        <h1>🇹🇭 לימוד תאילנדית</h1>
-        <p>שלום ליאור, מערכת המבחנים שודרגה</p>
-    </div>
 
+<div class="nav-bar">
+    <button class="nav-btn" id="backBtn" onclick="goBack()" style="visibility:hidden">🔙 חזור</button>
+    <span style="font-weight: 900; letter-spacing: 1px;">THAI MASTER</span>
+    <button class="nav-btn" onclick="showScreen('mainMenu')">🏠 בית</button>
+</div>
+
+<div class="container">
     <div id="mainMenu" class="screen active">
-        <button class="btn" onclick="showScreen('learnMenu')">📚 מצב למידה</button>
-        <button class="btn" onclick="showScreen('quizMenu')">🎯 מצב מבחן (20 שאלות)</button>
-        <button class="btn" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
+        <div class="header"><h1>🇹🇭 שלום ליאור</h1><p>העוזר האישי שלך לטיול מוכן</p></div>
+        <button class="btn-main" onclick="showScreen('learnMenu')">📚 לימוד מילים וביטויים</button>
+        <button class="btn-main btn-accent" onclick="startQuiz('all')">🎯 מבחן רנדומלי מהיר</button>
+        <button class="btn-main btn-danger" id="mistakeBtn" style="display:none" onclick="startQuiz('mistakes')">⚠️ תרגול טעויות</button>
+        <button class="btn-main" style="background:#2ecc71" onclick="showScreen('guideMenu')">🌏 מדריך יעדים וטיפים</button>
+        <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
     </div>
 
     <div id="learnMenu" class="screen">
-        <button class="btn btn-home" onclick="showScreen('mainMenu')">🏠 חזור למסך הבית</button>
-        <div id="learnCats"></div>
-    </div>
-
-    <div id="learnModeSelect" class="screen">
-        <button class="btn btn-home" onclick="showScreen('mainMenu')">🏠 חזור הביתה</button>
-        <button class="btn" onclick="startLearnCards()">🎴 כרטיסיות (קלפים)</button>
-        <button class="btn" onclick="startLearnList()">📜 רשימה מלאה</button>
+        <div class="header"><h2>בחר נושא ללימוד</h2></div>
+        <div id="categoryList"></div>
     </div>
 
     <div id="flashcardsScreen" class="screen">
-        <button class="btn btn-home" onclick="showScreen('mainMenu')">🏠 חזור הביתה</button>
         <div id="flashcard" class="flashcard" onclick="toggleCard()">
-            <div id="cardFront">
-                <div class="word-thai" id="cardThai"></div>
-                <p style="color:#ccc;margin-top:20px;">לחץ להיפוך</p>
-            </div>
+            <div id="cardFront"><div class="word-thai" id="cardThai"></div><p style="color:#ccc; margin-top:20px;">לחץ להיפוך</p></div>
             <div id="cardBack" style="display:none;">
                 <div class="word-hebrew" id="cardHebrew"></div>
                 <div class="word-pron" id="cardPron"></div>
             </div>
         </div>
-        <div style="display:flex;gap:10px;">
-            <button class="btn" onclick="prevCard()">הקודם</button>
-            <button class="btn" onclick="nextCard()">הבא</button>
+        <div style="display:flex; gap:15px;">
+            <button class="btn-main" style="background:#7f8c8d; flex:1" onclick="prevCard()">הקודם</button>
+            <button class="btn-main" style="flex:2" onclick="nextCard()">הבא ⮕</button>
         </div>
     </div>
 
-    <div id="listScreen" class="screen">
-        <button class="btn btn-home" onclick="showScreen('mainMenu')">🏠 חזור הביתה</button>
-        <div id="wordsDisplay"></div>
+    <div id="quizScreen" class="screen">
+        <div id="quizProgress" style="text-align:center; margin-bottom:15px; font-weight:900;"></div>
+        <div class="header"><h1 id="qThai" style="color:var(--primary); font-size:48px;"></h1></div>
+        <div id="quizOptions"></div>
+        <button id="nextQuizBtn" class="btn-main" style="display:none; background:#27ae60" onclick="nextQuestion()">המשך ⮕</button>
     </div>
 
-    <div id="quizMenu" class="screen">
-        <button class="btn btn-home" onclick="showScreen('mainMenu')">🏠 חזור הביתה</button>
-        <button class="btn" style="background:#e67e22; color:white;" onclick="startQuiz('mistakes')">
-            ⚠️ תרגול טעויות 
-            <span id="mistakeCount" class="badge">0</span>
-        </button>
-        <button class="btn" style="background:#ffc107;" onclick="startQuiz('all')">🎲 מבחן רנדומלי (הכל)</button>
-        <div id="quizCats"></div>
+    <div id="guideMenu" class="screen">
+        <div class="header"><h2>לאן נוסעים, ליאור?</h2></div>
+        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1589394815804-964ed96aeb33?w=500')" onclick="openGuide('phuket')">פוקט</div>
+        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500')" onclick="openGuide('krabi')">קראבי</div>
+        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=500')" onclick="openGuide('samui')">קוסמוי</div>
+        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=500')" onclick="openGuide('bangkok')">בנגקוק</div>
     </div>
 
-    <div id="quiz" class="screen">
-        <div id="quizProgress" style="text-align:center;color:white;margin-bottom:10px; font-weight: bold;"></div>
-        <div class="header">
-            <h2 id="qText" style="font-size: 18px; margin-bottom: 5px;"></h2>
-            <h1 id="qWord" style="color:#667eea"></h1>
-        </div>
-        <div id="quizOpts"></div>
-        <button id="nextBtn" class="btn" style="display:none; background:#2ecc71; color:white;" onclick="nextQ()">המשך ←</button>
+    <div id="destDetail" class="screen">
+        <div class="header"><h1 id="destTitle"></h1></div>
+        <div id="destContent"></div>
     </div>
 
     <div id="statsScreen" class="screen">
-        <button class="btn btn-home" onclick="showScreen('mainMenu')">🏠 חזור הביתה</button>
-        <div class="stats-box" id="statsContent"></div>
-        <button class="btn" style="background:#e74c3c;color:white;" onclick="resetStats()">🗑️ אפס את כל הנתונים</button>
+        <div class="header"><h2>ההתקדמות שלך</h2></div>
+        <div id="statBox" class="card-item" style="display:block; text-align:center; padding:30px;">
+            <p style="font-size:18px;">שאלות שנענו: <strong id="statTotal">0</strong></p>
+            <p style="font-size:18px;">דיוק: <strong id="statPercent">0%</strong></p>
+            <p style="font-size:18px;">מילים לחיזוק: <strong id="statMistakes">0</strong></p>
+        </div>
+        <button class="btn-main btn-danger" onclick="resetAllData()">🗑️ איפוס נתונים</button>
     </div>
 </div>
 
 <script>
-// מאגר המילים המלא כולל התוספות האחרונות
-const vocab = {
-    "categories": {
-        "basics": {
-            "name": "בסיסי ונימוס", "icon": "💬",
-            "words": [
-                {"thai":"Sawatdee","hebrew":"שלום","pron":"סַוַּאט-דִי"},
-                {"thai":"Khop khun","hebrew":"תודה","pron":"קוֹפּ קוּן"},
-                {"thai":"Khor thot","hebrew":"סליחה / Excuse me","pron":"כּוֹ-תּוֹט"},
-                {"thai":"Mai pen rai","hebrew":"אין בעיה / בכיף","pron":"מַאי פֶּן רַאי"},
-                {"thai":"Phom","hebrew":"אני (גבר)","pron":"פוֹם"},
-                {"thai":"Chai","hebrew":"כן","pron":"צ'אי"},
-                {"thai":"Mai","hebrew":"לא","pron":"מאי"},
-                {"thai":"Chok dee","hebrew":"בהצלחה!","pron":"צ'וֹק דִי"},
-                {"thai":"Chen gon loey","hebrew":"בבקשה, תעבור לפניי","pron":"צֶ'ן גוֹן לֶיי"}
-            ]
-        },
-        "conversation": {
-            "name": "שיחה ודיבור", "icon":"🗣️",
-            "words": [
-                {"thai":"Fang noi","hebrew":"תקשיב רגע","pron":"פָאנְג נוֹי"},
-                {"thai":"Ok, khor khit doo gon","hebrew":"בסדר, אני אחשוב על זה","pron":"אוֹ-קֵי, כּוֹ קִית דוּ גוֹן"},
-                {"thai":"Phut pasa angrit dai mai?","hebrew":"אתה מדבר אנגלית?","pron":"פּוּט פָּא-סָא אָנְג-גְרִיט דָאי מַאי?"},
-                {"thai":"Khun ma jak muang Thai mai?","hebrew":"אתה מתאילנד?","pron":"קוּן מָא גָ'אק מוּאַנְג תָּאי מַאי?"},
-                {"thai":"Khun chop Israel mai?","hebrew":"אתה אוהב את ישראל?","pron":"קוּן צוֹפּ אִיס-רָה-אֶל מַאי?"},
-                {"thai":"Khun tham-ngan a-rai?","hebrew":"במה אתה עובד?","pron":"קוּן תָּאם-נְגָאן אָ-רַאי?"},
-                {"thai":"Phom tham-ngan HR","hebrew":"אני עובד ב-HR","pron":"פּוֹם תָּאם-נְגָאן אֵיְיץ'-אָר"},
-                {"thai":"Khun suay maak","hebrew":"את יפה מאוד","pron":"קוּן סוּאַי מָאק"},
-                {"thai":"Khun dee maak khrap","hebrew":"אתה אדם טוב מאוד","pron":"קוּן דִי מָאק קְרָאפּ"},
-                {"thai":"Phom rian pasa Thai nit-noi","hebrew":"למדתי קצת תאית","pron":"פּוֹם רִיאַן פָּא-סָא תָּאי נִיט-נוֹי"}
-            ]
-        },
-        "shopping": {
-            "name": "קניות ומסעדה", "icon": "🛍️",
-            "words": [
-                {"thai":"Doo choey-choey","hebrew":"אני רק מסתכל (בלי לחץ)","pron":"דוּ צֶ'ה-אוֹי צֶ'ה-אוֹי"},
-                {"thai":"Mee thee sam-rap hok khon mai?","hebrew":"יש לכם מקום ל-6 אנשים?","pron":"מִי תִּי סַאם-רַאפּ הוֹק קוֹן מַאי?"},
-                {"thai":"Phaeng pai","hebrew":"יקר מדי!","pron":"פֶּנְג פָאי"},
-                {"thai":"Lot dai mai?","hebrew":"אפשר הנחה?","pron":"לוֹט דָאי מַאי?"},
-                {"thai":"A-roy maak mai khrap?","hebrew":"זה טעים מאוד, נכון?","pron":"אֲרוֹי מָאק מַאי קְרָאפּ?"},
-                {"thai":"Mee ya-mong mai khrap?","hebrew":"יש לכם משחת טייגר באם?","pron":"מִי יָא-מוֹנְג מַאי קְרָאפּ?"},
-                {"thai":"Mee... mai?","hebrew":"יש לכם...?","pron":"מִי... מַאי?"},
-                {"thai":"Tee-nee mee... khai mai?","hebrew":"אפשר למצוא/לקנות כאן...?","pron":"תִּי-נִי מִי... קָאי מַאי?"},
-                {"thai":"Nang thee-nee dai mai?","hebrew":"אפשר לשבת כאן?","pron":"נָאנְג תִּי-נִי דָאי מַאי?"}
-            ]
-        },
-        "food": {
-            "name": "אוכל ושתייה", "icon": "🥦",
-            "words": [
-                {"thai":"Khao-pode","hebrew":"תירס","pron":"קָאוֹ-פּוֹט"},
-                {"thai":"Khao-pode sai noey","hebrew":"תירס עם חמאה","pron":"קָאוֹ-פּוֹט סַאי נוֹי"},
-                {"thai":"Khao-pode ron","hebrew":"תירס חם","pron":"קָאוֹ-פּוֹט רוֹן"},
-                {"thai":"Nam-plao nueng khuat","hebrew":"בקבוק ממים (אחד)","pron":"נָאם-פְּלָאוּ נִינְג כּוּאַט"},
-                {"thai":"Gluay-Melon pan","hebrew":"שייק בננה מלון","pron":"קוּאַי-מֶלוֹן פַּן"},
-                {"thai":"Sai nom","hebrew":"עם חלב","pron":"סַאי נוֹם"},
-                {"thai":"Mai sai nom","hebrew":"בלי חלב","pron":"מָאי סַאי נוֹם"},
-                {"thai":"Mai waan maak","hebrew":"לא מתוק מדי","pron":"מָאי וָאן מָאק"},
-                {"thai":"Pen nam-som","hebrew":"על בסיס תפוזים","pron":"פֶּנְג נָאם-סוֹם"}
-            ]
-        },
-        "trans": {
-            "name": "תחבורה", "icon": "🚕",
-            "words": [
-                {"thai":"Jort thee-nee dai mai?","hebrew":"אפשר לחנות כאן?","pron":"ג'וֹרְט תִּי-נִי דָאי מַאי?"},
-                {"thai":"Pai rong-rem LK hok khon thao-rai?","hebrew":"כמה עולה ל-6 אנשים למלון LK?","pron":"פָאי רוֹנְג-רֶם LK הוֹק קוֹן תַּאוֹ-רַאי?"},
-                {"thai":"Tua hok bai thao-rai?","hebrew":"כמה עולים 6 כרטיסים?","pron":"תּוּאַה הוֹק בַּאי תַּאוֹ-רַאי?"},
-                {"thai":"Jort thee-nee","hebrew":"עצור כאן","pron":"יוּט תִי-נִי"},
-                {"thai":"Liao kwa","hebrew":"פנה ימינה","pron":"לִיאוּ כּוּאַה"},
-                {"thai":"Liao sai","hebrew":"פנה שמאלה","pron":"לִיאוּ סַאי"},
-                {"thai":"Trong pai","hebrew":"סע ישר","pron":"טְרוֹנְג פַּאי"}
-            ]
-        }
-    }
+// מאגר המידע המלא - מילים וטיפים
+const vocabData = {
+    "basics": { name: "שיחה וסלנג", icon: "✨", words: [
+        { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
+        { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
+        { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
+        { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
+        { thai: "Fan dee na", hebrew: "לילה טוב", pron: "פַאן דִי נָה" }
+    ]},
+    "food": { name: "נוסחת הנדל\"ס", icon: "🍜", words: [
+        { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
+        { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
+        { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
+        { thai: "Nam / Haeng", hebrew: "רטוב / יבש", pron: "נָאם / הֶנְג" },
+        { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" }
+    ]}
+};
+
+const guideData = {
+    "common_711": `
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAcc(this)">🍦 קינוחים ומתוקים <span>▼</span></div>
+            <div class="accordion-content">
+                • <b>מוצ'י לבה קוקוס</b> <span class="price-tag">39฿</span> - להיט הטיקטוק.<br>
+                • <b>מוצ'י חלמון מלוח</b> <span class="price-tag">35฿</span> - ויראלי ומשלב מתוק-מלוח.<br>
+                • <b>פודינג חלב תאי ומלון</b> <span class="price-tag">25฿</span> - קרמי ומרענן.
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAcc(this)">🥪 מאכלים וטוסטים <span>▼</span></div>
+            <div class="accordion-content">
+                • <b>טוסט גבינה משולש</b> <span class="price-tag">32-44฿</span> - חובה לחמם במקום!<br>
+                • <b>סנדוויץ' תרד וגבינה</b> <span class="price-tag">39฿</span> - אופציה צמחונית עשירה.
+            </div>
+        </div>
+        <div class="accordion">
+            <div class="accordion-header" onclick="toggleAcc(this)">💄 קוסמטיקה וטיפוח <span>▼</span></div>
+            <div class="accordion-content">
+                • <b>ספריי יתושים ורוד (Soffell)</b> - ה-מגן הכי יעיל.<br>
+                • <b>Clear Nose BB Cream</b> <span class="price-tag">49฿</span> - BB קרם מעולה לאקנה.<br>
+                • <b>Aloe Vera Gel</b> - הכרחי אחרי השמש.
+            </div>
+        </div>`,
+    "phuket": { title: "📍 פוקט", content: `
+        <div class="card-item"><b>🏝️ חופים:</b> Freedom Beach, Banana Beach.</div>
+        <div class="card-item"><b>🍜 מסעדות:</b> שוק Chillva Market (מעולה לאוכל רחוב).</div>
+        <div class="card-item"><b>🛍️ קניות:</b> Jungceylon, Central Floresta.</div>` },
+    "bangkok": { title: "📍 בנגקוק", content: `
+        <div class="card-item"><b>🛍️ קניות:</b> MBK Center, Siam Paragon, Chatuchak Market.</div>
+        <div class="card-item"><b>🚕 נסיעות:</b> חובה לבקש Poet Miter (מונה) או Grab.</div>
+        <div class="card-item"><b>🍜 אוכל:</b> China Town (Yaowarat) בלילה.</div>` }
 };
 
 let state = {
-    currentCat: null, wordIndex: 0, score: 0, questions: [],
-    mistakes: JSON.parse(localStorage.getItem('thaiMistakes') || '[]'),
-    stats: JSON.parse(localStorage.getItem('thaiStats') || '{"total":0,"correct":0}')
+    stack: ['mainMenu'], curCat: null, wordIdx: 0,
+    quizWords: [], quizIdx: 0, score: 0,
+    mistakes: JSON.parse(localStorage.getItem('lior_mistakes') || '[]'),
+    stats: JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}')
 };
 
-function getAllWords() {
-    let all = [];
-    for (let cat in vocab.categories) { all.push(...vocab.categories[cat].words); }
-    return all;
-}
-
-function updateMistakeBadge() {
-    document.getElementById('mistakeCount').textContent = state.mistakes.length;
-}
-
-function showScreen(id) {
+function showScreen(id, push = true) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
+    if(push && state.stack[state.stack.length-1] !== id) state.stack.push(id);
+    document.getElementById('backBtn').style.visibility = (id === 'mainMenu') ? 'hidden' : 'visible';
     if(id === 'statsScreen') renderStats();
-    if(id === 'quizMenu') updateMistakeBadge();
+    updateMistakeBtn();
+}
+
+function goBack() {
+    if(state.stack.length > 1) {
+        state.stack.pop();
+        showScreen(state.stack[state.stack.length-1], false);
+    }
+}
+
+function updateMistakeBtn() {
+    document.getElementById('mistakeBtn').style.display = (state.mistakes.length >= 3) ? 'block' : 'none';
 }
 
 function init() {
-    const l = document.getElementById('learnCats'), q = document.getElementById('quizCats');
-    l.innerHTML = ''; q.innerHTML = '';
-    for (let id in vocab.categories) {
-        let c = vocab.categories[id];
-        let html = `<div class="card" onclick="selectCat('${id}','{{M}}')"><span>${c.icon}</span><strong>${c.name}</strong></div>`;
-        l.innerHTML += html.replace('{{M}}','learn');
-        q.innerHTML += html.replace('{{M}}','quiz');
+    const list = document.getElementById('categoryList');
+    for(let key in vocabData) {
+        list.innerHTML += `<div class="card-item" onclick="startLearn('${key}')"><span>${vocabData[key].icon}</span><strong>${vocabData[key].name}</strong></div>`;
     }
-    updateMistakeBadge();
 }
 
-function selectCat(id, m) {
-    state.currentCat = id;
-    if(m === 'learn') showScreen('learnModeSelect');
-    else startQuiz(id);
+function startLearn(cat) {
+    state.curCat = cat; state.wordIdx = 0;
+    updateCard(); showScreen('flashcardsScreen');
 }
 
-function startLearnCards() { state.wordIndex = 0; showCard(); showScreen('flashcardsScreen'); }
-
-function showCard() {
-    const w = vocab.categories[state.currentCat].words[state.wordIndex];
+function updateCard() {
+    const w = vocabData[state.curCat].words[state.wordIdx];
     document.getElementById('cardThai').textContent = w.thai;
     document.getElementById('cardHebrew').textContent = w.hebrew;
-    document.getElementById('cardPron').textContent = `(${w.pron})`;
+    document.getElementById('cardPron').textContent = w.pron;
     document.getElementById('cardBack').style.display = 'none';
     document.getElementById('cardFront').style.display = 'block';
 }
 
 function toggleCard() {
     const f = document.getElementById('cardFront'), b = document.getElementById('cardBack');
-    if(f.style.display === 'none') { f.style.display = 'block'; b.style.display = 'none'; }
-    else { f.style.display = 'none'; b.style.display = 'block'; }
+    f.style.display = (f.style.display === 'none') ? 'block' : 'none';
+    b.style.display = (b.style.display === 'none') ? 'block' : 'none';
 }
 
 function nextCard() {
-    state.wordIndex = (state.wordIndex + 1) % vocab.categories[state.currentCat].words.length;
-    showCard();
+    if(state.wordIdx < vocabData[state.curCat].words.length - 1) { state.wordIdx++; updateCard(); }
+    else { alert("סיימת את הקטגוריה!"); goBack(); }
 }
+function prevCard() { if(state.wordIdx > 0) { state.wordIdx--; updateCard(); } }
 
-function prevCard() {
-    state.wordIndex = (state.wordIndex - 1 + vocab.categories[state.currentCat].words.length) % vocab.categories[state.currentCat].words.length;
-    showCard();
-}
-
-function startLearnList() {
-    const d = document.getElementById('wordsDisplay');
-    d.innerHTML = '';
-    vocab.categories[state.currentCat].words.forEach(w => 
-        d.innerHTML += `<div class="card"><div><strong>${w.thai}</strong><br><small>${w.hebrew} (${w.pron})</small></div></div>`
-    );
-    showScreen('listScreen');
-}
-
-function startQuiz(src) {
+function startQuiz(mode) {
     let pool = [];
-    if(src === 'all') {
-        Object.values(vocab.categories).forEach(c => pool.push(...c.words));
-    } else if(src === 'mistakes') {
-        if(state.mistakes.length === 0) {
-            alert("אין עדיין מילים שטעית בהן. תתחיל להתאמן!");
-            return;
-        }
-        pool = [...state.mistakes];
-    } else {
-        pool = vocab.categories[src].words;
-    }
-
-    const allWords = getAllWords();
-    // הגדרת כמות שאלות ל-20 (או פחות אם אין מספיק במאגר)
-    const numQuestions = Math.min(pool.length, 20);
+    if(mode === 'all') { Object.values(vocabData).forEach(c => pool.push(...c.words)); }
+    else { pool = [...state.mistakes]; }
     
-    state.questions = pool.sort(() => 0.5 - Math.random()).slice(0, numQuestions).map(w => {
-        let wrongOpts = allWords.filter(item => item.hebrew !== w.hebrew).map(item => item.hebrew);
-        wrongOpts = [...new Set(wrongOpts)].sort(() => 0.5 - Math.random()).slice(0, 3);
-        return { w, correct: w.hebrew, opts: [w.hebrew, ...wrongOpts].sort(() => 0.5 - Math.random()) };
-    });
-
-    state.current = 0; state.score = 0;
-    showQ(); showScreen('quiz');
+    state.quizWords = pool.sort(() => 0.5 - Math.random()).slice(0, 10);
+    state.quizIdx = 0; state.score = 0;
+    renderQuestion(); showScreen('quizScreen');
 }
 
-function showQ() {
-    const q = state.questions[state.current];
-    document.getElementById('quizProgress').textContent = `שאלה ${state.current + 1} מתוך ${state.questions.length}`;
-    document.getElementById('qWord').textContent = q.w.thai;
-    document.getElementById('qText').textContent = "מה הפירוש בעברית?";
-    const o = document.getElementById('quizOpts');
-    o.innerHTML = '';
-    q.opts.forEach(opt => {
-        const d = document.createElement('div');
-        d.className = 'quiz-option';
-        d.textContent = opt;
-        d.onclick = () => {
-            if(opt === q.correct) { 
-                d.classList.add('correct'); 
-                state.score++; state.stats.correct++;
-                // אם ענית נכון על מילה שהייתה בטעויות - היא מוסרת מהמאגר
-                state.mistakes = state.mistakes.filter(m => m.thai !== q.w.thai);
-            } else { 
-                d.classList.add('wrong'); 
-                // אם טעית, המילה מתווספת למאגר הטעויות (אם לא קיימת שם)
-                if(!state.mistakes.find(m => m.thai === q.w.thai)) {
-                    state.mistakes.push(q.w);
-                }
-            }
-            state.stats.total++;
-            localStorage.setItem('thaiMistakes', JSON.stringify(state.mistakes));
-            localStorage.setItem('thaiStats', JSON.stringify(state.stats));
-            Array.from(o.children).forEach(el => el.onclick = null);
-            document.getElementById('nextBtn').style.display = 'block';
+function renderQuestion() {
+    const q = state.quizWords[state.quizIdx];
+    document.getElementById('quizProgress').textContent = `שאלה ${state.quizIdx + 1} / ${state.quizWords.length}`;
+    document.getElementById('qThai').textContent = q.thai;
+    const optsDiv = document.getElementById('quizOptions'); optsDiv.innerHTML = '';
+    
+    let allH = []; Object.values(vocabData).forEach(c => c.words.forEach(w => allH.push(w.hebrew)));
+    let choices = [q.hebrew, ...allH.filter(h => h !== q.hebrew).sort(() => 0.5 - Math.random()).slice(0, 3)].sort(() => 0.5 - Math.random());
+    
+    choices.forEach(opt => {
+        const btn = document.createElement('div');
+        btn.className = 'quiz-option'; btn.textContent = opt;
+        btn.onclick = () => {
+            if(opt === q.hebrew) { btn.classList.add('correct'); state.score++; state.stats.correct++; state.mistakes = state.mistakes.filter(m => m.thai !== q.thai); }
+            else { btn.classList.add('wrong'); if(!state.mistakes.find(m => m.thai === q.thai)) state.mistakes.push(q); }
+            state.stats.total++; localStorage.setItem('lior_mistakes', JSON.stringify(state.mistakes)); localStorage.setItem('lior_stats', JSON.stringify(state.stats));
+            document.querySelectorAll('.quiz-option').forEach(b => { if(b.textContent === q.hebrew) b.classList.add('correct'); b.onclick = null; });
+            document.getElementById('nextQuizBtn').style.display = 'block';
         };
-        o.appendChild(d);
+        optsDiv.appendChild(btn);
     });
-    document.getElementById('nextBtn').style.display = 'none';
+    document.getElementById('nextQuizBtn').style.display = 'none';
 }
 
-function nextQ() {
-    state.current++;
-    if(state.current < state.questions.length) showQ();
-    else { 
-        alert(`המבחן הסתיים!\nציון: ${state.score} מתוך ${state.questions.length}`); 
-        showScreen('mainMenu'); 
-    }
+function nextQuestion() {
+    state.quizIdx++;
+    if(state.quizIdx < state.quizWords.length) renderQuestion();
+    else { alert(`ציון: ${state.score}/${state.quizWords.length}`); showScreen('mainMenu'); }
 }
+
+function openGuide(id) {
+    document.getElementById('destTitle').textContent = guideData[id]?.title || "מידע על היעד";
+    document.getElementById('destContent').innerHTML = (guideData[id]?.content || "בקרוב...") + `<h3>🏪 טיפים ל-7-Eleven:</h3>` + guideData.common_711;
+    showScreen('destDetail');
+}
+
+function toggleAcc(el) { el.nextElementSibling.classList.toggle('open'); }
 
 function renderStats() {
-    const s = state.stats;
-    const p = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
-    document.getElementById('statsContent').innerHTML = `
-        <div class="stat-line"><span>סה"כ שאלות שענית:</span><strong>${s.total}</strong></div>
-        <div class="stat-line"><span>תשובות נכונות:</span><strong>${s.correct}</strong></div>
-        <div class="stat-line"><span>אחוז הצלחה כללי:</span><strong>${p}%</strong></div>
-        <div class="stat-line"><span>מילים ב"מאגר הטעויות":</span><strong>${state.mistakes.length}</strong></div>
-    `;
+    document.getElementById('statTotal').textContent = state.stats.total;
+    document.getElementById('statPercent').textContent = (state.stats.total > 0 ? Math.round(state.stats.correct / state.stats.total * 100) : 0) + '%';
+    document.getElementById('statMistakes').textContent = state.mistakes.length;
 }
 
-function resetStats() { 
-    if(confirm('האם אתה בטוח שברצונך לאפס את כל הסטטיסטיקות ומאגר הטעויות?')) { 
-        localStorage.clear(); 
-        state.mistakes = [];
-        state.stats = {"total":0,"correct":0};
-        location.reload(); 
-    } 
-}
+function resetAllData() { if(confirm('לאפס הכל?')) { localStorage.clear(); location.reload(); } }
 
 init();
 </script>
