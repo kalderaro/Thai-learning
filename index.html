@@ -3,290 +3,148 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thai Master - Lior's Executive Guide</title>
+    <title>Thai Master - Lior's Ultimate Guide</title>
     <style>
-        :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f4f7f6; --text: #2c3e50; }
-        * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); overflow-x: hidden; }
-        
-        /* Navigation & UI */
-        .nav-bar { display: flex; justify-content: space-between; padding: 15px; background: var(--primary); color: white; position: sticky; top:0; z-index:100; box-shadow: 0 4px 10px rgba(0,0,0,0.15); }
-        .nav-btn { background: rgba(255,255,255,0.15); border: none; color: white; padding: 10px 18px; border-radius: 12px; font-weight: 700; cursor: pointer; }
-        .container { max-width: 500px; margin: 0 auto; min-height: 100vh; padding: 15px; }
-        .header { background: white; border-radius: 20px; padding: 25px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.05); margin-bottom: 20px; border-bottom: 6px solid var(--accent); }
-        
-        /* Screens */
-        .screen { display: none; animation: slideIn 0.3s ease-out; }
+        :root { --primary: #1a2a6c; --secondary: #b21f1f; --accent: #fdbb2d; --bg: #f8f9fa; }
+        * { margin:0; padding:0; box-sizing:border-box; font-family: system-ui, -apple-system, sans-serif; }
+        body { background: var(--bg); color: #333; }
+        .nav-bar { display: flex; justify-content: space-between; padding: 15px; background: var(--primary); color: white; position: sticky; top:0; z-index:100; box-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+        .nav-btn { background: rgba(255,255,255,0.2); border: none; color: white; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-weight: bold; }
+        .container { max-width: 600px; margin: 0 auto; padding: 15px; }
+        .screen { display: none; animation: fadeIn 0.3s; }
         .screen.active { display: block; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Buttons & Menu */
-        .btn-main { background: var(--primary); color: white; border: none; padding: 20px; border-radius: 18px; font-size: 18px; font-weight: 800; cursor: pointer; width: 100%; margin-bottom: 15px; box-shadow: 0 6px 15px rgba(26,42,108,0.25); display: flex; align-items: center; justify-content: center; gap: 15px; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        
+        .btn-main { background: var(--primary); color: white; border: none; padding: 18px; border-radius: 15px; font-size: 18px; font-weight: bold; cursor: pointer; width: 100%; margin-bottom: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); display: flex; align-items: center; justify-content: center; gap: 10px; }
         .btn-accent { background: var(--accent); color: var(--primary); }
-        .btn-danger { background: var(--secondary); color: white; }
-        
-        .card-item { background: white; border-radius: 15px; padding: 20px; margin-bottom: 12px; cursor: pointer; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.04); transition: 0.2s; border: 1px solid #eee; }
-        .card-item:active { transform: scale(0.97); }
+        .btn-green { background: #27ae60; }
 
-        /* Study & Quiz */
-        .flashcard { background: white; border-radius: 30px; padding: 60px 20px; min-height: 380px; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; cursor: pointer; box-shadow: 0 15px 35px rgba(0,0,0,0.1); margin-bottom: 25px; border: 2px solid #f0f0f0; }
-        .word-thai { font-size: 52px; color: var(--primary); font-weight: 900; margin-bottom: 10px; }
-        .word-hebrew { font-size: 38px; color: var(--secondary); font-weight: 700; }
-        .word-pron { font-size: 24px; color: #7f8c8d; margin-top: 20px; background: #f8f9fa; padding: 10px 25px; border-radius: 15px; font-style: italic; }
+        .card { background: white; border-radius: 15px; padding: 15px; margin-bottom: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .accordion { background: white; border-radius: 12px; margin-bottom: 8px; border: 1px solid #eee; overflow: hidden; }
+        .acc-header { padding: 15px; font-weight: bold; background: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .acc-content { padding: 15px; display: none; border-top: 1px solid #eee; background: #fdfdfd; line-height: 1.6; }
+        .acc-content.open { display: block; }
         
-        .quiz-option { background: white; border: 2.5px solid #edf2f7; border-radius: 15px; padding: 20px; font-size: 19px; font-weight: 700; cursor: pointer; text-align: center; margin-bottom: 12px; }
-        .correct { background: #c6f6d5; border-color: #38a169; color: #22543d; }
-        .wrong { background: #fed7d7; border-color: #e53e3e; color: #742a2a; }
-
-        /* Guide & Destination */
-        .dest-card { background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1528181304800-2f5408bb1267?auto=format&fit=crop&w=500&q=80'); background-size: cover; height: 120px; border-radius: 20px; display: flex; align-items: center; justify-content: center; color: white; font-size: 26px; font-weight: 900; margin-bottom: 15px; cursor: pointer; text-shadow: 2px 2px 4px rgba(0,0,0,0.5); }
-        .accordion { background: white; border-radius: 15px; margin-bottom: 10px; overflow: hidden; border: 1px solid #eee; }
-        .accordion-header { padding: 18px; font-weight: 800; display: flex; justify-content: space-between; cursor: pointer; background: #fafafa; }
-        .accordion-content { padding: 18px; display: none; border-top: 1px solid #eee; font-size: 16px; line-height: 1.8; }
-        .accordion-content.open { display: block; }
+        .dest-link { background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500'); background-size: cover; height: 100px; border-radius: 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 22px; font-weight: bold; margin-bottom: 12px; cursor: pointer; }
+        .price-tag { background: #eee; padding: 2px 6px; border-radius: 5px; font-size: 12px; margin-right: 5px; color: var(--primary); font-weight: bold; }
         
-        .price-tag { background: #e2e8f0; padding: 2px 8px; border-radius: 6px; font-size: 13px; font-weight: bold; color: var(--primary); }
+        h3 { margin-bottom: 10px; color: var(--primary); border-bottom: 2px solid var(--accent); display: inline-block; }
     </style>
 </head>
 <body>
 
 <div class="nav-bar">
-    <button class="nav-btn" id="backBtn" onclick="goBack()" style="visibility:hidden">🔙 חזור</button>
-    <span style="font-weight: 900; letter-spacing: 1px;">THAI MASTER</span>
+    <button class="nav-btn" onclick="goBack()">🔙 חזור</button>
+    <span style="font-weight: 900;">THAI MASTER</span>
     <button class="nav-btn" onclick="showScreen('mainMenu')">🏠 בית</button>
 </div>
 
 <div class="container">
     <div id="mainMenu" class="screen active">
-        <div class="header"><h1>🇹🇭 שלום ליאור</h1><p>העוזר האישי שלך לטיול מוכן</p></div>
-        <button class="btn-main" onclick="showScreen('learnMenu')">📚 לימוד מילים וביטויים</button>
-        <button class="btn-main btn-accent" onclick="startQuiz('all')">🎯 מבחן רנדומלי מהיר</button>
-        <button class="btn-main btn-danger" id="mistakeBtn" style="display:none" onclick="startQuiz('mistakes')">⚠️ תרגול טעויות</button>
-        <button class="btn-main" style="background:#2ecc71" onclick="showScreen('guideMenu')">🌏 מדריך יעדים וטיפים</button>
-        <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
+        <div style="text-align: center; padding: 20px;"><h1>🇹🇭 שלום ליאור</h1><p>כל הידע לטיול במקום אחד</p></div>
+        <button class="btn-main" onclick="showScreen('learnMenu')">📚 לימוד מילים ומשפטים</button>
+        <button class="btn-main btn-accent" onclick="startQuiz('all')">🎯 מבחן רנדומלי</button>
+        <button class="btn-main btn-green" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
+        <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
     </div>
 
-    <div id="learnMenu" class="screen">
-        <div class="header"><h2>בחר נושא ללימוד</h2></div>
-        <div id="categoryList"></div>
-    </div>
-
-    <div id="flashcardsScreen" class="screen">
-        <div id="flashcard" class="flashcard" onclick="toggleCard()">
-            <div id="cardFront"><div class="word-thai" id="cardThai"></div><p style="color:#ccc; margin-top:20px;">לחץ להיפוך</p></div>
-            <div id="cardBack" style="display:none;">
-                <div class="word-hebrew" id="cardHebrew"></div>
-                <div class="word-pron" id="cardPron"></div>
-            </div>
-        </div>
-        <div style="display:flex; gap:15px;">
-            <button class="btn-main" style="background:#7f8c8d; flex:1" onclick="prevCard()">הקודם</button>
-            <button class="btn-main" style="flex:2" onclick="nextCard()">הבא ⮕</button>
-        </div>
-    </div>
-
-    <div id="quizScreen" class="screen">
-        <div id="quizProgress" style="text-align:center; margin-bottom:15px; font-weight:900;"></div>
-        <div class="header"><h1 id="qThai" style="color:var(--primary); font-size:48px;"></h1></div>
-        <div id="quizOptions"></div>
-        <button id="nextQuizBtn" class="btn-main" style="display:none; background:#27ae60" onclick="nextQuestion()">המשך ⮕</button>
+    <div id="sevenMenu" class="screen">
+        <div style="text-align:center; margin-bottom:20px;"><h2>🏪 המלצות סבן אילבן</h2></div>
+        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🍰 קינוחים ומתוקים <span>▼</span></div><div class="acc-content" id="711_sweets"></div></div>
+        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">💄 קוסמטיקה וטיפוח <span>▼</span></div><div class="acc-content" id="711_beauty"></div></div>
+        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🌶️ חטיפים ומאכלים חריפים <span>▼</span></div><div class="acc-content" id="711_spicy"></div></div>
+        <div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">🥤 משקאות ומגוון <span>▼</span></div><div class="acc-content" id="711_drinks"></div></div>
     </div>
 
     <div id="guideMenu" class="screen">
-        <div class="header"><h2>לאן נוסעים, ליאור?</h2></div>
-        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1589394815804-964ed96aeb33?w=500')" onclick="openGuide('phuket')">פוקט</div>
-        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?w=500')" onclick="openGuide('krabi')">קראבי</div>
-        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1537953773345-d172ccf13cf1?w=500')" onclick="openGuide('samui')">קוסמוי</div>
-        <div class="dest-card" style="background-image:linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=500')" onclick="openGuide('bangkok')">בנגקוק</div>
+        <div class="dest-link" onclick="openDest('phuket')">פוקט (Phuket)</div>
+        <div class="dest-link" onclick="openDest('krabi')">קראבי (Krabi)</div>
+        <div class="dest-link" onclick="openDest('samui')">קוסמוי (Koh Samui)</div>
+        <div class="dest-link" onclick="openDest('bangkok')">בנגקוק (Bangkok)</div>
     </div>
 
     <div id="destDetail" class="screen">
-        <div class="header"><h1 id="destTitle"></h1></div>
-        <div id="destContent"></div>
+        <div class="card"><h1 id="destTitle"></h1></div>
+        <div id="destSections"></div>
     </div>
 
-    <div id="statsScreen" class="screen">
-        <div class="header"><h2>ההתקדמות שלך</h2></div>
-        <div id="statBox" class="card-item" style="display:block; text-align:center; padding:30px;">
-            <p style="font-size:18px;">שאלות שנענו: <strong id="statTotal">0</strong></p>
-            <p style="font-size:18px;">דיוק: <strong id="statPercent">0%</strong></p>
-            <p style="font-size:18px;">מילים לחיזוק: <strong id="statMistakes">0</strong></p>
-        </div>
-        <button class="btn-main btn-danger" onclick="resetAllData()">🗑️ איפוס נתונים</button>
-    </div>
+    <div id="learnMenu" class="screen"><div id="categoryList"></div></div>
 </div>
 
 <script>
-// מאגר המידע המלא - מילים וטיפים
-const vocabData = {
-    "basics": { name: "שיחה וסלנג", icon: "✨", words: [
-        { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
-        { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
-        { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
-        { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
-        { thai: "Fan dee na", hebrew: "לילה טוב", pron: "פַאן דִי נָה" }
-    ]},
-    "food": { name: "נוסחת הנדל\"ס", icon: "🍜", words: [
-        { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
-        { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
-        { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
-        { thai: "Nam / Haeng", hebrew: "רטוב / יבש", pron: "נָאם / הֶנְג" },
-        { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" }
-    ]}
+const destData = {
+    phuket: {
+        name: "פוקט (Phuket)",
+        sections: [
+            { h: "🗺️ התמצאות ולינה", c: "• <b>מערב-מרכז:</b> Patong, Karon, Kata (תיירותי, חיי לילה).<br>• <b>צפון-מערב:</b> Bang Tao, Surin, Kamala (יוקרתי, נקי).<br>• <b>דרום:</b> Rawai, Nai Harn (טבעי, וייב מקומי)." },
+            { h: "🏖️ חופים (Must Visit)", c: "• <b>Bang Tao:</b> חול לבן, רגוע, מושלם לקיאקים.<br>• <b>Freedom Beach:</b> מים שקופים, הגעה בסירה מפאטונג (~600฿).<br>• <b>Surin:</b> השקיעה הכי טובה באי.<br>• <b>Nai Harn:</b> חוף טבעי מעולה לשחייה." },
+            { h: "🍜 אוכל ושווקים", c: "• <b>Malin Plaza:</b> אוכל רחוב זול בפאטונג.<br>• <b>שוק הדגים ב-Rawai:</b> קונים טרי ומבשלים במסעדה ממול.<br>• <b>Naka Market:</b> שוק סופ\"ש ענק (קניות וזיופים)." },
+            { h: "🎢 אטרקציות ואקשן", c: "• <b>Andamanda:</b> פארק מים חדיש (~1500฿).<br>• <b>James Bond Island:</b> שיט במפרץ פאנג נגה.<br>• <b>Hanuman World:</b> אומגות בג'ונגל ומסעדת Three Monkeys." }
+        ]
+    },
+    krabi: {
+        name: "קראבי (Krabi)",
+        sections: [
+            { h: "🏖️ חופים ואיים", c: "• <b>Phra Nang Cave:</b> מערת הנסיכה, להגיע לפני 10:00.<br>• <b>Railay West:</b> אווירת אי ללא כבישים, שקיעה מטורפת.<br>• <b>4 Islands:</b> טיול איים קלאסי (Poda, Chicken).<br>• <b>Hong Island:</b> לגונה ותצפית 360 מעלות." },
+            { h: "🌿 טבע ואטרקציות", c: "• <b>Emerald Pool:</b> בריכת טורקיז טבעית (400฿).<br>• <b>Hot Springs:</b> מעיינות חמים (200฿).<br>• <b>Ao Thalane:</b> קיאקים בין מנגרובים." }
+        ]
+    },
+    samui: {
+        name: "קוסמוי (Koh Samui)",
+        sections: [
+            { h: "🏖️ חופים", c: "• <b>Chaweng:</b> המרכז, חול לבן, מסיבות (Ark Bar).<br>• <b>Silver Beach:</b> מפרץ קטן ושקוף, להגיע מוקדם.<br>• <b>Fisherman’s Village:</b> טיילת ומסעדות על המים." },
+            { h: "🌇 תצפיות", c: "• <b>Overlap Rock:</b> סלעי ענק על הצוק (~200฿).<br>• <b>The Cocoon:</b> מסעדה עם תצפית מעל השדה." }
+        ]
+    },
+    bangkok: {
+        name: "בנגקוק (Bangkok)",
+        sections: [
+            { h: "🚇 תחבורה", c: "• <b>BTS/MRT:</b> עוקף פקקים, חובה Rabbit Card.<br>• <b>Chao Phraya Boat:</b> קו כתום (16฿) או כחול תיירותי (45฿).<br>• <b>Grab:</b> רק בשעות ללא פקקים." },
+            { h: "🛍️ קניות", c: "• <b>MBK:</b> זיופים וגאדג'טים.<br>• <b>Icon Siam:</b> הקניון המפואר, שוק צף מקורה בקומה 1.<br>• <b>Chatuchak:</b> שוק סופ\"ש הגדול בעולם." }
+        ]
+    }
 };
 
-const guideData = {
-    "common_711": `
-        <div class="accordion">
-            <div class="accordion-header" onclick="toggleAcc(this)">🍦 קינוחים ומתוקים <span>▼</span></div>
-            <div class="accordion-content">
-                • <b>מוצ'י לבה קוקוס</b> <span class="price-tag">39฿</span> - להיט הטיקטוק.<br>
-                • <b>מוצ'י חלמון מלוח</b> <span class="price-tag">35฿</span> - ויראלי ומשלב מתוק-מלוח.<br>
-                • <b>פודינג חלב תאי ומלון</b> <span class="price-tag">25฿</span> - קרמי ומרענן.
-            </div>
-        </div>
-        <div class="accordion">
-            <div class="accordion-header" onclick="toggleAcc(this)">🥪 מאכלים וטוסטים <span>▼</span></div>
-            <div class="accordion-content">
-                • <b>טוסט גבינה משולש</b> <span class="price-tag">32-44฿</span> - חובה לחמם במקום!<br>
-                • <b>סנדוויץ' תרד וגבינה</b> <span class="price-tag">39฿</span> - אופציה צמחונית עשירה.
-            </div>
-        </div>
-        <div class="accordion">
-            <div class="accordion-header" onclick="toggleAcc(this)">💄 קוסמטיקה וטיפוח <span>▼</span></div>
-            <div class="accordion-content">
-                • <b>ספריי יתושים ורוד (Soffell)</b> - ה-מגן הכי יעיל.<br>
-                • <b>Clear Nose BB Cream</b> <span class="price-tag">49฿</span> - BB קרם מעולה לאקנה.<br>
-                • <b>Aloe Vera Gel</b> - הכרחי אחרי השמש.
-            </div>
-        </div>`,
-    "phuket": { title: "📍 פוקט", content: `
-        <div class="card-item"><b>🏝️ חופים:</b> Freedom Beach, Banana Beach.</div>
-        <div class="card-item"><b>🍜 מסעדות:</b> שוק Chillva Market (מעולה לאוכל רחוב).</div>
-        <div class="card-item"><b>🛍️ קניות:</b> Jungceylon, Central Floresta.</div>` },
-    "bangkok": { title: "📍 בנגקוק", content: `
-        <div class="card-item"><b>🛍️ קניות:</b> MBK Center, Siam Paragon, Chatuchak Market.</div>
-        <div class="card-item"><b>🚕 נסיעות:</b> חובה לבקש Poet Miter (מונה) או Grab.</div>
-        <div class="card-item"><b>🍜 אוכל:</b> China Town (Yaowarat) בלילה.</div>` }
+const sevenEleven = {
+    sweets: ["April’s Bakery Coconut Lava Mochi <span class='price-tag'>39฿</span>", "Salted Egg Mochi <span class='price-tag'>35฿</span>", "Chocolate Mochi <span class='price-tag'>32฿</span>", "Pandan Custard Roll <span class='price-tag'>28฿</span>", "Lod Chong Coconut Milk <span class='price-tag'>26฿</span>"],
+    beauty: ["Clear Nose BB Cream <span class='price-tag'>49฿</span>", "Garnier Vitamin C Serum <span class='price-tag'>39฿</span>", "Sistar Watermelon Serum <span class='price-tag'>39฿</span>", "Nivea Sun Oil Control <span class='price-tag'>50฿</span>", "Soffell Mosquito Spray (וורוד)"],
+    spicy: ["Lay’s Mieng Kam Chips <span class='price-tag'>35฿</span>", "Mama Green Curry Noodles <span class='price-tag'>22฿</span>", "Samyang Carbonara <span class='price-tag'>35฿</span>", "Bento Spicy Snack <span class='price-tag'>26฿</span>"],
+    drinks: ["Cheese Toastie (חימום במקום) <span class='price-tag'>32฿</span>", "Meiji Banana Milk <span class='price-tag'>20฿</span>", "All Café Iced Latte <span class='price-tag'>35฿</span>", "Nam Plao (מים מינרליים)"]
 };
 
-let state = {
-    stack: ['mainMenu'], curCat: null, wordIdx: 0,
-    quizWords: [], quizIdx: 0, score: 0,
-    mistakes: JSON.parse(localStorage.getItem('lior_mistakes') || '[]'),
-    stats: JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}')
-};
+let screenStack = ['mainMenu'];
 
 function showScreen(id, push = true) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
     document.getElementById(id).classList.add('active');
-    if(push && state.stack[state.stack.length-1] !== id) state.stack.push(id);
-    document.getElementById('backBtn').style.visibility = (id === 'mainMenu') ? 'hidden' : 'visible';
-    if(id === 'statsScreen') renderStats();
-    updateMistakeBtn();
+    if(push && screenStack[screenStack.length-1] !== id) screenStack.push(id);
 }
 
 function goBack() {
-    if(state.stack.length > 1) {
-        state.stack.pop();
-        showScreen(state.stack[state.stack.length-1], false);
-    }
-}
-
-function updateMistakeBtn() {
-    document.getElementById('mistakeBtn').style.display = (state.mistakes.length >= 3) ? 'block' : 'none';
-}
-
-function init() {
-    const list = document.getElementById('categoryList');
-    for(let key in vocabData) {
-        list.innerHTML += `<div class="card-item" onclick="startLearn('${key}')"><span>${vocabData[key].icon}</span><strong>${vocabData[key].name}</strong></div>`;
-    }
-}
-
-function startLearn(cat) {
-    state.curCat = cat; state.wordIdx = 0;
-    updateCard(); showScreen('flashcardsScreen');
-}
-
-function updateCard() {
-    const w = vocabData[state.curCat].words[state.wordIdx];
-    document.getElementById('cardThai').textContent = w.thai;
-    document.getElementById('cardHebrew').textContent = w.hebrew;
-    document.getElementById('cardPron').textContent = w.pron;
-    document.getElementById('cardBack').style.display = 'none';
-    document.getElementById('cardFront').style.display = 'block';
-}
-
-function toggleCard() {
-    const f = document.getElementById('cardFront'), b = document.getElementById('cardBack');
-    f.style.display = (f.style.display === 'none') ? 'block' : 'none';
-    b.style.display = (b.style.display === 'none') ? 'block' : 'none';
-}
-
-function nextCard() {
-    if(state.wordIdx < vocabData[state.curCat].words.length - 1) { state.wordIdx++; updateCard(); }
-    else { alert("סיימת את הקטגוריה!"); goBack(); }
-}
-function prevCard() { if(state.wordIdx > 0) { state.wordIdx--; updateCard(); } }
-
-function startQuiz(mode) {
-    let pool = [];
-    if(mode === 'all') { Object.values(vocabData).forEach(c => pool.push(...c.words)); }
-    else { pool = [...state.mistakes]; }
-    
-    state.quizWords = pool.sort(() => 0.5 - Math.random()).slice(0, 10);
-    state.quizIdx = 0; state.score = 0;
-    renderQuestion(); showScreen('quizScreen');
-}
-
-function renderQuestion() {
-    const q = state.quizWords[state.quizIdx];
-    document.getElementById('quizProgress').textContent = `שאלה ${state.quizIdx + 1} / ${state.quizWords.length}`;
-    document.getElementById('qThai').textContent = q.thai;
-    const optsDiv = document.getElementById('quizOptions'); optsDiv.innerHTML = '';
-    
-    let allH = []; Object.values(vocabData).forEach(c => c.words.forEach(w => allH.push(w.hebrew)));
-    let choices = [q.hebrew, ...allH.filter(h => h !== q.hebrew).sort(() => 0.5 - Math.random()).slice(0, 3)].sort(() => 0.5 - Math.random());
-    
-    choices.forEach(opt => {
-        const btn = document.createElement('div');
-        btn.className = 'quiz-option'; btn.textContent = opt;
-        btn.onclick = () => {
-            if(opt === q.hebrew) { btn.classList.add('correct'); state.score++; state.stats.correct++; state.mistakes = state.mistakes.filter(m => m.thai !== q.thai); }
-            else { btn.classList.add('wrong'); if(!state.mistakes.find(m => m.thai === q.thai)) state.mistakes.push(q); }
-            state.stats.total++; localStorage.setItem('lior_mistakes', JSON.stringify(state.mistakes)); localStorage.setItem('lior_stats', JSON.stringify(state.stats));
-            document.querySelectorAll('.quiz-option').forEach(b => { if(b.textContent === q.hebrew) b.classList.add('correct'); b.onclick = null; });
-            document.getElementById('nextQuizBtn').style.display = 'block';
-        };
-        optsDiv.appendChild(btn);
-    });
-    document.getElementById('nextQuizBtn').style.display = 'none';
-}
-
-function nextQuestion() {
-    state.quizIdx++;
-    if(state.quizIdx < state.quizWords.length) renderQuestion();
-    else { alert(`ציון: ${state.score}/${state.quizWords.length}`); showScreen('mainMenu'); }
-}
-
-function openGuide(id) {
-    document.getElementById('destTitle').textContent = guideData[id]?.title || "מידע על היעד";
-    document.getElementById('destContent').innerHTML = (guideData[id]?.content || "בקרוב...") + `<h3>🏪 טיפים ל-7-Eleven:</h3>` + guideData.common_711;
-    showScreen('destDetail');
+    if(screenStack.length > 1) { screenStack.pop(); showScreen(screenStack[screenStack.length-1], false); }
 }
 
 function toggleAcc(el) { el.nextElementSibling.classList.toggle('open'); }
 
-function renderStats() {
-    document.getElementById('statTotal').textContent = state.stats.total;
-    document.getElementById('statPercent').textContent = (state.stats.total > 0 ? Math.round(state.stats.correct / state.stats.total * 100) : 0) + '%';
-    document.getElementById('statMistakes').textContent = state.mistakes.length;
+function openDest(id) {
+    const data = destData[id];
+    document.getElementById('destTitle').innerText = data.name;
+    let html = "";
+    data.sections.forEach(s => {
+        html += `<div class="accordion"><div class="acc-header" onclick="toggleAcc(this)">${s.h} <span>▼</span></div><div class="acc-content">${s.c}</div></div>`;
+    });
+    document.getElementById('destSections').innerHTML = html;
+    showScreen('destDetail');
 }
 
-function resetAllData() { if(confirm('לאפס הכל?')) { localStorage.clear(); location.reload(); } }
+function init711() {
+    document.getElementById('711_sweets').innerHTML = sevenEleven.sweets.map(i => `• ${i}`).join('<br>');
+    document.getElementById('711_beauty').innerHTML = sevenEleven.beauty.map(i => `• ${i}`).join('<br>');
+    document.getElementById('711_spicy').innerHTML = sevenEleven.spicy.map(i => `• ${i}`).join('<br>');
+    document.getElementById('711_drinks').innerHTML = sevenEleven.drinks.map(i => `• ${i}`).join('<br>');
+}
 
-init();
+init711();
 </script>
 </body>
 </html>
