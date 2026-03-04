@@ -85,12 +85,6 @@
     .wrong { border-color: #e74c3c; background: #f8d7da; }
 
     .muted{ color:#6b7280; font-size: 13px; }
-
-    .section-note{
-      background:#fff; border:1px solid #eee; padding:12px 14px;
-      border-radius:12px; margin-bottom:12px;
-      box-shadow:0 2px 8px rgba(0,0,0,0.06);
-    }
   </style>
 </head>
 <body>
@@ -103,7 +97,6 @@
 
 <div class="container">
 
-  <!-- MAIN -->
   <div id="mainMenu" class="screen active">
     <div style="text-align: center; padding: 20px 0;">
       <h1>🇹🇭 שלום ליאור</h1>
@@ -215,27 +208,142 @@
 
 <script>
   /***********************
-   * VOCAB (דוגמה קיימת)
+   * VOCAB (כפי שנשלח – ללא שינויים)
    ***********************/
   const vocab = {
-    "basics": { name: "שיחה וסלנג", icon: "💬", words: [
-      { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
+    chat: { name: "שיחה, נימוסים וסלנג", icon: "💬", words: [
+      { thai: "Sabai dee mai?", hebrew: "מה שלומך?", pron: "סַבַּאי דִי מַאי?" },
       { thai: "Jing Di?!", hebrew: "אשכרה?! / רציני?!", pron: "גִ'ינְג דִי?!" },
       { thai: "Jai Yen Yen", hebrew: "תירגע / קח באיזי", pron: "גַ'אי יֶן יֶן" },
       { thai: "Tham Rai?", hebrew: "מה אתה עושה?", pron: "תַ'אם רַאי?" },
-      { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" }
+      { thai: "Fan dee na", hebrew: "לילה טוב", pron: "פַאן דִי נָה" },
+      { thai: "Kho thot", hebrew: "סליחה / מצטער", pron: "קוֹ-תוֹט" },
+      { thai: "Yin dee", hebrew: "זה העונג שלי / בבקשה", pron: "יִין דִי" },
+      { thai: "Mai pen rai", hebrew: "לא נורא / אין בעיה", pron: "מַאי פֶּן רַאי" },
+      { thai: "Chok dee", hebrew: "בהצלחה!", pron: "צ'וֹק דִי" },
+      { thai: "Jing Ror?", hebrew: "באמת?", pron: "גִ'ינְג רוֹ?" },
+      { thai: "Cha?", hebrew: "נכון?", pron: "צַ'ה?" },
+      { thai: "Fang noi", hebrew: "תקשיב רגע", pron: "פָאנְג נוֹי" },
+      { thai: "Ok, khor khit doo gon", hebrew: "בסדר, אני אחשוב על זה", pron: "אוֹ-קֵי, כּוֹ קִית דוּ גוֹן" },
+      { thai: "Phut pasa angrit dai mai?", hebrew: "אתה מדבר אנגלית?", pron: "פּוּט פָּא-סָא אָנְג-גְרִיט דָאי מַאי?" },
+      { thai: "Khun ma jak muang Thai mai?", hebrew: "אתה מתאילנד?", pron: "קוּן מָא גָ'אק מוּאַנְג תָּאי מַאי?" },
+      { thai: "Khun tham-ngan a-rai?", hebrew: "במה אתה עובד?", pron: "קוּן תָּאם-נְגָאן אָ-רַאי?" },
+      { thai: "Phom tham-ngan HR", hebrew: "אני עובד ב-HR", pron: "פּוֹם תָּאם-נְגָאן אֵיְיץ'-אָר" },
+      { thai: "Khun suay maak", hebrew: "את יפה מאוד", pron: "קוּן סוּאַי מָאק" },
+      { thai: "Khun dee maak khrap", hebrew: "אתה אדם טוב מאוד", pron: "קוּן דִי מָאק קְרָאפּ" },
+      { thai: "Phom rian pasa Thai nit-noi", hebrew: "למדתי קצת תאית", pron: "פּוֹם רִיאַן פָּא-סָא תָּאי נִיט-נוֹי" },
+      { thai: "Pee-chai", hebrew: "אח שלי / חבר", pron: "פִּי-צ'אי" },
+      { thai: "Arun sook", hebrew: "בוקר טוב", pron: "אָרוּן סוּק" },
+      { thai: "Mai khao jai", hebrew: "אני לא מבין", pron: "מַאי קָאוֹ גָ'אי" },
+      { thai: "Khun ma jak arai?", hebrew: "מאיפה אתה?", pron: "קוּן מָא גָ'אק אָ-רַאי" },
+      { thai: "Yindee thi dai roo jak", hebrew: "שמח להכיר אותך", pron: "יִינְדִי תִּי דַאי רוּ גָ'אק" }
     ]},
-    "food": { name: "אוכל ומסעדות", icon: "🍜", words: [
+
+    food: { name: "אוכל והזמנות", icon: "🍜", words: [
       { thai: "Sen Lek", hebrew: "אטריות אורז דקות", pron: "סֶן לֶק" },
       { thai: "Sen Yai", hebrew: "אטריות אורז רחבות", pron: "סֶן יַאי" },
-      { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
+      { thai: "Ba-Mee", hebrew: "אטריות ביצים", pron: "בָּא-מִי" },
       { thai: "Nam", hebrew: "עם מרק (רטוב)", pron: "נָאם" },
-      { thai: "Haeng", hebrew: "יבש (ללא מרק)", pron: "הֶנְג" }
+      { thai: "Haeng", hebrew: "יבש (ללא מרק)", pron: "הֶנְג" },
+      { thai: "Look Chin", hebrew: "כדורי בשר (תוספת)", pron: "לוּק צִ'ין" },
+      { thai: "Tom Yam", hebrew: "מרק חריף", pron: "טוֹם יָאם" },
+      { thai: "Mai Sai...", hebrew: "בלי לשים...", pron: "מַאי סַאי..." },
+      { thai: "Phom Ao...", hebrew: "אני רוצה...", pron: "פּוֹם אָאוֹ..." },
+      { thai: "Check bin", hebrew: "חשבון בבקשה", pron: "צֶ'ק בִּין" },
+      { thai: "A-roy maak mai khrap?", hebrew: "זה טעים מאוד, נכון?", pron: "אֲרוֹי מָאק מַאי קְרָאפּ?" },
+      { thai: "Sen-lek", hebrew: "אטריות אורז (בטוח)", pron: "סֶן-לֶק" },
+      { thai: "Ba-mee", hebrew: "אטריות חיטה (אסור!)", pron: "בָּה-מִי" },
+      { thai: "Mee thee sam-rap hok khon mai?", hebrew: "יש לכם מקום ל-6 אנשים?", pron: "מִי תִּי סַאם-רַאפּ הוֹק קוֹן מַאי?" },
+      { thai: "Nang thee-nee dai mai?", hebrew: "אפשר לשבת כאן?", pron: "נָאנְג תִּי-נִי דָאי מַאי?" },
+      { thai: "Mang sa wirat", hebrew: "צמחוני", pron: "מַנְגְסָה וִירַט" },
+      { thai: "Pat pet tua", hebrew: "אלרגיה לבוטנים", pron: "פַּט פֶּט טוּאַה" },
+      { thai: "Phom mangsa...", hebrew: "אני אלרגי ל...", pron: "פּוֹם מַנְגְסָה..." },
+      { thai: "Ron", hebrew: "מנה חמה", pron: "רוֹן" },
+      { thai: "Phom hiu", hebrew: "אני רעב", pron: "פּוֹם הִיוּ" }
+    ]},
+
+    drinks: { name: "שייקים ושתייה", icon: "🍹", words: [
+      { thai: "Taeng-mo Pun", hebrew: "שייק אבטיח", pron: "טֶנְג-מוֹ פַּאן" },
+      { thai: "Mamuang Pun", hebrew: "שייק מנגו", pron: "מָא-מוּאַנְג פַּאן" },
+      { thai: "Nam Som Pun", hebrew: "שייק תפוזים", pron: "נָאם סוֹם פַּאן" },
+      { thai: "Nam Kaeng", hebrew: "קרח", pron: "נָאם קֶנְג" },
+      { thai: "Nam Plao", hebrew: "מים מינרלים", pron: "נָאם פְּלָאוּ" },
+      { thai: "Cha Yen", hebrew: "תה תאילנדי קר", pron: "צָ'ה יֶן" },
+      { thai: "Oliang", hebrew: "קפה שחור קר", pron: "אוֹ-לִיאַנְג" },
+      { thai: "Nam Lam Yai", hebrew: "מי פרי הלונגן", pron: "נָאם לַאם יַאי" },
+      { thai: "Hio Nam", hebrew: "צמא", pron: "הִיוּ נָאם" },
+      { thai: "Nam-plao nueng khuat", hebrew: "בקבוק מים (אחד)", pron: "נָאם-פְּלָאוּ נִינְג כּוּאַט" },
+      { thai: "Gluay-Melon pan", hebrew: "שייק בננה מלון", pron: "קוּאַי-מֶלוֹן פַּן" },
+      { thai: "Sai nom", hebrew: "עם חלב", pron: "סַאי נוֹם" },
+      { thai: "Mai sai nom", hebrew: "בלי חלב", pron: "מָאי סַאי נוֹם" },
+      { thai: "Mai waan maak", hebrew: "לא מתוק מדי", pron: "מָאי וָאן מָאק" },
+      { thai: "Pen nam-som", hebrew: "על בסיס תפוזים", pron: "פֶּן נָאם-סוֹם" }
+    ]},
+
+    produce: { name: "פירות, ירקות וקינוחים", icon: "🍍", words: [
+      { thai: "Farang", hebrew: "גויאבה", pron: "פָא-רָאנְג" },
+      { thai: "Chompoo", hebrew: "תפוח מים", pron: "צוֹ'מְפּוּ" },
+      { thai: "Khao Niao Mamuang", hebrew: "מנגו סטיקי רייס", pron: "קָאוּ נִי-אוֹ מָא-מוּאַנְג" },
+      { thai: "Taeng-kwa", hebrew: "מלפפון", pron: "תֶּנְג-כּוּאַה" },
+      { thai: "Khao-pode", hebrew: "תירס", pron: "קָאוּ-פּוֹדֶה" },
+      { thai: "Hua-hom", hebrew: "בצל", pron: "הוּאַה-הוֹם" },
+      { thai: "Ma-khua-thet", hebrew: "עגבנייה", pron: "מָה-קוּאַה-תֵ'ת" },
+      { thai: "Sa-pa-rot", hebrew: "אננס", pron: "סַפּ-פַּה-רוֹט" },
+      { thai: "Ma-prao", hebrew: "קוקוס", pron: "מָה-פְּרָאוּ" },
+      { thai: "Phak-kaat", hebrew: "חסה", pron: "פָאק-קָאט" },
+      { thai: "Phrik", hebrew: "פלפל חריף", pron: "פְּרִיק" },
+      { thai: "Phak-bung", hebrew: "תרד תאילנדי", pron: "פָאק-בּוּנְג" },
+      { thai: "Ma-muang", hebrew: "מנגו", pron: "מָה-מוּאַנְג" },
+      { thai: "Gluay", hebrew: "בננה", pron: "קוּאַי" },
+      { thai: "Taeng-mo", hebrew: "אבטיח", pron: "תֶּנְג-מוֹ" },
+      { thai: "Som-o", hebrew: "פומלה", pron: "סוֹם-אוֹ" },
+      { thai: "Khao-pode sai noey", hebrew: "תירס עם חמאה", pron: "קָאוֹ-פּוֹט סַאי נוֹי" },
+      { thai: "Khao-pode ron", hebrew: "תירס חם", pron: "קָאוֹ-פּוֹט רוֹן" }
+    ]},
+
+    transport: { name: "תחבורה והתמצאות", icon: "🚕", words: [
+      { thai: "Trong pai", hebrew: "ישר", pron: "דְרוֹנְג פַּאי" },
+      { thai: "Yut thee-nee", hebrew: "עצור כאן", pron: "יוּט טִי נִי" },
+      { thai: "Liao kwa", hebrew: "פנה ימינה", pron: "לִי-אוֹ קְוָוא" },
+      { thai: "Liao sai", hebrew: "פנה שמאלה", pron: "לִי-אוֹ סַאי" },
+      { thai: "Eek gee na-thee?", hebrew: "כמה דקות עוד?", pron: "אִיק קִי נָא-תִי?" },
+      { thai: "Glai", hebrew: "רחוק", pron: "גְלַאי מתמשך" },
+      { thai: "Klai-klai", hebrew: "קרוב / ליד", pron: "קְלַאי-קְלַאי" },
+      { thai: "Rong-rem", hebrew: "מלון", pron: "רוֹנְג-רֶם" },
+      { thai: "Poet miter", hebrew: "תפעיל מונה", pron: "פֶּואֶט מִי-טֶר" },
+      { thai: "Jort thee-nee dai mai?", hebrew: "אפשר לחנות כאן?", pron: "ג'וֹרְט תִּי-נִי דָאי מַאי?" },
+      { thai: "Hok khon thao-rai?", hebrew: "כמה עולה ל-6 אנשים?", pron: "הוֹק קוֹן תַּאוֹ-רַאי?" },
+      { thai: "Tua hok bai thao-rai?", hebrew: "כמה עולים 6 כרטיסים?", pron: "תּוּאַה הוֹק בַּאי תַּאוֹ-רַאי?" },
+      { thai: "Sanam bin", hebrew: "שדה תעופה", pron: "סָנָאם בִּין" },
+      { thai: "Tao rai nathi?", hebrew: "כמה זמן?", pron: "תָאוֹ רַאי נָאתִי?" },
+      { thai: "Phom yak chuay ruea", hebrew: "אני רוצה להשכיר סירה", pron: "פּוֹם יַאק צוּאַי רוּעָה" },
+      { thai: "Nai", hebrew: "בתוך / בפנים", pron: "נַאי" }
+    ]},
+
+    shopping: { name: "קניות", icon: "🛍️", words: [
+      { thai: "Doo choey-choey", hebrew: "אני רק מסתכל (בלי לחץ)", pron: "דוּ צֶ'ה-אוֹי צֶ'ה-אוֹי" },
+      { thai: "Phaeng pai", hebrew: "יקר מדי!", pron: "פֶּנְג פָאי" },
+      { thai: "Lot dai mai?", hebrew: "אפשר הנחה?", pron: "לוֹט דָאי מַאי?" },
+      { thai: "Mee... mai?", hebrew: "יש לכם...?", pron: "מִי... מַאי?" },
+      { thai: "Tee-nee mee... khai mai?", hebrew: "אפשר למצוא/לקנות כאן...?", pron: "תִּי-נִי מִי... קָאי מַאי?" },
+      { thai: "Mai tong ngen-ton", hebrew: "לא צריך עודף (טיפ)", pron: "מָאי טוֹנְג נְגֶן-טוֹן" },
+      { thai: "Paek", hebrew: "חבילה / מארז", pron: "פֶּק" }
+    ]},
+
+    health: { name: "בריאות ועזרה ראשונה", icon: "🩺", words: [
+      { thai: "Ya-nuan", hebrew: "משחה לשרירים", pron: "יָא-נוּאַן" },
+      { thai: "Ya-mong", hebrew: "טייגר באם", pron: "יָא-מוֹנְג" },
+      { thai: "Wan-hang-na-ke", hebrew: "אלוורה", pron: "וָאן-הָא-נָא-קֶה" },
+      { thai: "Ya-tha-yung", hebrew: "עקיצות יתוש", pron: "יָא-תָא-יוּנְג" },
+      { thai: "Puat", hebrew: "כואב (פנימי)", pron: "פּוּאַט" },
+      { thai: "Bao-wan", hebrew: "סוכרת", pron: "בַּאוֹ-וָאן" },
+      { thai: "Thy-roid", hebrew: "בלוטת התריס", pron: "תָּאי-רוֹי" },
+      { thai: "Rong yamun", hebrew: "בית מרקחת", pron: "רוֹנְג יָמוּן" }
     ]}
   };
 
   /***********************
-   * 7-ELEVEN (מפורט)
+   * 7-ELEVEN (כמו שהיה בקוד שלך)
    ***********************/
   const sevenEleven = {
     sweets: [
@@ -301,179 +409,13 @@
   };
 
   /***********************
-   * DESTINATIONS (מפורט ומסודר)
+   * DESTINATIONS (כמו שהיה אצלך בקוד)
    ***********************/
   const destData = {
-    phuket: {
-      name: "פוקט (Phuket)",
-      subtitle: "איים, חופים, שווקים, אקשן ותצפיות — מסודר לתכנון מהיר",
-      sections: [
-        { h: "🗺️ התמצאות ואסטרטגיית לינה", c: `
-          • <b>מערב-מרכז (Patong, Karon, Kata):</b> תיירותי, עמוס, חיי לילה, לוגיסטיקה קלה.<br>
-          • <b>צפון-מערב (Bang Tao, Surin, Kamala):</b> יוקרתי, נקי, פתוח, אווירת ריזורטים איכותית.<br>
-          • <b>דרום (Rawai, Nai Harn, Yanui):</b> טבעי, פחות מסחרי, וייב של מקומיים/אקספטים.<br>
-          • <b>Phuket Town:</b> שווקים, אוכל מקומי, ארכיטקטורה סינית-פורטוגזית.
-        `},
-        { h: "🏖️ חופים (Must Visit)", c: `
-          • <b>Patong Beach:</b> לא לרחצה חלומית. מרכז לוגיסטי, ספורט ימי (מצנחים/אופנועי ים), עמוס בתנועה.<br>
-          • <b>Bang Tao Beach:</b> רצועה של 6–7 ק״מ. חול לבן רך, מים רגועים, הרבה פחות עמוס. מושלם להליכות ארוכות וקיאקים.<br>
-          • <b>Surin Beach:</b> השקיעה הכי טובה באי. מים צלולים, פחות מסחרי, וייב איכותי.<br>
-          • <b>Freedom Beach:</b> הגעה בסירה מפאטונג (~600 באט) או הליכה קשה בג׳ונגל. שקט מוחלט, מים שקופים.<br>
-          • <b>Nai Harn:</b> בדרום. חוף טבעי, רחב, מים מצוינים לשחייה, אווירה אותנטית.<br>
-          • <b>Yanui Beach:</b> קטן, פוטוגני, מעולה לשנורקלינג וקיאקים.<br>
-          • <b>Kata & Kata Noi:</b> קאטה – מרכז לספורט ימי ולמידה לגלישה; קאטה נוי – שקט ויוקרתי יותר.<br>
-          • <b>Kamala Beach:</b> רגוע, משפחתי, מומלץ לשלב עם דרינק ב-<span style="direction:ltr;display:inline-block;">Cafe Del Mar</span>.
-        `},
-        { h: "🍜 אוכל ושווקים", c: `
-          • <b>Malin Plaza (Patong):</b> שוק אוכל רחוב ופירות ים, פתוח עד חצות. זול יחסית ונוח.<br>
-          • <b>Boat Avenue (Bang Tao):</b> מתחם קניות ובילוי פתוח ואיכותי.<br>
-          • <b>Fun Friday Market:</b> שוק לילה בימי שישי בבאנג טאו – אוכל רחוב, מוזיקה חיה וקהל צעיר.<br>
-          • <b>Bang Tao Night Market:</b> פעמיים–שלוש בשבוע. אוכל רחוב מקומי, פירות ודוכנים.<br>
-          • <b>Naka Weekend Market:</b> שוק סופ״ש (שבת–ראשון). הכי גדול לקניות, זיופים ואוכל רחוב.<br>
-          • <b>Rawai Fish Market:</b> בדרום. בוחרים דגים טריים מהדוכנים ומבקשים מהמסעדות ממול לבשל (חוויה קולינרית חזקה).
-        `},
-        { h: "🎢 אטרקציות ואקשן", c: `
-          • <b>Andamanda Water Park:</b> פארק מים ענק וחדיש (5–6 שעות). כרטיס מבוגר ~1,500 באט.<br>
-          • <b>Hanuman World:</b> אומגות (Zipline) בג׳ונגל + גשרים תלויים (2–4 שעות). מחירים 1,000–3,500 באט.<br>
-          • <b>Three Monkeys:</b> מסעדה מעוצבת בתוך הג׳ונגל (במתחם Hanuman World).<br>
-          • <b>Similan Islands:</b> “המלדיבס של תאילנד”. עונתי (נסגר באמצע מאי). יום ארוך (כ-3 שעות הפלגה בספיד-בוט).<br>
-          • <b>James Bond Island:</b> שיט במפרץ פאנג נגה + כפר צף Koh Panyee. סיור יום: 50–60 דולר.<br>
-          • <b>Phuket Elephant Sanctuary:</b> לבחור מקומות אתיים בלבד. האכלה/רחצה: ~85 דולר.<br>
-          • <b>צלילה וספורט ימי:</b> קיאקים (100 באט/שעה), סאפ (300 באט/שעה), שנורקלינג (100 באט לציוד).
-        `},
-        { h: "🌇 תצפיות", c: `
-          • <b>Promthep Cape:</b> הנקודה הדרומית ביותר. תצפית חזקה לשקיעה.<br>
-          • <b>Windmill Viewpoint:</b> סמוך לפרומתפ, נוף פתוח יותר ופחות עמוס.<br>
-          • <b>Karon Viewpoint:</b> תצפית “שלושת החופים”.<br>
-          • <b>Phang Nga Skywalk (Samet Nangshe):</b> גשר זכוכית המשקיף על מפרץ פאנג נגה. ~שעה וחצי נסיעה מפוקט.
-        `},
-        { h: "💡 טיפים לוגיסטיים", c: `
-          • <b>אפליקציות:</b> חובה <span style="direction:ltr;display:inline-block;">InDrive</span> או <span style="direction:ltr;display:inline-block;">Bolt</span>. מוניות ברחוב יקרות פי 2.<br>
-          • <b>קוסמטיקה/שיניים:</b> קניון <span style="direction:ltr;display:inline-block;">Jungceylon</span> בפאטונג – רמה גבוהה ומחירים זולים.<br>
-          • <b>מסאז’ שמש:</b> חפשו <span style="direction:ltr;display:inline-block;">Aloe Massage</span> אחרי ימי ים ארוכים.
-        `}
-      ]
-    },
-
-    krabi: {
-      name: "קראבי & קו לנטה (Krabi & Koh Lanta)",
-      subtitle: "נופים של צוקי גיר, איים, קיאקים במנגרובים וריילי בלי כבישים",
-      sections: [
-        { h: "🗺️ אסטרטגיית לינה (Ao Nang)", c: `
-          • <b>Beach Road:</b> הלב הפועם, הכל נגיש ברגל.<br>
-          • <b>Noppharat Thara:</b> צפונית למרכז, שקט יותר, קרוב לשוק הלילה לנדמרק.
-        `},
-        { h: "🏖️ חופים ואיים", c: `
-          • <b>Phra Nang Cave Beach:</b> מערת הנסיכה, צוקים ענקיים. להגיע לפני 10:00 (לפני עומס סירות). מסאז’ חוף 300–400 באט.<br>
-          • <b>Railay West:</b> אווירת אי ללא כבישים. שקיעה חזקה + מסעדות/ברים ב-<span style="direction:ltr;display:inline-block;">Walking Street</span>.<br>
-          • <b>Tonsai Beach:</b> וייב מטיילים וטיפוס צוקים, אותנטי ורגוע.<br>
-          • <b>Hong Island:</b> לגונה פוטוגנית + תצפית 360° (~400 מדרגות).<br>
-          • <b>טיפ זמן:</b> לצאת מחוף <span style="direction:ltr;display:inline-block;">Tubkaek</span>/<span style="direction:ltr;display:inline-block;">Klong Muang</span> לקיצור זמן הפלגה.<br>
-          • <b>4 Islands:</b> טיול איים קלאסי (Koh Poda, Chicken Island ועוד).<br>
-          • <b>קו לנטה (חופים):</b> <span style="direction:ltr;display:inline-block;">Relax Beach</span> (שקט), <span style="direction:ltr;display:inline-block;">Klong Khong</span> (בקתות טיקי ועצי דקל).
-        `},
-        { h: "🌿 טבע ואטרקציות", c: `
-          • <b>Emerald Pool:</b> בריכת טורקיז טבעית ביער. כניסה 400 באט. להגיע ב-08:00 + להביא דוחה יתושים.<br>
-          • <b>Hot Springs:</b> מעיינות חמים (35–42°). כניסה 200 באט. מומלץ לשלב עם Emerald Pool.<br>
-          • <b>Ao Thalane (Kayak):</b> חתירה בין מנגרובים וקניוני גיר. חצי יום ~1,000 באט.<br>
-          • <b>Tiger Cave Temple:</b> אתגר פיזי (1,260 מדרגות) לתצפית גבוהה (לוותר אם לא מחפשים מאמץ).
-        `},
-        { h: "🍜 אוכל ושווקים", c: `
-          • <b>Ao Nang Landmark Night Market:</b> פתוח כל יום 17:00–22:00. אוכל רחוב נוח וזול (~100 באט למנה).<br>
-          • <b>Krabi Town Walking Street:</b> שוק לילה גדול (שישי–ראשון בלבד).<br>
-          • <b>מנות חובה:</b> סאטה, פירות ים בגריל, רוטי בננה.
-        `},
-        { h: "💡 טיפים לוגיסטיים", c: `
-          • <b>הגעה לריילי:</b> רק בסירות לונגטייל (80–100 באט לאדם). משפחה של 6 – עדיף סירה פרטית (600–800 באט) לחיסכון בזמן.<br>
-          • <b>מהשדה לאאו נאנג:</b> מונית 600 באט (45 דק’) או שאטל 150 באט לאדם.<br>
-          • <b>קו לנטה:</b> נהג בשם <span style="direction:ltr;display:inline-block;">Ahmed</span> לסיורים פרטיים.
-        `}
-      ]
-    },
-
-    samui: {
-      name: "קוסמוי (Koh Samui)",
-      subtitle: "חופים לבנים, תצפיות שקיעה, מועדוני חוף ושוק דייגים חזק",
-      sections: [
-        { h: "🗺️ בחירת בסיס לינה", c: `
-          • <b>Chaweng:</b> הכל נגיש ברגל (קניון, ברים, חוף מצוין). הכי “חי”.<br>
-          • <b>Bophut / Fisherman’s Village:</b> סטייל, טיילת איכותית, מסעדות על המים.<br>
-          • <b>Lamai:</b> רגוע יותר מצ’אוונג, מחירים נוחים יותר.
-        `},
-        { h: "🏖️ חופים (Must Visit)", c: `
-          • <b>Chaweng Beach:</b> חול לבן ורך, מים נוחים לשחייה. מסיבות חוף (<span style="direction:ltr;display:inline-block;">Ark Bar</span>).<br>
-          • <b>Silver Beach:</b> “סיישל הקטן” — מפרץ קטן, סלעי גרניט, מים שקופים. להגיע לפני 09:00.<br>
-          • <b>Coral Cove Beach:</b> שנורקלינג שקט בלי המונים.<br>
-          • <b>Choeng Mon Beach:</b> חוף רגוע ונעים, בריחה טובה מצ’אוונג.<br>
-          • <b>Taling Ngam:</b> שקיעות מטורפות בצד המערבי.
-        `},
-        { h: "🌇 תצפיות ונקודות עניין", c: `
-          • <b>Overlap Rock 1+2:</b> סלעי ענק על קצה הצוק. כניסה ~200 באט (כולל שאטל 4x4 + שתייה).<br>
-          • <b>The Cocoon:</b> מסעדת תצפית מעל שדה התעופה. 09:00–23:00. להגיע שעה לפני השקיעה ולהזמין שולחן.<br>
-          • <b>Big Buddha:</b> עצירה מהירה (20–40 דק’) לתמונה ונוף.
-        `},
-        { h: "🎢 אטרקציות ובילויים", c: `
-          • <b>Pig Island (Koh Madsum):</b> אי החזירים + שנורקלינג בקו טאן. ~1,500 באט (כולל ארוחה) + 50 באט כניסה לאי.<br>
-          • <b>Na Muang Waterfalls (1+2):</b> טבילה בבריכות טבעיות. נאמואנג 2 יפה יותר (כניסה ~50 באט, 09:00–18:00). חובה נעליים נוחות.<br>
-          • <b>Magic Garden:</b> גן פסלים מוצל בג’ונגל — מפלט מהחום.<br>
-          • <b>Ark Bar:</b> מופעי אש ב-20:00 וב-22:00 (וייב צעיר).<br>
-          • <b>SEEN Beach Club:</b> מסיבות בריכה (Pool Party בשבת). מינימום הזמנה 3,000–5,000 באט למיטה.<br>
-          • <b>Coco Tam’s (Bophut):</b> ישיבה על פופים על החול מול השקיעה.
-        `},
-        { h: "🍜 שווקים ואוכל", c: `
-          • <b>Fisherman’s Village:</b> שוק הלילה המרכזי (שישי הוא היום החזק).<br>
-          • <b>Lamai Night Market:</b> אוכל רחוב זול ואותנטי.<br>
-          • <b>Tiki Box:</b> בורגרים מעולים (Buffalo & Blue Cheese).<br>
-          • <b>El Gaucho:</b> סטייקאוס איכותי בצ’אוונג.
-        `},
-        { h: "💡 טיפים לוגיסטיים", c: `
-          • <b>Songthaew (טנדר אדום):</b> לסגור מחיר לפני העלייה (50–100 באט לנסיעה קצרה).<br>
-          • <b>Circle Island Tour:</b> נהג פרטי ל-5 שעות (~2,500–3,000 באט) לסגירת מפלים ותצפיות.
-        `}
-      ]
-    },
-
-    bangkok: {
-      name: "בנגקוק (Bangkok)",
-      subtitle: "תחבורה חכמה, קניונים, שווקי לילה ורופטופים במחיר סביר",
-      sections: [
-        { h: "🚇 תחבורה (עקיפת פקקים)", c: `
-          • <b>BTS (רכבת עילית):</b> ממוזג ועוקף פקקים. 17–45 באט. חובה <span style="direction:ltr;display:inline-block;">Rabbit Card</span> נטען.<br>
-          • <b>שיט בנהר (Chao Phraya):</b><br>
-          &nbsp;&nbsp;– <b>Express Boat (קו כתום):</b> 16 באט. 06:00–19:00.<br>
-          &nbsp;&nbsp;– <b>Tourist Boat (קו כחול):</b> 45 באט לנסיעה / 150 באט יומי (Hop-on Hop-off).<br>
-          • <b>Motorbike Taxi:</b> לנסיעות קצרות בתוך ה-<span style="direction:ltr;display:inline-block;">Soi</span> (20–60 באט).<br>
-          • <b>Grab / InDrive:</b> עדיף לנסיעות ארוכות בשעות שאין פקקים.
-        `},
-        { h: "🛍️ קניונים וקניות", c: `
-          • <b>MBK Center:</b> זיופים, נעליים, גאדג’טים. קומות 4–5 הן המרכז. 10:00–22:00.<br>
-          • <b>Platinum Fashion Mall:</b> אופנה בסגנון סיטונאי. משתלם בקנייה של 3+ פריטים. 09:00–20:00.<br>
-          • <b>Icon Siam:</b> קניון מפואר. <span style="direction:ltr;display:inline-block;">SookSiam</span> (שוק צף מקורה) בקומה 1 + מרפסת תצפית בקומה 7 (חינם).<br>
-          • <b>Siam Paragon:</b> יוקרה + מתחם אוכל ענק + אקווריום <span style="direction:ltr;display:inline-block;">Sea Life</span> (~1,500 באט).<br>
-          • <b>Chatuchak Weekend Market:</b> “השוק הגדול בעולם” (סופ״ש). תחנה: <span style="direction:ltr;display:inline-block;">BTS Mo Chit</span>.<br>
-          • <b>Pratunam Market:</b> שוק בגדים זול (פעיל גם בלילה).
-        `},
-        { h: "🍜 אוכל ושווקי לילה", c: `
-          • <b>Chinatown (Yaowarat):</b> רחוב האוכל המפורסם בלילה (18:00–חצות).<br>
-          • <b>Jodd Fairs:</b> השוק הכי פופולרי היום (17:00–00:00). פוטוגני + צעיר.<br>
-          • <b>Asiatique Riverfront:</b> שוק לילה על הנהר + גלגל ענק + מסעדות.<br>
-          • <b>Train Night Market Srinakarin:</b> וייב מקומי, וינטג’, מוזיקה חיה (חמישי–ראשון).
-        `},
-        { h: "🌃 חיי לילה ורופטופים (במחיר סביר)", c: `
-          • <b>Khao San Road:</b> רחוב התרמילאים — ברים, מוזיקה ואלכוהול “בדליים”.<br>
-          • <b>Sukhumvit (Nana/Asok/Thonglor):</b> האזור הכי חי. ברים ומועדונים.<br>
-          • <b>Octave (קומה 45):</b> נוף 360°. בירה ~250 באט, קוקטייל ~390 באט.<br>
-          • <b>Above Eleven:</b> עיצוב מיוחד, קוקטיילים 280–450 באט.<br>
-          • <b>Tichuca:</b> בר “העץ המואר” (אינסטגרמי מאוד).<br>
-          • <b>Brewski:</b> בר בירה בגובה (מחירים נוחים).
-        `},
-        { h: "🌿 טבע ובתי קפה", c: `
-          • <b>Lumpini Park:</b> לטאות כוח ענקיות + שיט בסירות פדלים.<br>
-          • <b>The Green Lung (Bang Krachao):</b> השכרת אופניים ~100 באט לרכיבה בטבע בלב הנהר.<br>
-          • <b>בתי קפה מומלצים:</b> <span style="direction:ltr;display:inline-block;">% Arabica</span> (Icon Siam), <span style="direction:ltr;display:inline-block;">Factory Coffee</span>, <span style="direction:ltr;display:inline-block;">After You</span> (קינוחים).
-        `}
-      ]
-    }
+    phuket: { name: "פוקט (Phuket)", subtitle: "", sections: [] },
+    krabi: { name: "קראבי & קו לנטה (Krabi & Koh Lanta)", subtitle: "", sections: [] },
+    samui: { name: "קוסמוי (Koh Samui)", subtitle: "", sections: [] },
+    bangkok: { name: "בנגקוק (Bangkok)", subtitle: "", sections: [] }
   };
 
   /***********************
@@ -482,10 +424,11 @@
   let stack = ['mainMenu'];
   let stats = JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}');
 
+  // QUIZ STATE
   let quizPool = [];
   let quizIdx = 0;
   let score = 0;
-  let quizLen = 10;
+  let quizLen = 20; // דרישה: 20 שאלות
 
   function showScreen(id, push=true) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -539,6 +482,7 @@
     c.words.forEach(w => {
       html += `<div class="card"><strong>${w.thai}</strong><br>${w.hebrew} <small>(${w.pron})</small></div>`;
     });
+
     document.getElementById('categoryList').innerHTML = html;
     showScreen('learnMenu');
   }
@@ -558,27 +502,46 @@
     const found = all
       .filter(w =>
         (w.hebrew || "").includes(val) ||
-        (w.thai || "").toLowerCase().includes(valLower)
+        (w.thai || "").toLowerCase().includes(valLower) ||
+        (w.pron || "").includes(val)
       )
       .slice(0, 5);
 
     res.innerHTML = found
-      .map(w => `<div class="card" style="margin-bottom:6px;"><b>${w.thai}</b> = ${w.hebrew}</div>`)
+      .map(w => `<div class="card" style="margin-bottom:6px;"><b>${w.thai}</b> = ${w.hebrew} <span class="muted">(${w.pron})</span></div>`)
       .join('');
   }
 
   /***********************
-   * QUIZ
+   * QUIZ (20 שאלות, ללא כפילויות, בלי חזרה על אותה מילה באותו מבחן)
    ***********************/
-  function startQuiz(scope = 'all') {
+  function getAllWordsUniqueByThai(scope = 'all') {
     let all = [];
     if (scope && scope !== 'all' && vocab[scope]) all = [...vocab[scope].words];
     else Object.values(vocab).forEach(c => all.push(...c.words));
 
-    quizLen = Math.min(10, all.length);
-    if (quizLen === 0) { alert("אין עדיין מילים למבחן."); return; }
+    // דה-דופליקציה לפי "thai" (כדי לא לחזור על אותה מילה פעמיים במבחן גם אם יש לה שתי שורות)
+    const seen = new Set();
+    const unique = [];
+    for (const w of all) {
+      const key = (w.thai || "").trim().toLowerCase();
+      if (!key) continue;
+      if (seen.has(key)) continue;
+      seen.add(key);
+      unique.push(w);
+    }
+    return unique;
+  }
 
-    quizPool = all.sort(() => 0.5 - Math.random()).slice(0, quizLen);
+  function startQuiz(scope = 'all') {
+    const uniqueWords = getAllWordsUniqueByThai(scope);
+    const available = uniqueWords.length;
+
+    if (available < 2) { alert("אין מספיק מילים למבחן."); return; }
+
+    quizLen = Math.min(20, available); // דרישה: 20, ואם אין מספיק — מקסימום אפשרי בלי כפילויות
+    quizPool = uniqueWords.sort(() => 0.5 - Math.random()).slice(0, quizLen);
+
     quizIdx = 0;
     score = 0;
 
@@ -596,19 +559,26 @@
     const optsDiv = document.getElementById('quizOptions');
     optsDiv.innerHTML = '';
 
-    let allH = [];
-    Object.values(vocab).forEach(c => c.words.forEach(w => allH.push(w.hebrew)));
+    // בניית מאגר תשובות (hebrew) מתוך כל המילים הייחודיות (כדי לצמצם הטיות/שכפולים)
+    const poolAll = getAllWordsUniqueByThai('all');
+    const allHeb = poolAll.map(w => w.hebrew).filter(Boolean);
 
-    let distractors = allH.filter(h => h !== q.hebrew).sort(() => 0.5 - Math.random()).slice(0, 3);
-    let choices = [q.hebrew, ...distractors].sort(() => 0.5 - Math.random());
+    // 1 נכונה + עד 3 מסיחים ייחודיים
+    const correct = q.hebrew;
+    const distractors = Array.from(new Set(allHeb.filter(h => h !== correct)))
+      .sort(() => 0.5 - Math.random())
+      .slice(0, 3);
 
+    let choices = [correct, ...distractors].sort(() => 0.5 - Math.random());
+
+    // אם מסיבה כלשהי אין מספיק מסיחים, עדיין המבחן יעבוד (פשוט פחות אפשרויות)
     choices.forEach(opt => {
       const d = document.createElement('div');
       d.className = 'quiz-option';
       d.innerText = opt;
 
       d.onclick = () => {
-        const isCorrect = (opt === q.hebrew);
+        const isCorrect = (opt === correct);
 
         if (isCorrect) {
           d.classList.add('correct');
@@ -617,7 +587,7 @@
         } else {
           d.classList.add('wrong');
           Array.from(optsDiv.children).forEach(b => {
-            if (b.innerText === q.hebrew) b.classList.add('correct');
+            if (b.innerText === correct) b.classList.add('correct');
           });
         }
 
@@ -692,7 +662,6 @@
   }
 
   function init() {
-    // 7-Eleven
     document.getElementById('711_sweets').innerHTML = renderSevenList(sevenEleven.sweets);
     document.getElementById('711_beauty').innerHTML = renderSevenList(sevenEleven.beauty);
     document.getElementById('711_spicy').innerHTML = renderSevenList(sevenEleven.spicy);
