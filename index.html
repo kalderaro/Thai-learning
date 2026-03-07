@@ -34,6 +34,11 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
+    .btn-main:disabled {
+      opacity: 0.55;
+      cursor: not-allowed;
+    }
+
     .search-box {
       width: 100%; padding: 15px; border-radius: 12px;
       border: 2px solid #ddd; margin-bottom: 15px; font-size: 16px; outline: none;
@@ -96,6 +101,37 @@
     .wrong { border-color: #e74c3c; background: #f8d7da; }
 
     .muted{ color:#6b7280; font-size: 13px; }
+
+    .quiz-mode-badge{
+      display:inline-block;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 10px;
+      background: #eef2ff;
+      color: var(--primary);
+    }
+
+    .wrong-bank-row{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      margin-top: 8px;
+      margin-bottom: 12px;
+    }
+
+    .small-pill{
+      background:#fff3cd;
+      color:#7a5a00;
+      border:1px solid #f1d58a;
+      padding:6px 10px;
+      border-radius:999px;
+      font-size:13px;
+      font-weight:900;
+      white-space:nowrap;
+    }
   </style>
 </head>
 <body>
@@ -126,6 +162,11 @@
 
     <button class="btn-main" onclick="loadLearnMenu()">📚 לימוד לפי נושאים</button>
     <button class="btn-main" style="background:var(--accent); color:var(--primary);" onclick="startQuiz('all')">🎯 מבחן רנדומלי</button>
+    <button id="wrongPracticeBtn" class="btn-main" style="background:#e67e22" onclick="startWrongAnswersQuiz()">🧠 תרגול טעויות (0)</button>
+    <div class="wrong-bank-row">
+      <div class="muted">המילים שטעית בהן יישמרו אוטומטית לתרגול חוזר</div>
+      <div id="wrongBankInfo" class="small-pill">0 מילים במאגר</div>
+    </div>
     <button class="btn-main" style="background:#27ae60" onclick="showScreen('guideMenu')">📍 מדריך יעדים מפורט</button>
     <button class="btn-main" style="background:#e67e22" onclick="showScreen('sevenMenu')">🏪 המלצות סבן אילבן</button>
     <button class="btn-main" style="background:#bdc3c7; color:#2c3e50" onclick="showScreen('statsScreen')">📊 סטטיסטיקות</button>
@@ -198,6 +239,7 @@
 
   <!-- QUIZ -->
   <div id="quizScreen" class="screen">
+    <div id="quizModeBadge" class="quiz-mode-badge">מצב: מבחן רגיל</div>
     <div id="quizProgress" style="text-align:center; margin-bottom:15px; font-weight:bold;"></div>
     <div style="background:white; padding:30px; border-radius:20px; text-align:center; margin-bottom:20px;">
       <h1 id="qThai" style="color:var(--primary); font-size:48px;"></h1>
@@ -211,8 +253,10 @@
     <div style="background:white; padding:30px; border-radius:15px; text-align:center;">
       <p>שאלות שענית: <strong id="statTotal">0</strong></p>
       <p>דיוק: <strong id="statPercent">0%</strong></p>
+      <p>מילים במאגר טעויות: <strong id="statWrongCount">0</strong></p>
     </div>
     <button class="btn-main" style="margin-top:20px; background:#e74c3c" onclick="resetStats()">🗑️ איפוס נתונים</button>
+    <button class="btn-main" style="margin-top:12px; background:#c0392b" onclick="resetWrongBank()">🧠 איפוס מאגר טעויות</button>
   </div>
 
 </div>
@@ -491,12 +535,90 @@
    ***********************/
   let stack = ['mainMenu'];
   let stats = JSON.parse(localStorage.getItem('lior_stats') || '{"total":0, "correct":0}');
+  let wrongBank = JSON.parse(localStorage.getItem('lior_wrong_bank') || '{}');
 
   // QUIZ STATE
   let quizPool = [];
   let quizIdx = 0;
   let score = 0;
   let quizLen = 20;
+  let currentQuizMode = 'normal'; // normal | wrong
+
+  /***********************
+   * HELPERS
+   ***********************/
+  function getWordKey(word) {
+    return (word?.thai || '').trim().toLowerCase();
+  }
+
+  function saveWrongBank() {
+    localStorage.setItem('lior_wrong_bank', JSON.stringify(wrongBank));
+    updateWrongPracticeButton();
+  }
+
+  function getWrongBankCount() {
+    return Object.keys(wrongBank).length;
+  }
+
+  function updateWrongPracticeButton() {
+    const count = getWrongBankCount();
+    const btn = document.getElementById('wrongPracticeBtn');
+    const info = document.getElementById('wrongBankInfo');
+
+    if (btn) {
+      btn.innerText = `🧠 תרגול טעויות (${count})`;
+      btn.disabled = count === 0;
+    }
+
+    if (info) {
+      info.innerText = `${count} מילים במאגר`;
+    }
+  }
+
+  function addWrongWord(word) {
+    const key = getWordKey(word);
+    if (!key) return;
+
+    if (!wrongBank[key]) {
+      wrongBank[key] = {
+        thai: word.thai,
+        hebrew: word.hebrew,
+        pron: word.pron || '',
+        num: word.num || '',
+        successCount: 0
+      };
+    } else {
+      wrongBank[key].thai = word.thai;
+      wrongBank[key].hebrew = word.hebrew;
+      wrongBank[key].pron = word.pron || '';
+      wrongBank[key].num = word.num || '';
+      wrongBank[key].successCount = 0;
+    }
+
+    saveWrongBank();
+  }
+
+  function markCorrectInWrongPractice(word) {
+    const key = getWordKey(word);
+    if (!key || !wrongBank[key]) return;
+
+    wrongBank[key].successCount = (wrongBank[key].successCount || 0) + 1;
+
+    if (wrongBank[key].successCount >= 2) {
+      delete wrongBank[key];
+    }
+
+    saveWrongBank();
+  }
+
+  function resetWrongBank() {
+    localStorage.removeItem('lior_wrong_bank');
+    wrongBank = {};
+    updateWrongPracticeButton();
+    renderStats();
+    alert("מאגר הטעויות אופס.");
+    goHome();
+  }
 
   function showScreen(id, push=true) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -507,6 +629,7 @@
     if (push && stack[stack.length - 1] !== id) stack.push(id);
 
     if (id === 'statsScreen') renderStats();
+    if (id === 'mainMenu') updateWrongPracticeButton();
   }
 
   function goBack() {
@@ -610,7 +733,7 @@
     const seen = new Set();
     const unique = [];
     for (const w of all) {
-      const key = (w.thai || "").trim().toLowerCase();
+      const key = getWordKey(w);
       if (!key) continue;
       if (seen.has(key)) continue;
       seen.add(key);
@@ -626,10 +749,36 @@
     if (available < 2) { alert("אין מספיק מילים למבחן."); return; }
 
     quizLen = Math.min(20, available);
-    quizPool = uniqueWords.sort(() => 0.5 - Math.random()).slice(0, quizLen);
+    quizPool = [...uniqueWords].sort(() => 0.5 - Math.random()).slice(0, quizLen);
 
     quizIdx = 0;
     score = 0;
+    currentQuizMode = 'normal';
+
+    renderQ();
+    showScreen('quizScreen');
+  }
+
+  function startWrongAnswersQuiz() {
+    const wrongWords = Object.values(wrongBank).map(w => ({
+      thai: w.thai,
+      hebrew: w.hebrew,
+      pron: w.pron || '',
+      num: w.num || ''
+    }));
+
+    const available = wrongWords.length;
+    if (available < 1) {
+      alert("אין כרגע טעויות שמורות לתרגול.");
+      return;
+    }
+
+    quizLen = Math.min(20, available);
+    quizPool = [...wrongWords].sort(() => 0.5 - Math.random()).slice(0, quizLen);
+
+    quizIdx = 0;
+    score = 0;
+    currentQuizMode = 'wrong';
 
     renderQ();
     showScreen('quizScreen');
@@ -638,6 +787,11 @@
   function renderQ() {
     const q = quizPool[quizIdx];
     if (!q) { goHome(); return; }
+
+    document.getElementById('quizModeBadge').innerText =
+      currentQuizMode === 'wrong'
+        ? "מצב: תרגול טעויות"
+        : "מצב: מבחן רגיל";
 
     document.getElementById('quizProgress').innerText = `שאלה ${quizIdx + 1} / ${quizLen}`;
     document.getElementById('qThai').innerText = q.thai;
@@ -667,11 +821,17 @@
           d.classList.add('correct');
           score++;
           stats.correct++;
+
+          if (currentQuizMode === 'wrong') {
+            markCorrectInWrongPractice(q);
+          }
         } else {
           d.classList.add('wrong');
           Array.from(optsDiv.children).forEach(b => {
             if (b.innerText === correct) b.classList.add('correct');
           });
+
+          addWrongWord(q);
         }
 
         stats.total++;
@@ -689,8 +849,16 @@
 
   function nextQuestion() {
     quizIdx++;
-    if (quizIdx < quizLen) renderQ();
-    else { alert(`ציון: ${score}/${quizLen}`); goHome(); }
+    if (quizIdx < quizLen) {
+      renderQ();
+    } else {
+      if (currentQuizMode === 'wrong') {
+        alert(`סיום תרגול טעויות: ${score}/${quizLen}`);
+      } else {
+        alert(`ציון: ${score}/${quizLen}`);
+      }
+      goHome();
+    }
   }
 
   /***********************
@@ -719,6 +887,7 @@
     document.getElementById('statTotal').innerText = stats.total;
     document.getElementById('statPercent').innerText =
       (stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0) + "%";
+    document.getElementById('statWrongCount').innerText = getWrongBankCount();
   }
 
   function resetStats() {
@@ -750,6 +919,7 @@
     document.getElementById('711_spicy').innerHTML = renderSevenList(sevenEleven.spicy);
     document.getElementById('711_meals').innerHTML = renderSevenList(sevenEleven.meals);
     document.getElementById('711_drinks').innerHTML = renderSevenList(sevenEleven.drinks);
+    updateWrongPracticeButton();
   }
   init();
 </script>
