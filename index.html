@@ -46,6 +46,17 @@
       box-shadow:0 2px 8px rgba(0,0,0,0.06);
     }
 
+    .word-head{
+      display:flex; justify-content:space-between; align-items:center; gap:10px;
+      margin-bottom: 4px;
+    }
+
+    .num-badge{
+      background: var(--accent); color: var(--primary);
+      padding: 4px 10px; border-radius: 999px; font-weight: 900;
+      font-size: 14px; white-space: nowrap; direction:ltr;
+    }
+
     .accordion {
       background: white; border-radius: 12px; margin-bottom: 10px;
       border: 1px solid #eee; overflow: hidden;
@@ -208,7 +219,7 @@
 
 <script>
   /***********************
-   * VOCAB (כפי שנשלח – ללא שינויים)
+   * VOCAB
    ***********************/
   const vocab = {
     chat: { name: "שיחה, נימוסים וסלנג", icon: "💬", words: [
@@ -339,11 +350,68 @@
       { thai: "Bao-wan", hebrew: "סוכרת", pron: "בַּאוֹ-וָאן" },
       { thai: "Thy-roid", hebrew: "בלוטת התריס", pron: "תָּאי-רוֹי" },
       { thai: "Rong yamun", hebrew: "בית מרקחת", pron: "רוֹנְג יָמוּן" }
+    ]},
+
+    numbers: { name: "מספרים", icon: "🔢", words: [
+      { num: "1", thai: "Nueng", hebrew: "1 (אחת)", pron: "נִינְג" },
+      { num: "2", thai: "Song", hebrew: "2 (שתים)", pron: "סוֹנְג" },
+      { num: "3", thai: "Saam", hebrew: "3 (שלוש)", pron: "סָאם" },
+      { num: "4", thai: "See", hebrew: "4 (ארבע)", pron: "סִי" },
+      { num: "5", thai: "Haa", hebrew: "5 (חמש)", pron: "הָא" },
+      { num: "6", thai: "Hok", hebrew: "6 (שש)", pron: "הוֹק" },
+      { num: "7", thai: "Jet", hebrew: "7 (שבע)", pron: "גֶ'ט" },
+      { num: "8", thai: "Paet", hebrew: "8 (שמונה)", pron: "פֶּט" },
+      { num: "9", thai: "Gao", hebrew: "9 (תשע)", pron: "קָאוֹ" },
+      { num: "10", thai: "Sip", hebrew: "10 (עשר)", pron: "סִיפּ" },
+      { num: "11", thai: "Sip-et", hebrew: "11 (אחת עשרה)", pron: "סִיפּ-אֶט" },
+      { num: "12", thai: "Sip-song", hebrew: "12 (שתים עשרה)", pron: "סִיפּ-סוֹנְג" },
+      { num: "14", thai: "Sip-see", hebrew: "14 (ארבע עשרה)", pron: "סִיפּ-סִי" },
+      { num: "15", thai: "Sip-haa", hebrew: "15 (חמש עשרה)", pron: "סִיפּ-הָא" },
+      { num: "17", thai: "Sip-jet", hebrew: "17 (שבע עשרה)", pron: "סִיפּ-גֶ'ט" },
+
+      { num: "20", thai: "Yee-sip", hebrew: "20 (עשרים)", pron: "יִי-סִיפּ" },
+      { num: "21", thai: "Yee-sip-et", hebrew: "21 (עשרים ואחת)", pron: "יִי-סִיפּ-אֶט" },
+      { num: "22", thai: "Yee-sip-song", hebrew: "22 (עשרים ושתיים)", pron: "יִי-סִיפּ-סוֹנְג" },
+      { num: "23", thai: "Yee-sip-saam", hebrew: "23 (עשרים ושלוש)", pron: "יִי-סִיפּ-סָאם" },
+      { num: "24", thai: "Yee-sip-see", hebrew: "24 (עשרים וארבע)", pron: "יִי-סִיפּ-סִי" },
+      { num: "26", thai: "Yee-sip-hok", hebrew: "26 (עשרים ושש)", pron: "יִי-סִיפּ-הוֹק" },
+
+      { num: "30", thai: "Saam-sip", hebrew: "30 (שלושים)", pron: "סָאם-סִיפּ" },
+      { num: "35", thai: "Saam-sip-haa", hebrew: "35 (שלושים וחמש)", pron: "סָאם-סִיפּ-הָא" },
+
+      { num: "40", thai: "See-sip", hebrew: "40 (ארבעים)", pron: "סִי-סִיפּ" },
+      { num: "45", thai: "See-sip-haa", hebrew: "45 (ארבעים וחמש)", pron: "סִי-סִיפּ-הָא" },
+
+      { num: "50", thai: "Haa-sip", hebrew: "50 (חמישים)", pron: "הָא-סִיפּ" },
+      { num: "60", thai: "Hok-sip", hebrew: "60 (שישים)", pron: "הוֹק-סִיפּ" },
+
+      { num: "74", thai: "Jet-sip-see", hebrew: "74 (שבעים וארבע)", pron: "גֶ'ט-סִיפּ-סִי" },
+      { num: "86", thai: "Paet-sip-hok", hebrew: "86 (שמונים ושש)", pron: "פֶּט-סִיפּ-הוֹק" },
+
+      { num: "90", thai: "Gao-sip", hebrew: "90 (תשעים)", pron: "קָאוֹ-סִיפּ" },
+
+      { num: "100", thai: "Nueng-roi", hebrew: "100 (מאה)", pron: "נִינְג-רוֹי" },
+      { num: "122", thai: "Roi-yee-sip-song", hebrew: "122 (מאה עשרים ושתיים)", pron: "רוֹי-יִי-סִיפּ-סוֹנְג" },
+      { num: "130", thai: "Roi-saam-sip", hebrew: "130 (מאה שלושים)", pron: "רוֹי-סָאם-סִיפּ" },
+      { num: "340", thai: "Saam-roi-see-sip", hebrew: "340 (שלוש מאות ארבעים)", pron: "סָאם-רוֹי-סִי-סִיפּ" },
+      { num: "650", thai: "Hok-roi-haa-sip", hebrew: "650 (שש מאות חמישים)", pron: "הוֹק-רוֹי-הָא-סִיפּ" },
+      { num: "820", thai: "Paet-roi-yee-sip", hebrew: "820 (שמונה מאות עשרים)", pron: "פֶּט-רוֹי-יִי-סִיפּ" },
+
+      { num: "1,000", thai: "Nueng-phan", hebrew: "1,000 (אלף)", pron: "נִינְג-פָּאן" },
+      { num: "2,000", thai: "Song-phan", hebrew: "2,000 (אלפיים)", pron: "סוֹנְג-פָּאן" },
+
+      { num: "2,340", thai: "Song-phan-saam-roi-see-sip", hebrew: "2,340 (אלפיים שלוש מאות ארבעים)", pron: "סוֹנְג-פָּאן-סָאם-רוֹי-סִי-סִיפּ" },
+      { num: "2,560", thai: "Song-phan-haa-roi-hok-sip", hebrew: "2,560 (אלפיים חמש מאות שישים)", pron: "סוֹנְג-פָּאן-הָא-רוֹי-הוֹק-סִיפּ" },
+      { num: "3,500", thai: "Saam-phan-haa-roi", hebrew: "3,500 (שלושת אלפים חמש מאות)", pron: "סָאם-פָּאן-הָא-רוֹי" },
+      { num: "6,400", thai: "Hok-phan-see-roi", hebrew: "6,400 (ששת אלפים ארבע מאות)", pron: "הוֹק-פָּאן-סִי-רוֹי" },
+
+      { num: "10,000", thai: "Nueng-muen", hebrew: "10,000 (עשרת אלפים)", pron: "נִינְג-מִיוַּאן" },
+      { num: "15,350", thai: "Muen-haa-phan-saam-roi-haa-sip", hebrew: "15,350 (חמש עשרה אלף שלוש מאות חמישים)", pron: "מִיוַּאן-הָא-פָּאן-סָאם-רוֹי-הָא-סִיפּ" }
     ]}
   };
 
   /***********************
-   * 7-ELEVEN (כמו שהיה בקוד שלך)
+   * 7-ELEVEN
    ***********************/
   const sevenEleven = {
     sweets: [
@@ -409,7 +477,7 @@
   };
 
   /***********************
-   * DESTINATIONS (כמו שהיה אצלך בקוד)
+   * DESTINATIONS
    ***********************/
   const destData = {
     phuket: { name: "פוקט (Phuket)", subtitle: "", sections: [] },
@@ -428,7 +496,7 @@
   let quizPool = [];
   let quizIdx = 0;
   let score = 0;
-  let quizLen = 20; // דרישה: 20 שאלות
+  let quizLen = 20;
 
   function showScreen(id, push=true) {
     document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
@@ -480,7 +548,16 @@
 
     let html = `<h2 style="margin-bottom:12px;">${c.name}</h2>`;
     c.words.forEach(w => {
-      html += `<div class="card"><strong>${w.thai}</strong><br>${w.hebrew} <small>(${w.pron})</small></div>`;
+      html += `
+        <div class="card">
+          <div class="word-head">
+            <strong>${w.thai}</strong>
+            ${w.num ? `<span class="num-badge">${w.num}</span>` : ""}
+          </div>
+          <div>${w.hebrew}</div>
+          <small>${w.pron}</small>
+        </div>
+      `;
     });
 
     document.getElementById('categoryList').innerHTML = html;
@@ -503,24 +580,33 @@
       .filter(w =>
         (w.hebrew || "").includes(val) ||
         (w.thai || "").toLowerCase().includes(valLower) ||
-        (w.pron || "").includes(val)
+        (w.pron || "").includes(val) ||
+        (w.num || "").includes(val)
       )
       .slice(0, 5);
 
     res.innerHTML = found
-      .map(w => `<div class="card" style="margin-bottom:6px;"><b>${w.thai}</b> = ${w.hebrew} <span class="muted">(${w.pron})</span></div>`)
+      .map(w => `
+        <div class="card" style="margin-bottom:6px;">
+          <div class="word-head">
+            <b>${w.thai}</b>
+            ${w.num ? `<span class="num-badge">${w.num}</span>` : ""}
+          </div>
+          <div>${w.hebrew}</div>
+          <div class="muted">(${w.pron})</div>
+        </div>
+      `)
       .join('');
   }
 
   /***********************
-   * QUIZ (20 שאלות, ללא כפילויות, בלי חזרה על אותה מילה באותו מבחן)
+   * QUIZ
    ***********************/
   function getAllWordsUniqueByThai(scope = 'all') {
     let all = [];
     if (scope && scope !== 'all' && vocab[scope]) all = [...vocab[scope].words];
     else Object.values(vocab).forEach(c => all.push(...c.words));
 
-    // דה-דופליקציה לפי "thai" (כדי לא לחזור על אותה מילה פעמיים במבחן גם אם יש לה שתי שורות)
     const seen = new Set();
     const unique = [];
     for (const w of all) {
@@ -539,7 +625,7 @@
 
     if (available < 2) { alert("אין מספיק מילים למבחן."); return; }
 
-    quizLen = Math.min(20, available); // דרישה: 20, ואם אין מספיק — מקסימום אפשרי בלי כפילויות
+    quizLen = Math.min(20, available);
     quizPool = uniqueWords.sort(() => 0.5 - Math.random()).slice(0, quizLen);
 
     quizIdx = 0;
@@ -559,11 +645,9 @@
     const optsDiv = document.getElementById('quizOptions');
     optsDiv.innerHTML = '';
 
-    // בניית מאגר תשובות (hebrew) מתוך כל המילים הייחודיות (כדי לצמצם הטיות/שכפולים)
     const poolAll = getAllWordsUniqueByThai('all');
     const allHeb = poolAll.map(w => w.hebrew).filter(Boolean);
 
-    // 1 נכונה + עד 3 מסיחים ייחודיים
     const correct = q.hebrew;
     const distractors = Array.from(new Set(allHeb.filter(h => h !== correct)))
       .sort(() => 0.5 - Math.random())
@@ -571,7 +655,6 @@
 
     let choices = [correct, ...distractors].sort(() => 0.5 - Math.random());
 
-    // אם מסיבה כלשהי אין מספיק מסיחים, עדיין המבחן יעבוד (פשוט פחות אפשרויות)
     choices.forEach(opt => {
       const d = document.createElement('div');
       d.className = 'quiz-option';
